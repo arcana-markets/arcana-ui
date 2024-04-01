@@ -7,7 +7,7 @@ import { MdClose } from "react-icons/md";
 import ModalCustom from "./ModalCustom";
 
 const Navbar = () => {
-  const [modal, setmodal] = useState(false)
+  const [modal, setModal] = useState(false)
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const Navbar = () => {
 
         <div className="flex gap-5">
 
-          <div className="text-white z-30 cursor-pointer" onClick={() => setmodal(!modal)}>
+          <div className="text-white z-30 cursor-pointer" onClick={() => setModal(!modal)}>
             {modal === true ? <MdClose size={24} /> : <button className="text-foxflowerviola sm:text-white text-sm sm:text-base font-medium sm:py-[10px] p-3 sm:px-4 rounded-xl bg-[#013746] sm:bg-[#252B32] Connect_btn transition-all duration-300 ease-linear">
               Connect <span className="max-sm:hidden">Wallet</span>
             </button>}

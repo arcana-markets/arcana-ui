@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Arcana Vaults | Home",
+  title: "Arcana | Vaults",
   description: "Grow your yield using advanced MM strategies.",
 };
 

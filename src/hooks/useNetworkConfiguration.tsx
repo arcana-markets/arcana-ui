@@ -31,7 +31,7 @@ export function useNetworkConfiguration() {
       case Networks.Custom:
         return customEndpoint || clusterApiUrl('mainnet-beta');
       default:
-        return clusterApiUrl('mainnet-beta');
+        return clusterApiUrl('devnet');
     }
   }, [network, customEndpoint]);
 
