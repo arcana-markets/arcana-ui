@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import Sliders from "react-slick";
@@ -6,9 +7,8 @@ import Link from 'next/link';
 import FirstCard from "./herocards/FirstCard";
 import Augury from "./herocards/Augury";
 import Aether from "./herocards/Aether";
+
 const HeroSection = () => {
-
-
   const [progress, setProgress] = useState(75);
   const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProgress(parseInt(e.target.value));
@@ -48,7 +48,7 @@ const HeroSection = () => {
       </h1>
       <p className="text-white font-poppins text-center font-medium text-lg md:text-2xl">
         Grow your yield using{" "}
-        <span className="max-sm:d-block">advanced aMMLs.</span>
+        <span className="max-sm:d-block">advanced MM strategies.</span>
       </p>
 
 

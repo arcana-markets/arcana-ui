@@ -1,4 +1,5 @@
 "use client";
+
 import { NavIcon, NavMenu } from "@/components/common/Icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -71,7 +72,6 @@ const Navbar = () => {
 
         <div className="flex gap-5">
 
-
           <div className="text-white z-30 cursor-pointer" onClick={() => setmodal(!modal)}>
             {modal === true ? <MdClose size={24} /> : <button className="text-foxflowerviola sm:text-white text-sm sm:text-base font-medium sm:py-[10px] p-3 sm:px-4 rounded-xl bg-[#013746] sm:bg-[#252B32] Connect_btn transition-all duration-300 ease-linear">
               Connect <span className="max-sm:hidden">Wallet</span>
@@ -84,6 +84,7 @@ const Navbar = () => {
           >
             {show ? <MdClose size={24} /> : <NavMenu />}
           </button>
+
         </div>
       </div>
       <div className={` ${modal === true ? "block" : "hidden"} fixed w-full left-0 top-0`}>
