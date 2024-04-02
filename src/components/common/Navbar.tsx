@@ -51,7 +51,7 @@ const Navbar = () => {
                   Markets
                 </li>
               </Link>
-              <Link href="/">
+              <Link href="/swap">
                 <li className=" nav-link">
                   Swap
                 </li>

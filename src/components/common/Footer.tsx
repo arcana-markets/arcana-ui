@@ -3,7 +3,7 @@ import {
   LinkedInIcon,
   NavIcon,
   TwiterIcon,
-} from "@/components/common/Icons";
+} from "@/utils/Icons";
 
 const Footer = () => {
   return (
