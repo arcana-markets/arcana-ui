@@ -136,9 +136,8 @@ export const NavIcon = () => {
           width="13.5562"
           height="22.6956"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -688,9 +687,8 @@ export const FaceIcon = () => {
           width="11.0386"
           height="18.6664"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"

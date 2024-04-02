@@ -26,7 +26,7 @@
 <path d="M53.3773 102.593L58.7269 103.105L61.8606 102.427L63.3696 101.709L62.282 100.54L60.1476 101.663L57.3062 102.799L53.3773 102.593Z" fill="#8EACAF"/>
 <defs>
 <filter id="filter0_d_1606_92" x="32.4417" y="53.2178" width="55.9637" height="87.7822" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feFlood result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feOffset dy="1"/>
 <feComposite in2="hardAlpha" operator="out"/>
