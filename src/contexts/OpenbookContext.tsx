@@ -4,7 +4,7 @@ import { PublicKey, type Message } from '@solana/web3.js';
 import { Program, utils } from '@coral-xyz/anchor';
 import { useProvider } from '@/hooks/useProvider';
 import { OPENBOOK_PROGRAM_ID } from '@/utils/constants';
-import { IDL as OPENBOOK_IDL, OpenbookV2 } from '@/lib/idl/openbook_v2';
+import { IDL as OPENBOOK_IDL, OpenbookV2 } from '@/utils/idl/openbook_v2';
 
 interface Market {
   market: string;

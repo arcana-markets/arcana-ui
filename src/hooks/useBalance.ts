@@ -1,3 +1,4 @@
+{/*
 import { PublicKey } from '@solana/web3.js';
 import { getAssociatedTokenAddressSync } from '@solana/spl-token';
 import { useWallet } from '@solana/wallet-adapter-react';
@@ -15,3 +16,5 @@ export function useBalance(mint?: PublicKey) {
 
   return { amount: balance ?? defaultAmount };
 }
+
+*/}
