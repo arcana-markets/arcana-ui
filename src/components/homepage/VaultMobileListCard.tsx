@@ -3,8 +3,8 @@ import React from "react";
 
 type VaultData = {
   coinImg: string;
-  Vault1: string;
-  Vault2: string;
+  baseVaultTicker: string;
+  quoteVaultTicker: string;
   Liquidity: string | JSX.Element;
   APY: string;
   TVL: string;
@@ -29,8 +29,8 @@ const VaultMobileListCard: React.FC<VaultMobileListCardProps> = ({
           <div className="flex items-center gap-[10px]">
             <Image width={51} height={32} src={obj.coinImg} alt="logo" />
             <p className="text-base font-medium text-white">
-              {obj.Vault1} <span className="text-foxflowerviola">/</span>{" "}
-              {obj.Vault2}
+              {obj.baseVaultTicker} <span className="text-foxflowerviola">/</span>{" "}
+              {obj.quoteVaultTicker}
             </p>
           </div>
           <button
