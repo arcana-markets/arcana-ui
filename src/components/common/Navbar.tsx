@@ -153,11 +153,9 @@ const Navbar = () => {
                   Swap
                 </li>
               </Link>
-              <Link href="/">
-                <li className="nav-link ">
-                  Markets
-                </li>
-              </Link>
+              <a href="https://app.arcana.markets/data" className="nav-link flex items-center gap-2">
+                  <span>Markets</span>
+                </a>
               <a href="https://github.com/arcana-markets/arcana-trading-bot" target="_blank" rel="noopener noreferrer" className="nav-link flex items-center gap-2">
                   <span>Tools</span>
                   <RedirectIcon />
