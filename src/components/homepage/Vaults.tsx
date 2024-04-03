@@ -38,7 +38,7 @@ const Vaults = () => {
             <FaceIcon />
           </span>
           <p className="text-sm lg:text-base font-medium text-white">
-            You can easily create permissionless{" "}
+            Soon, you can easily create permissionless{" "}
             <span className="max-lg:">vaults with Arcana’s Vault Engine.</span>
           </p>
           <button className="max-lg:my-1 whitespace-nowrap bg-[#023646] font-bold text-bluelguana px-5 py-[9px] hover:bg-bluelguana duration-300 hover:text-white rounded-xl ml-2">

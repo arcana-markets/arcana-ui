@@ -2,8 +2,8 @@ import { EmptyIcon } from "./Icons";
 
 type vaultsData = {
   coinImg: string;
-  Vault1: string;
-  Vault2: string;
+  baseVaultTicker: string;
+  quoteVaultTicker: string;
   Liquidity: string | JSX.Element;
   APY: string;
   TVL: string;
@@ -14,8 +14,8 @@ type vaultsData = {
 export const vaultsData: vaultsData[] = [
   {
     coinImg: "/img/svg/Arcanum-icon.svg",
-    Vault1: "PYTH",
-    Vault2: "USDC",
+    baseVaultTicker: "PYTH",
+    quoteVaultTicker: "USDC",
     Liquidity: "$2,472,248.24",
     APY: ">999%",
     TVL: "$176.29K",
@@ -25,8 +25,8 @@ export const vaultsData: vaultsData[] = [
   },
   {
     coinImg: "/img/svg/bork-icon.svg",
-    Vault1: "BORK",
-    Vault2: "JTO",
+    baseVaultTicker: "BORK",
+    quoteVaultTicker: "JTO",
     Liquidity: "$170,552.11",
     APY: "148%",
     TVL: "$120.74K",
@@ -36,8 +36,8 @@ export const vaultsData: vaultsData[] = [
   },
   {
     coinImg: "/img/svg/sol.svg",
-    Vault1: "SOL",
-    Vault2: "USDT",
+    baseVaultTicker: "SOL",
+    quoteVaultTicker: "USDT",
     Liquidity: "$32,889.00",
     APY: "8.35%",
     TVL: "$32.57K",
@@ -47,8 +47,8 @@ export const vaultsData: vaultsData[] = [
   },
   {
     coinImg: "/img/svg/usdt.svg",
-    Vault1: "USDT",
-    Vault2: "X",
+    baseVaultTicker: "USDT",
+    quoteVaultTicker: "X",
     Liquidity: <EmptyIcon />,
     APY: "11.54%",
     TVL: "$120.74K",
@@ -58,8 +58,8 @@ export const vaultsData: vaultsData[] = [
   },
   {
     coinImg: "/img/svg/jto.svg",
-    Vault1: "JTO",
-    Vault2: "USDT",
+    baseVaultTicker: "JTO",
+    quoteVaultTicker: "USDT",
     Liquidity: <EmptyIcon />,
     APY: "249%",
     TVL: "$176.29K",
@@ -69,8 +69,8 @@ export const vaultsData: vaultsData[] = [
   },
   {
     coinImg: "/img/svg/vice.svg",
-    Vault1: "VICE",
-    Vault2: "JLP",
+    baseVaultTicker: "VICE",
+    quoteVaultTicker: "JLP",
     Liquidity: <EmptyIcon />,
     APY: "7.11%",
     TVL: "$529",
@@ -80,8 +80,8 @@ export const vaultsData: vaultsData[] = [
   },
   {
     coinImg: "/img/svg/jto-usdc.svg",
-    Vault1: "JTO",
-    Vault2: "USDC",
+    baseVaultTicker: "JTO",
+    quoteVaultTicker: "USDC",
     Liquidity: <EmptyIcon />,
     APY: "559%",
     TVL: "$2.2B",
@@ -91,8 +91,8 @@ export const vaultsData: vaultsData[] = [
   },
   {
     coinImg: "/img/svg/ghos.svg",
-    Vault1: "GH0S",
-    Vault2: "USDC",
+    baseVaultTicker: "GH0S",
+    quoteVaultTicker: "USDC",
     Liquidity: <EmptyIcon />,
     APY: "33.52%",
     TVL: "$32.57K",
@@ -103,8 +103,8 @@ export const vaultsData: vaultsData[] = [
 
   {
     coinImg: "/img/svg/seth.svg",
-    Vault1: "USDT",
-    Vault2: "sETH",
+    baseVaultTicker: "USDT",
+    quoteVaultTicker: "sETH",
     Liquidity: <EmptyIcon />,
     APY: "3.42%",
     TVL: "$32.57K",
@@ -114,8 +114,8 @@ export const vaultsData: vaultsData[] = [
   },
   {
     coinImg: "/img/svg/jlp.svg",
-    Vault1: "JLP",
-    Vault2: "USDC",
+    baseVaultTicker: "JLP",
+    quoteVaultTicker: "USDC",
     Liquidity: <EmptyIcon />,
     APY: "100.29%",
     TVL: "$32.57K",
@@ -125,8 +125,8 @@ export const vaultsData: vaultsData[] = [
   },
   {
     coinImg: "/img/svg/jto-bonk.svg",
-    Vault1: "JTO",
-    Vault2: "BONK",
+    baseVaultTicker: "JTO",
+    quoteVaultTicker: "BONK",
     Liquidity: <EmptyIcon />,
     APY: "5.98%",
     TVL: "$120.74K",

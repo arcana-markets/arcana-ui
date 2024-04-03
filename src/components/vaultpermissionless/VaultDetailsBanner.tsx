@@ -3,8 +3,6 @@ import { InfoIcon, NextIcon } from "@/components/common/Icons";
 import Image from "next/image";
 import React from "react";
 
-
-
 const VaultDetailsBanner = ({ params }: {
   params: { permission: string }
 }) => {
