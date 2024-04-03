@@ -1,20 +1,19 @@
-import useNotificationStore from "../stores/useNotificationStore";
+import useNotificationStore from "@/stores/useNotificationStore";
 
 export function notify(newNotification: {
-  type?: string
-  message: string
-  description?: string
-  txid?: string
+  type?: string;
+  title: string;
+  message: React.ReactNode;
+  description?: string;
+  txid?: string;
+  autoClose?: number;
 }) {
-  const {
-    notifications,
-    set: setNotificationStore,
-  } = useNotificationStore.getState()
+  const { notifications, set: setNotificationStore } = useNotificationStore.getState();
 
   setNotificationStore((state: { notifications: any[] }) => {
     state.notifications = [
       ...notifications,
       { type: 'success', ...newNotification },
-    ]
-  })
+    ];
+  });
 }

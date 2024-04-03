@@ -1,25 +1,45 @@
+'use client'
+
 import { useState, useEffect } from 'react';
 
-// Define an interface for the options object
 interface UseLocalStorageStateOptions<T> {
   key: string;
   defaultValue: T;
+  getInitialValueInEffect?: boolean;
+  serialize?: (value: T) => string;
+  deserialize?: (value: string) => T; 
 }
 
 function useLocalStorageState<T>({
   key,
   defaultValue,
-}: UseLocalStorageStateOptions<T>): [T, (newState: T) => void] {
-  // Initial state to defaultValue or the value from localStorage
-  const [state, setState] = useState<T>(() => {
-    const storedValue = typeof window !== 'undefined' ? localStorage.getItem(key) : null;
-    return storedValue !== null ? JSON.parse(storedValue) : defaultValue;
-  });
+  getInitialValueInEffect = true,
+  serialize = JSON.stringify, // Use JSON.stringify by default
+  deserialize = JSON.parse, // Use JSON.parse by default
+}: UseLocalStorageStateOptions<T>): [T, (newState: T | ((prevState: T) => T)) => void] {
+  const [state, setState] = useState<T>(defaultValue);
 
-  // Update localStorage when state changes
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(state));
-  }, [key, state]);
+    if (typeof window === 'undefined' || !getInitialValueInEffect) return;
+    try {
+      const storedValue = localStorage.getItem(key);
+      if (storedValue !== null) {
+        setState(deserialize(storedValue));
+      }
+    } catch (error) {
+      console.error('Error reading localStorage key “' + key + '”: ', error);
+    }
+  }, [key, getInitialValueInEffect, deserialize]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const serializedState = serialize(state);
+      localStorage.setItem(key, serializedState);
+    } catch (error) {
+      console.error('Error writing to localStorage key “' + key + '”: ', error);
+    }
+  }, [key, state, serialize]);
 
   return [state, setState];
 }
