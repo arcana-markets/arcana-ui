@@ -11,6 +11,8 @@ export const WRAPPED_SOL_MINT = new PublicKey('So1111111111111111111111111111111
 
 export const TOKEN_PROGRAM_ID = new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
 
+export const ARCANA_VAULTS_PROGRAM_ID = new PublicKey('FVbmcn58GVgYAGYqtQwVWwWrTDbSFqwXfCrErGEGo1mx');
+
 export const ARCANA_DATA_API_URL = 'https://prod.arcana.markets/api/openbookv2/markets'
 
 export const BASE_OPENBOOK_URL = 'https://prod.arcana.markets/api/openbookv2/markets';
