@@ -64,11 +64,11 @@ const Notification: React.FC<NotificationStore> = ({ type, message, description,
 
   return (
     <div
-      className={`max-w-sm w-full rounded-md mt-2 pointer-events-auto ring-1 ring-black ring-opacity-5 p-2 mx-4 mb-12 overflow-hidden text-foxflowerviola bg-[#013746] sm:bg-[#252B32] transition-all duration-300 ease-linear Connect_btn transition-all duration-300 ease-linear`}
-    >
-      <div className={`p-4 rounded-md bg-gradient-to-r from-purple-900 from-10% via-purple-600 via-30% to-emerald-500 to-90%`}>
-        <div className={`flex items-center`}>
-          <div className={`flex-shrink-0`}>
+    className={`w-full max-w-md rounded-md mt-2 pointer-events-auto  mx-4 mb-12 overflow text-foxflowerviola bg-[#013746] sm:bg-[#252B32] sm:max-w-3/4 md:max-w-1/2 lg:max-w-1/3 xl:max-w-1/4 transition-all duration-300 ease-linear Connect_btn`}
+  >
+    <div className={`p-4 rounded-md bg-gradient-to-r from-purple-900 from-10% via-purple-600 via-30% to-emerald-500 to-90%`}>
+      <div className={`flex flex-grow items-center`}>
+        <div className={`flex-shrink-0`}>
             {type === 'success' ? (
               <IconCheck className={`h-8 w-8 mr-1 text-green`} />
             ) : null}
@@ -77,8 +77,8 @@ const Notification: React.FC<NotificationStore> = ({ type, message, description,
               <IconCircleXFilled className={`h-8 w-8 mr-1`} />
             )}
           </div>
-          <div className={`ml-2 w-0 flex-1`}>
-            <div className={`font-bold text-fgd-1`}>{message}</div>
+          <div className={`flex-grow ml-2`}>
+            <div className={`font-bold text-foxflowerviola`}>{message}</div>
             {description ? (
               <p className={`mt-0.5 text-sm text-fgd-2`}>{description}</p>
             ) : null}
@@ -102,7 +102,7 @@ const Notification: React.FC<NotificationStore> = ({ type, message, description,
           <div className={`ml-4 flex-shrink-0 self-start flex`}>
             <button
               onClick={() => onHide()}
-              className={`bg-bkg-2 default-transition rounded-md inline-flex text-fgd-3 hover:text-fgd-4 focus:outline-none`}
+              className={`bg-bkg-2 default-transition rounded-md inline-flex text-primary hover:text-foxflowerviola focus:outline-none`}
             >
               <span className={`sr-only`}>Close</span>
               <IconX className="h-5 w-5" />

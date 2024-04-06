@@ -29,9 +29,8 @@ export function Providers({ children }: { children: React.ReactNode; }) {
     console.error(error);
     notify({
       type: 'error',
-      title: 'Wallet Error',
+      description: 'Wallet Error',
       message: error.message,
-      autoClose: 5000,
     });
   }, []);
 

@@ -89,14 +89,12 @@ export const useTransactionSender = () => {
               ))}
             </div>
           ),
-          autoClose: 5000,
         });
         return signatures;
       } catch (err) {
         notify({
           title: 'Transactions not sent!',
           message: <p>An error occured: {err?.toString()}</p>,
-          autoClose: 5000,
         });
         return [];
       }
