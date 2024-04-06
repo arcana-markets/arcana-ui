@@ -69,6 +69,7 @@ export default function useMultiAccountSubscription<T, U>(
         isLoading: r.isLoading,
       },
     }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [results]);
 
   useEffect(() => {
@@ -109,6 +110,7 @@ export default function useMultiAccountSubscription<T, U>(
         };
       }
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accounts, globalTimeout, JSON.stringify(subscriptionsConnected)]);
 
   const updateData = (updatedData: T, publicKey: PublicKey) => {

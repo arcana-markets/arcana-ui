@@ -5,6 +5,7 @@ import Navbar from '@/components/Shared/Navbar';
 import Image from 'next/image';
 import HeroSwap from '@/components/Swap/HeroSwap';
 import '@/app/globals.css';
+import Footer from '@/components/Shared/Footer';
 
 const Page = () => {
   useEffect(() => {
@@ -35,6 +36,7 @@ const Page = () => {
         </div>
       </div>
       </div>
+    <Footer />
     </div>
   );
 };

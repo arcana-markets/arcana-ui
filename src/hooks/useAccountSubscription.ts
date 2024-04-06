@@ -56,7 +56,7 @@ export default function useAccountSubscription<T, U>(
 
   useEffect(() => {
     if (publicKey) {
-      const subscription = connection.onAccountChange(publicKey, async (accountInfo) => {
+      const subscription = connection.onAccountChange(publicKey, async (accountInfo: AccountInfo<Buffer>) => {
         const processedData = handler(accountInfo, metaData);
         let result: T;
         if (processedData instanceof Promise) {
@@ -88,6 +88,7 @@ export default function useAccountSubscription<T, U>(
         }
       };
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicKey?.toString(), globalTimeout, subscriptionConnected]);
 
   const updateData = (updatedData: T) => {

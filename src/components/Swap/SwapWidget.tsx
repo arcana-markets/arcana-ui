@@ -57,9 +57,9 @@ const SwapWidget = () => {
   };
 
   return (
-    <div className={`relative w-full min-w-[350px] max-w-[350px] flex flex-col bg-coarsewool rounded-[16px] pt-2 sm:pt-4`}>
-    <button onClick={refreshWidget} className='absolute top-[-50px] left-[4px] bg-[#013746] sm:bg-[#252B32] transition-all duration-300 ease-linear hover:bg-lightgrey text-white font-bold py-2 px-4 rounded-[18px]' title="Refresh">
-      ↻
+    <div className={`relative w-full flex flex-col bg-coarsewool rounded-[16px] pt-2 sm:pt-4`}>
+      <button onClick={refreshWidget} className='absolute top-[-50px] left-[4px] bg-[#013746] sm:bg-[#252B32] transition-all duration-300 ease-linear hover:bg-lightgrey text-white font-bold py-2 px-4 rounded-[18px]' title="Refresh">
+        ↻
       </button>
       <div key={refreshKey} id="integrated-terminal" className='w-full rounded-md'>
       </div>
