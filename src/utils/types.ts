@@ -1,16 +1,8 @@
 import { Idl, IdlAccounts, IdlTypes } from '@coral-xyz/anchor';
 import { Connection, PublicKey, Signer, Transaction } from '@solana/web3.js';
 import { OpenbookV2 } from './idl/openbook_v2';
-import { ConditionalVault } from './idl/conditional_vault';
 import CoinLogos from '../config/logos.json';
 import { ArcanaVaults } from './idl/arcana_vaults';
-
-export type ArcVaultAccount = IdlAccounts<ArcanaVaults>['vault']; // Adjust 'vault' if your actual account name differs
-export type ConditionalVaultAccount = IdlAccounts<ConditionalVault>['conditionalVault']; // Example for ConditionalVault
-
-export type PublicKeyString = string; // For simplicity, assuming public keys are handled as strings
-export type u8 = number;
-export type u64 = bigint;
 
 export enum SelfTradeBehavior {
   DecrementTake,
@@ -31,82 +23,43 @@ export enum Side {
   Ask,
 }
 
-export interface DepositReceipt {
-  bump: u8;
+// Instructions and Accounts
+export interface VaultAccount {
+  bump: number;
   isInitialized: boolean;
-  owner: PublicKeyString;
-  vault: PublicKeyString;
-  baseTokenLiquidityShares: u64;
-  quoteTokenLiquidityShares: u64;
+  owner: PublicKey;
+  vault: PublicKey;
+  baseTokenLiquidityShares: bigint;
+  quoteTokenLiquidityShares: bigint;
 }
 
 export interface UnifiedVault {
-  bump: u8;
-  owner: PublicKeyString;
-  marketIdentifier: PublicKeyString;
-  baseVault: PublicKeyString;
-  quoteVault: PublicKeyString;
-  baseLiquidityShares: u64;
-  quoteLiquidityShares: u64;
-  downtimeStartTimestamp: u64;
-  downtimeEndTimestamp: u64;
-  cycleDurationInSeconds: u64;
-  downtimeInSeconds: u64;
-  lastUpdateSlot: u64;
+  bump: number;
+  owner: PublicKey;
+  marketIdentifier: PublicKey;
+  baseVault: PublicKey;
+  quoteVault: PublicKey;
+  baseLiquidityShares: bigint;
+  quoteLiquidityShares: bigint;
+  downtimeStartTimestamp: bigint;
+  downtimeEndTimestamp: bigint;
+  cycleDurationInSeconds: bigint;
+  downtimeInSeconds: bigint;
+  lastUpdateSlot: bigint;
 }
 
-export interface InitializeVaultInstruction {
-  owner: PublicKeyString;
-  marketIdentifier: PublicKeyString;
-  vault: PublicKeyString;
-  baseMint: PublicKeyString;
-  quoteMint: PublicKeyString;
-  vaultBaseTokenAccount: PublicKeyString;
-  vaultQuoteTokenAccount: PublicKeyString;
-  associatedTokenProgram: PublicKeyString;
-  tokenProgram: PublicKeyString;
-  systemProgram: PublicKeyString;
-  cycleDurationInSeconds: u64;
-  downtimeInSeconds: u64;
-}
-
-export interface CloseVaultInstruction {
-  owner: PublicKeyString;
-  vault: PublicKeyString;
-  baseVault: PublicKeyString;
-  quoteVault: PublicKeyString;
-}
-
-export interface DepositFundsInstruction {
-  owner: PublicKeyString;
-  marketIdentifier: PublicKeyString;
-  vault: PublicKeyString;
-  depositReceipt: PublicKeyString;
-  mint: PublicKeyString;
-  userTokenAccount: PublicKeyString;
-  vaultTokenAccount: PublicKeyString;
-  tokenProgram: PublicKeyString;
-  systemProgram: PublicKeyString;
-  amount: u64;
-}
-
-export interface WithdrawAllFundsInstruction {
-  owner: PublicKeyString;
-  marketIdentifier: PublicKeyString;
-  vault: PublicKeyString;
-  depositReceipt: PublicKeyString;
-  userTokenAccount: PublicKeyString;
-  vaultTokenAccount: PublicKeyString;
-  tokenProgram: PublicKeyString;
-}
-
-// Add similar interfaces for other instructions as needed
-export interface ArcanaVaultsError {
-  code: number;
-  name: string;
-  msg: string;
-}
-
+// Error Types
+export type ArcanaVaultError =
+  | "PhoenixHeaderError"
+  | "InvalidPhoenixProgram"
+  | "PhoenixMarketError"
+  | "PhoenixVaultSeatRetired"
+  | "VaultFundsNotEmpty"
+  | "DepositWithdrawDuringUptime"
+  | "AmountCannotBeZero"
+  | "RefreshQuotesDuringDowntime"
+  | "DepositRatioCheckFail"
+  | "InvalidVaultOwner";
 
 
 export interface MarketData {
@@ -236,7 +189,6 @@ export const CoinLogosTyped: CoinLogosType = CoinLogos as CoinLogosType;
 export type AccountWithKey<T> = { publicKey: PublicKey; account: T };
 export type ProgramVersion = { label: string; programId: PublicKey; idl: Idl };
 
-export type VaultAccount = IdlAccounts<ConditionalVault>['conditionalVault'];
 export type VaultAccountWithKey = AccountWithKey<VaultAccount>;
 export type OrderBookSide = {
   parsed: {
@@ -309,7 +261,7 @@ export interface InitializedVault {
 }
 
 /// Avoid importing Openbook because it uses a NodeWallet
-export type PlaceOrderArgs = IdlTypes<OpenbookV2>['PlaceOrderArgs'];
+export type PlaceOrderArgs = IdlTypes<ArcanaVaults>['PlaceOrderArgs'];
 export type PlaceOrderPeggedArgs = IdlTypes<OpenbookV2>['PlaceOrderPeggedArgs'];
 export type OracleConfigParams = IdlTypes<OpenbookV2>['OracleConfigParams'];
 export type OracleConfig = IdlTypes<OpenbookV2>['OracleConfig'];
