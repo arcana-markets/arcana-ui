@@ -1,14 +1,16 @@
 import { notify } from '@/utils/notifications';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { Transaction, VersionedTransaction } from '@solana/web3.js';
+import { ComputeBudgetProgram, Transaction, VersionedTransaction } from '@solana/web3.js';
 import { useCallback } from 'react';
-import { NotificationLink } from '@/components/common/NotificationLink';
+import { NotificationLink } from '../components/Shared/NotificationLink';
+import { usePriorityFee } from './usePriorityFee';
 
 type SingleOrArray<T> = T | T[];
 
 export const useTransactionSender = () => {
   const { connection } = useConnection();
   const wallet = useWallet();
+  const { priorityFee } = usePriorityFee();
 
   const send = useCallback(
     /**
@@ -34,58 +36,73 @@ export const useTransactionSender = () => {
           if (!(tx instanceof VersionedTransaction)) {
             tx.recentBlockhash = blockhask.blockhash;
             tx.feePayer = wallet.publicKey!;
+            // Priority fee ix
+            tx.instructions = [
+              ComputeBudgetProgram.setComputeUnitPrice({ microLamports: priorityFee }),
+              ...tx.instructions,
+            ];
           }
           return tx;
         }),
       );
-      const signedTxs = await wallet.signAllTransactions(timedTxs.flat());
-      const signatures = [];
 
-      // Reconstruct signed sequence
-      const signedSequence: T[][] = [];
-      let i = 0;
-      sequence.forEach((set) => {
-        const signedSet: T[] = [];
-        set.forEach(() => {
-          signedSet.push(signedTxs[i]);
-          i += 1;
+      try {
+        const signedTxs = await wallet.signAllTransactions(timedTxs.flat());
+        const signatures = [];
+
+        // Reconstruct signed sequence
+        const signedSequence: T[][] = [];
+        let i = 0;
+        sequence.forEach((set) => {
+          const signedSet: T[] = [];
+          set.forEach(() => {
+            signedSet.push(signedTxs[i]);
+            i += 1;
+          });
+          signedSequence.push(signedSet);
         });
-        signedSequence.push(signedSet);
-      });
 
-      // eslint-disable-next-line no-restricted-syntax
-      for (const set of signedSequence) {
-        signatures.push(
-          // eslint-disable-next-line no-await-in-loop
-          ...(await Promise.all(
-            set.map((tx) =>
-              connection
-                .sendRawTransaction(tx.serialize(), {
-                  skipPreflight: true,
-                })
-                .then((txSignature) =>
-                  connection.confirmTransaction(txSignature).then(() => txSignature),
-                ),
-            ),
-          )),
-        );
+        // eslint-disable-next-line no-restricted-syntax
+        for (const set of signedSequence) {
+          signatures.push(
+            // eslint-disable-next-line no-await-in-loop
+            ...(await Promise.all(
+              set.map((tx) =>
+                connection
+                  .sendRawTransaction(tx.serialize(), {
+                    skipPreflight: true,
+                  })
+                  .then((txSignature) =>
+                    connection.confirmTransaction(txSignature).then(() => txSignature),
+                  ),
+              ),
+            )),
+          );
+        }
+
+        notify({
+          title: 'Transactions sent!',
+          message: (
+            <div className="flex flex-col">
+              {signatures.map((signature) => (
+                <NotificationLink key={signature} signature={signature} />
+              ))}
+            </div>
+          ),
+          autoClose: 5000,
+        });
+        return signatures;
+      } catch (err) {
+        notify({
+          title: 'Transactions not sent!',
+          message: <p>An error occured: {err?.toString()}</p>,
+          autoClose: 5000,
+        });
+        return [];
       }
-
-      notify({
-        title: 'Transactions sent!',
-        message: (
-          <div>
-            {signatures.map((signature) => (
-              <NotificationLink key={signature} signature={signature} />
-            ))}
-          </div>
-        ),
-        autoClose: 5000,
-      });
-      return signatures;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [wallet.publicKey, connection],
+    [wallet.publicKey, connection, priorityFee],
   );
 
   return { send };

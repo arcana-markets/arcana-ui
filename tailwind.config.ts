@@ -12,6 +12,7 @@ const config: Config = {
         xl: "430px 430px",
       },
       backgroundImage: {
+        'black-gradient': 'linear-gradient(90deg, #01171e 0%, #012732 100%)',
         "gradient-radial":
           "radial-gradient(circle, rgba(80,153,204,1) 0%, rgba(80,153,204,0) 100%)",
         "gradient-radial-permissionless":
@@ -55,6 +56,14 @@ const config: Config = {
         wiggle: "wiggle 2s 2s linear infinite",
         rotate: "rotate 4s linear infinite",
       },
+      screens: {
+        xs: '325px',
+        sm: '480px',
+        md: '768px',
+        lg: '976px',
+        xl: '1280px',
+      },
+
       colors: {
         primary: "#0B0F13",
         darkblack: "#0f141a",
@@ -81,7 +90,57 @@ const config: Config = {
         green_dark: "#013746",
         blue_200: "#384257",
         blue_300: "#39404D",
-      },
+        white: '#ffffff',
+        black: '#000000',
+        pink: '#C77DFF',
+        green: '#4EDF87',
+        red: '#F9564F',
+        offWhite: '#f0f0f0',
+        background: {
+          100: '#012732',
+          200: '#012A36',
+          300: '#043542',
+        },
+        foreground: {
+          100: '#FFFFFF',
+          200: '#E4E4E7',
+          300: '#D4D4D8',
+        },
+        primary2: {
+          100: '#5099CC',
+          200: '#E9D8FD',
+          300: '#D6BCFA',
+        },
+        success: {
+          100: '#06D6A0',
+          200: '#C3DAFE',
+          300: '#A3BFFA',
+        },
+        warning: {
+          100: '#E3DB68',
+          200: '#E9D8FD',
+          300: '#D6BCFA',
+        },
+        danger: {
+          100: '#EF476F',
+          200: '#FED7E2',
+          300: '#FBB6CE',
+        },
+        down: {
+          DEFAULT: '#be6a6a',
+          dark: '#b65858',
+          muted: '#9e7070',
+        },
+        up: {
+          DEFAULT: '#60bf4f',
+          dark: '#52b441',
+          muted: '#748372',
+        },
+        button: {
+          DEFAULT: '#794ca9',
+          hover: '#6c4497',
+      }
+    },
       keyframes: {
         rotate: {
           "0%, 100%": {

@@ -1,0 +1,60 @@
+.highcharts-background {
+  fill: transparent !important;
+}
+
+.marketDepthCon {
+  max-width: 400px;
+}
+
+#container text {
+  fill: white !important;
+  opacity: 50%;
+}
+
+.highcharts-tooltip {
+  display: none !important;
+}
+
+.highcharts-yaxis-labels {
+  display: none !important;
+}
+
+.highcharts-credits {
+  display: none !important;
+}
+
+.highcharts-plot-line {
+  stroke: white;
+  opacity: 60%;
+  stroke-dasharray: 4, 2;
+}
+
+.highcharts-axis-line {
+  stroke: white;
+  opacity: 60%;
+  stroke-dasharray: 4, 2;
+}
+
+#container text {
+  font-size: 14px !important;
+  fill: white !important;
+  opacity: 40% !important;
+}
+
+@media screen and (max-width: 850px) {
+  .marketDepthCon {
+    max-width: 350px;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .marketDepthCon {
+    max-width: 330px;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .marketDepthCon {
+    max-width: 400px;
+  }
+}

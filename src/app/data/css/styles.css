@@ -1,0 +1,876 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --down: 190, 106, 106;
+  --down-dark: 182, 88, 88;
+  --down-muted: 158, 112, 112;
+  --up: 96, 191, 79;
+  --up-dark: 82, 180, 65;
+  --up-muted: 116, 131, 114;
+}
+
+@layer base {
+  .footer-header-title {
+    @apply font-medium text-xl sm:text-base leading-7 text-missioncontrol mb-1 sm:mb-2;
+  }
+
+  .footer-link {
+    @apply font-medium text-xl sm:text-base leading-7 text-white cursor-pointer transition-all duration-200 ease-in-out hover:opacity-60;
+  }
+  .nav-link {
+    @apply text-base max-sm:text-2xl max-[1024px]:text-3xl font-normal max-lg:text-white text-foxflowerviola hover:text-white duration-200 after:absolute relative after:w-0 after:duration-300 cursor-pointer after:bg-white after:-bottom-[2px] after:left-0 after:h-px after:hover:w-full;
+  }
+  .card-btn {
+    @apply bg-daintree mt-2 leading-6 duration-500 w-full rounded-lg py-2 px-3 text-white text-sm font-medium group-hover:!text-daintree group-hover:!bg-white;
+  }
+  .vault-headings {
+    @apply text-base whitespace-nowrap justify-end flex items-center gap-[2px] font-normal text-foxflowerviola;
+  }
+  .deposit-btn {
+    @apply text-sm mr-4 my-2 group-hover:!text-daintree group-hover:!bg-white duration-500 leading-6 text-white font-medium py-2 px-3 rounded-xl bg-[#1b1f2b];
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.slick-dots li button:before {
+  color: #384c61 !important;
+  opacity: 1 !important;
+  font-size: 12px !important;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #5099cc !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.26);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background-color: black;
+}
+
+@media (min-width: 640px) {
+  .loading_header {
+    position: relative;
+    transition: all 0.3s linear;
+  }
+
+  .loading_header::after {
+    --rotation: 0deg;
+    content: "";
+    border-radius: 12px !important;
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(var(--rotation), #5099cc 1.99%, #252b32 23.97%);
+    animation: rotate-border 4s linear infinite;
+    z-index: -1;
+  }
+
+  @keyframes rotate-border {
+    0%,
+    100% {
+      --rotation: 0deg;
+    }
+
+    50% {
+      --rotation: 360deg;
+    }
+  }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+ }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+      rgb(var(--foreground-rgb, 0, 0, 0))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.backgroundCustom {
+  background: linear-gradient(180deg, #012A36 0%, #013746 100%);
+}
+
+/* slider card css ============>  */
+.cardShadowBor {
+  box-shadow: 0px 32px 40px -2px rgba(0, 0, 0, 0.08),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--foreground-night-400, rgba(255, 255, 255, 0.027));
+}
+.cardShadow {
+  background: var(--background-night-900-high-emphasis, #012a36);
+}
+.borderColor {
+  border-color: var(--foreground-night-400, rgba(255, 255, 255, 0.13));
+}
+.timeLine {
+  background: var(--foreground-night-300, rgba(255, 255, 255, 0.08));
+}
+.radius {
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+/* slider card css ends here ============>  */
+
+/* buy and sell css =============>  */
+
+.halfBg {
+  background: var(--Danger-500, rgba(249, 86, 79, 0.19));
+}
+
+/* buy and sell css ends here ============>  */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.hideScrollBar::-webkit-scrollbar {
+  display: none;
+}
+
+/* order book styles =================>  */
+
+.bid-size-bar {
+  background: linear-gradient(to right, rgba(6, 214, 160, 0.3), #06D6A0, rgba(6, 214, 160, 0.3));
+  position: absolute;
+  right: 50%;
+  height: 100%;
+}
+
+.ask-size-bar {
+  background: linear-gradient(to left, rgba(239, 71, 111, 0.3), #EF476F, rgba(239, 71, 111, 0.3));
+  position: absolute;
+  left: 50%;
+  height: 100%;
+}
+
+.orderBookSearchBg {
+  border: 1px solid var(--foreground-night-400, rgba(255, 255, 255, 0.13));
+  background: var(--foreground-night-100, rgba(255, 255, 255, 0.03));
+}
+
+.recharts-cartesian-grid-horizontal :last-child {
+  display: none;
+}
+
+/* orderbook flash */
+
+@keyframes greenFlash {
+  from { background-color: rgba(6, 214, 160, 0.3); }
+  to { background-color: transparent; }
+}
+
+@keyframes redFlash {
+  from { background-color: rgba(239, 71, 111, 0.3); }
+  to { background-color: transparent; }
+}
+
+.green-flash {
+  animation: greenFlash 1s ease-out;
+}
+
+.red-flash {
+  animation: redFlash 1s ease-out;
+}
+
+
+/* order book styles ends here ===============>  */
+
+
+.clicked-icon {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* drawer styles ===========>  */
+.drawer {
+  width: 70% !important;
+  background-color: #043f50 !important;
+}
+
+@media screen and (max-width: 500px) {
+  .drawer {
+    width: 100% !important;
+    background-color: #012732 !important;
+  }
+}
+
+tspan {
+  font-size: 14px !important;
+  fill: white !important;
+  opacity: 40%;
+}
+
+@keyframes copiedAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+.animate-copied {
+  animation: copiedAnimation 0.5s ease;
+}
+
+.Connect_btn {
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+  color: white;
+  background: #252b32;
+  position: relative;
+  z-index: 2;
+  transition: all linear 300ms;
+  border: 0;
+}
+
+.Connect_btn:hover::after {
+  opacity: 1;
+}
+
+.Connect_btn:hover {
+  background-color: #2a4e65;
+}
+
+.Connect_btn::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  opacity: 0;
+  border-radius: 12px;
+  padding: 0.1px 0.1px;
+  inset: 0;
+  border: 2px solid transparent;
+  background: linear-gradient(137deg, #5099cc 1.99%, #252b3200 23.97%)
+    border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
+.Connect_btn:hover:after {
+  animation: rotate 3000ms infinite;
+  transition: all linear 0.3s;
+}
+
+@keyframes rotate {
+  0% {
+    background: linear-gradient(135deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  3% {
+    background: linear-gradient(145deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  6% {
+    background: linear-gradient(155deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  9% {
+    background: linear-gradient(165deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  12% {
+    background: linear-gradient(175deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  15% {
+    background: linear-gradient(185deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  18% {
+    background: linear-gradient(195deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  21% {
+    background: linear-gradient(205deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  24% {
+    background: linear-gradient(215deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  27% {
+    background: linear-gradient(225deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  30% {
+    background: linear-gradient(235deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  33% {
+    background: linear-gradient(245deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  36% {
+    background: linear-gradient(255deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  39% {
+    background: linear-gradient(265deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  42% {
+    background: linear-gradient(275deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  45% {
+    background: linear-gradient(285deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  48% {
+    background: linear-gradient(295deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  52% {
+    background: linear-gradient(305deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  54% {
+    background: linear-gradient(315deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  56% {
+    background: linear-gradient(325deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  58% {
+    background: linear-gradient(335deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  61% {
+    background: linear-gradient(345deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  64% {
+    background: linear-gradient(355deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  66% {
+    background: linear-gradient(360deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  68% {
+    background: linear-gradient(10deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  70% {
+    background: linear-gradient(20deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  72% {
+    background: linear-gradient(30deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  75% {
+    background: linear-gradient(40deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  78% {
+    background: linear-gradient(50deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  81% {
+    background: linear-gradient(60deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  84% {
+    background: linear-gradient(70deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  85% {
+    background: linear-gradient(80deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  88% {
+    background: linear-gradient(90deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  91% {
+    background: linear-gradient(100deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  94% {
+    background: linear-gradient(110deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  98% {
+    background: linear-gradient(120deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+
+  100% {
+    background: linear-gradient(130deg, #5099cc 1.99%, #252b3200 23.97%)
+      border-box;
+  }
+}
+
+/* TRADING VIEW STYLES ===========>  */
+
+.tradingview-widget-container iframe {
+  border: none !important;
+}
+
+.toggle {
+  width: 36px;
+  height: 18px;
+  padding: 1.5px;
+}
+
+.toggle-inner {
+  width: 16px;
+  height: 16px;
+
+  background: #fff;
+}
+
+.-translate-x-4 {
+  transform: translateX(-16px) !important;
+}
+
+.bg-blue {
+  background-color: #5099cc;
+}
+
+.bg-dark {
+  background-color: #272a32;
+}
+
+/* JUPITER STYLES ===========>  */
+
+#integrated-terminal {
+  background-color: #161b24;
+  border: none; /* Removes the border */
+  min-height: 419px; /* Example minimum height */
+  max-height: 819px; /* Example maximum height */
+  /* Other styles */
+}
+
+/* Custom Styles for Jupiter Widget Inner Button */
+#integrated-terminal button.relative.text-white.bg-\[\#191B1F\].dark\:bg-black\/50.w-full.mt-4.rounded-xl {
+  width: 100%;
+  border: 1px solid #5099CC; /* border-[1px] */
+  color: #d1d5db; /* text-primary-300 */
+  font-size: 14px; /* text-[14px] */
+  font-weight: 500; /* font-medium */
+  letter-spacing: normal; /* tracking-wide */
+  border-radius: 12px; /* rounded-[12px] */
+  background-color: #161b24; /* bg-[#012630] */
+  transition: opacity 0.3s, transform 0.3s; /* For hover and active states */
+}
+
+#integrated-terminal button.relative.text-white.bg-\[\#191B1F\].dark\:bg-black\/50.w-full.mt-4.rounded-xl:hover {
+  opacity: 0.7 !important; /* hover:opacity-70 */
+}
+
+#integrated-terminal button.relative.text-white.bg-\[\#191B1F\].dark\:bg-black\/50.w-full.mt-4.rounded-xl:active {
+  transform: translateY(2px) !important; /* active:translate-y-[2px] */
+}
+
+#integrated-terminal svg {
+  fill: white !important; /* SVG color */
+}
+
+#jupiter-terminal .bg-\[\#212128\], #jupiter-terminal .bg-\[\#36373E\] {
+  background-color: rgba(59, 71, 94, 1) !important; /* Replace #043341 with RGBA, 70% opacity */
+}
+
+#jupiter-terminal .bg-\[\#212128\]:hover, #jupiter-terminal .bg-\[\#36373E\]:hover {
+  background-color: rgb(59, 71, 94) !important; /* Full opacity on hover */
+}
+
+#jupiter-terminal .bg-\[\#191B1F\]:hover {
+  background-color: #5099CC !important; /* Color on hover */
+}
+
+#jupiter-terminal input[type="text"] {
+  background-color: transparent !important; /* Or your desired background color */
+  color: #d1d5db !important; /* Text color */
+  /* Other styles like border, font-size, etc. */
+}
+
+#jupiter-terminal svg {
+  fill: white !important; /* SVG color */
+}
+
+#jupiter-terminal > div > div > div > div > div > div > div > ul {
+  background-color: rgb(59, 71, 94) !important; /* Full opacity on hover */
+  color: #d1d5db !important; /* General text color */
+}
+
+#jupiter-terminal > div > div > div > div > div.flex.flex-col.w-full.justify-center.items-center.px-5.mt-7 > div {
+  background-color: #161b24; /* Change the background to green */
+}
+
+#jupiter-terminal > div > div > div > div.absolute.bottom-1.px-3.py-2.w-full > div {
+background-color: #AB9FF2; /* Change the background to green */
+}
+
+#jupiter-terminal > div > div > div > div > div > a > span {
+  visibility: hidden; /* Hides the original text */
+  position: relative;
+}
+
+#jupiter-terminal > div > div > div > div > div > a > span::after {
+  content: 'Swap'; /* New text */
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+
+#jupiter-terminal > div > div > div > div > div.flex.w-full.justify-center.items-center.mt-9 > div > img {
+  visibility: hidden;
+  position: relative;
+}
+
+#jupiter-terminal > div > div > div > div > div.flex.w-full.justify-center.items-center.mt-9 > div {
+  position: relative;
+}
+
+#jupiter-terminal > div > div > div > div > div.flex.w-full.justify-center.items-center.mt-9 > div::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/img/png/arcana-icon.png');
+  background-size: cover; /* Or 'contain' based on your need */
+  background-position: center;
+}
+
+#jupiter-terminal > div > div > div > div > div > a > img {
+  visibility: hidden;
+  position: relative;
+}
+
+#jupiter-terminal > div > div > div > div > div > a {
+  position: relative;
+}
+
+#jupiter-terminal > div > div > div > div > div > a::after {
+  content: "";
+  position: absolute;
+  top: 10;
+  right: 52px;
+  width: 38px;  /* Set the width of the pseudo-element */
+  height: 38px; /* Set the height of the pseudo-element */
+  background-image: url('/img/png/arcana-icon.png'); /* Update with the correct path */
+  background-size: contain; /* Use 'contain' to ensure the entire image fits within the dimensions */
+  background-position: center;
+}
+
+#jupiter-terminal {
+  /* General styles for the terminal */
+  background-color: #161b24 !important; /* Overall background */
+  color: white !important; /* General text color */
+}
+
+#jupiter-terminal > div > div > div > form > div > div.w-full.mt-2.rounded-xl.flex.flex-col.px-2 > div > div.border-b.border-transparent.bg-\[\#212128\].rounded-xl.transition-all {
+  background-color: #161b24 !important; /* Replace with the color you want */
+  /* You can add more styling properties here as needed */
+}
+
+#jupiter-terminal > div > div > div > form > div > div.w-full.mt-2.rounded-xl.flex.flex-col.px-2 > div > div:nth-child(3) {
+  background-color: #161b24 !important; /* Replace with the color you want */
+  /* Additional styling properties can be added here as needed */
+}
+
+#jupiter-terminal > div > div > div > div > div > div > div > button {
+  background-color: #161b24 !important; /* Main button background color */
+}
+
+#jupiter-terminal > div > div > div > div > div > div > div > button:hover {
+  background-color: #5099CC !important; /* Purple color on hover */
+}
+
+#jupiter-terminal > div > div > div > div.absolute.top-0.left-0.h-full.w-full.bg-jupiter-bg.rounded-lg.overflow-hidden:hover {
+  /* Your styles here */
+  background-color: #161b24 !important; /* Replace with the color you want */
+
+}
+
+#jupiter-terminal > div > div > div > div.absolute.top-0.left-0.h-full.w-full.bg-jupiter-bg.rounded-lg.overflow-hidden {
+  background-color: #161b24 !important; /* Ensures the background is always green */
+}
+
+
+#jupiter-terminal > div > div > div > div > div:nth-child(2) > div {
+  background-color: #161b24; /* Sets the background color to #043341 */
+}
+
+#jupiter-terminal > div > div > div > div > div.flex.flex-col.justify-center.items-center > div > div.mt-4.space-y-4.border.border-white\/5.rounded-xl.p-3.bg-\[\#25252D\].border-none.mt-0 {
+  background-color: #161b24; /* Sets the background color to #043341 */
+}
+
+#jupiter-terminal > div > div > div > form > div > div.w-full.mt-2.rounded-xl.flex.flex-col.px-2 > div > div.my-2 > div > div {
+  background-color: #3B475E !important; /* Existing style */
+  margin-bottom: -1rem; /* Adds a bottom margin of 1rem (16 pixels) */
+  transform: translateY(-10px); /* Moves the element up by 10 pixels */
+  /* Include other existing styles here */
+  }
+  
+  /* Include other existing styles here */
+
+#jupiter-terminal > div > div > div > form > div > div.w-full.mt-2.rounded-xl.flex.flex-col.px-2 > div > div.my-2 {
+  margin-bottom: 0px !important;
+}
+
+#jupiter-terminal > div > div > div > form > div > div:nth-child(2) > div > button:hover {
+  background-color: #5099CC !important; /* Ensures this style takes precedence on hover */
+}
+
+#jupiter-terminal > div > div > div > div.absolute.top-0.left-0.h-full.w-full.bg-jupiter-bg.rounded-lg.overflow-hidden > div > div.mt-2 > div > div > div > li > div {
+  background-color: #161b24; /* Applies the background color to all rows */
+}
+
+#integrated-terminal, #jupiter-terminal {
+  flex: 1; /* This will make both elements take up equal space */
+  /* Or you can set specific widths */
+}
+
+#jupiter-terminal > div > div > div > form > div > div:nth-child(2) > div.mt-4.space-y-4.border.border-white\/5.rounded-xl.p-3 {
+  position: relative; /* If it's not already positioned */
+  background-color: #161b24; /* Replace with your desired color */
+
+  /* Other existing styles */
+}
+/* Custom Sleek Scrollbar Styles for #jupiter-terminal > div > div */
+#jupiter-terminal > div > div::-webkit-scrollbar {
+  width: 6px; /* Thin scrollbar width */
+}
+
+#jupiter-terminal > div > div::-webkit-scrollbar-track {
+  background-color: #161b24; /* Background color same as the page */
+}
+
+#jupiter-terminal > div > div::-webkit-scrollbar-thumb {
+  background-color: rgba(1, 39, 50, 0.6); /* Slightly visible scrollbar thumb */
+  border-radius: 3px; /* Mildly rounded corners for the scrollbar thumb */
+}
+
+#jupiter-terminal > div > div::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(1, 39, 50, 0.8); /* Darker shade on hover for better visibility */
+}
+
+/* Ensuring scrollbar blends well in dark mode too for #jupiter-terminal */
+@media (prefers-color-scheme: dark) {
+  #jupiter-terminal > div > div::-webkit-scrollbar-track {
+    background-color: #161b24;
+  }
+
+  #jupiter-terminal > div > div::-webkit-scrollbar-thumb {
+    background-color: rgba(1, 39, 50, 0.6);
+  }
+
+  #jupiter-terminal > div > div::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(1, 39, 50, 0.8);
+  }
+};
+
+/* JUPITER STYLES END ===========>  */
+
+.chart-container {
+  display: flex;
+  justify-content: flex-end;
+};
+
+.legend {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 1;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 300;
+};
+
+.shiny-gradient-text {
+  font-weight: bold; /* Makes the text bold */
+  background: linear-gradient(45deg, #5099CC, #5099CC, #FFFFFF, #5099CC);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: moveGradient 3s ease infinite;
+}
+
+.shiny-gradient-text2 {
+  font-weight: bold; /* Makes the text bold */
+  background: linear-gradient(45deg, #C77DFF, #FFFFFF, #C77DFF, #C77DFF);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: moveGradient 3s ease infinite;
+}
+
+.fixed-container {
+  width: 250px; /* Fixed width */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the start to keep them left-aligned */
+  justify-content: flex-start; /* Align content to the top */
+  padding: 4px; /* Add some padding for spacing */
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px; /* Adjust the gap as needed */
+  width: 100%;
+}
+
+.button-market-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.button-chevron {
+  justify-self: center;
+}
+
+.markets-bar-container {
+  border-top: 1px solid #ccc; 
+  border-left: 1px solid #ccc; 
+  border-right: 1px solid #ccc;
+  background-color: #012732;
+  border-radius: 16px 16px 0 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column; /* Stack elements on mobile */
+}
+
+@media (min-width: 768px) { /* Adjust breakpoint as needed */
+  .markets-bar-container {
+    flex-direction: row; /* Horizontal layout on larger screens */
+    justify-content: space-between;
+  }
+}
+
+.market-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.market-info div, .market-info p {
+  margin: 0.5rem 0; /* Adjust as needed */
+}
+
+@keyframes moveGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Custom Sleek Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 6px; /* Thin scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #012732; /* Background color same as the page */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(1, 39, 50, 0.6); /* Slightly visible scrollbar thumb */
+  border-radius: 3px; /* Mildly rounded corners for the scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(1, 39, 50, 0.8); /* Darker shade on hover for better visibility */
+}
+
+/* Ensuring scrollbar blends well in dark mode too */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background-color: #012732;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(1, 39, 50, 0.6);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(1, 39, 50, 0.8);
+  }
+
+};

@@ -1,11 +1,11 @@
 "use client";
 import { useEffect } from "react";
-import Footer from "@/components/common/Footer";
-import Navbar from "@/components/common/Navbar";
-import VaultDetailsBanner from "@/components/vaultpermissionless/VaultDetailsBanner";
-import VaultPermissionless from "@/components/vaultpermissionless/VaultPermissionless";
-import Technicals from "@/components/homepage/Technicals";
-import TopVaults from "@/components/homepage/TopVaults";
+import Footer from "@/components/Shared/Footer";
+import Navbar from "@/components/Shared/Navbar";
+import VaultDetailsBanner from "@/components/Permissionless/VaultDetailsBanner";
+import VaultPermissionless from "@/components/Permissionless/VaultPermissionless";
+import Technicals from "@/components/Vaults/Technicals";
+import TopVaults from "@/components/Vaults/TopVaults";
 
 const VaultPermissionlessDetailsPage = ({
   params,

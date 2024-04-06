@@ -50,6 +50,7 @@ export function useExplorerConfiguration() {
 
   const generateExplorerLink = useCallback(
     (element: string, type: 'account' | 'tx' | 'transaction') => matchSuffix(type) + element,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [explorer],
   );
 

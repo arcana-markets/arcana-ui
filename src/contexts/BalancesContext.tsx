@@ -1,4 +1,3 @@
-{/*
 import { createContext, useCallback, useContext, useState } from 'react';
 import { useConnection } from '@solana/wallet-adapter-react';
 import { PublicKey, TokenAmount } from '@solana/web3.js';
@@ -75,5 +74,3 @@ export function BalancesProvider({
     </balancesContext.Provider>
   );
 }
-
-*/}
