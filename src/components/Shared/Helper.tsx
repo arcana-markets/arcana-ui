@@ -1,5 +1,4 @@
 import { EmptyIcon } from "./Icons";
-import Link, { LinkProps } from 'next/link';
 
 type vaultsData = {
   coinImg: string;
@@ -11,7 +10,6 @@ type vaultsData = {
   Volume: string;
   VenueImg: string;
   btnText: string;
-  btnLink: string;
 };
 export const vaultsData: vaultsData[] = [
   {
@@ -24,7 +22,6 @@ export const vaultsData: vaultsData[] = [
     Volume: "$0",
     VenueImg: "/img/svg/phoenix.svg",
     btnText: "Manage",
-    btnLink: "/vaults/pyth-usdc",
   },
   {
     coinImg: "/img/svg/jto-usdc.svg",
@@ -36,10 +33,9 @@ export const vaultsData: vaultsData[] = [
     Volume: "$0",
     VenueImg: "/img/svg/openbook.svg",
     btnText: "Manage",
-    btnLink: "/vaults/pyth-usdc",
   },
   {
-    coinImg: "/img/svg/jto.svg",
+    coinImg: "/img/svg/jtousdc.svg",
     Vault1: "JTO",
     Vault2: "USDC",
     Liquidity: <EmptyIcon />,
@@ -48,7 +44,6 @@ export const vaultsData: vaultsData[] = [
     Volume: "$0",
     VenueImg: "/img/svg/openbook.svg",
     btnText: "Deposit",
-    btnLink: "/vaults/pyth-usdc",
   },
   {
     coinImg: "/img/svg/jup.svg",
@@ -60,7 +55,6 @@ export const vaultsData: vaultsData[] = [
     Volume: "$0",
     VenueImg: "/img/svg/openbook.svg",
     btnText: "Deposit",
-    btnLink: "/vaults/pyth-usdc",
   },
   {
     coinImg: "/img/svg/seth.svg",
@@ -72,7 +66,6 @@ export const vaultsData: vaultsData[] = [
     Volume: "$0",
     VenueImg: "/img/svg/meteora.svg",
     btnText: "Deposit",
-    btnLink: "/vaults/pyth-usdc",
   },
   {
     coinImg: "/img/svg/jlp.svg",
@@ -84,7 +77,6 @@ export const vaultsData: vaultsData[] = [
     Volume: "$0",
     VenueImg: "/img/svg/r-logo.svg",
     btnText: "Deposit",
-    btnLink: "/vaults/pyth-usdc",
   },
   {
     coinImg: "/img/svg/jto-bonk.svg",
@@ -96,7 +88,6 @@ export const vaultsData: vaultsData[] = [
     Volume: "$0",
     VenueImg: "/img/svg/fish.svg",
     btnText: "Deposit",
-    btnLink: "/vaults/pyth-usdc",
   },
 ];
 
