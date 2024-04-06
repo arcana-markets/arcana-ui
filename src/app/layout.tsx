@@ -1,6 +1,7 @@
 import { Providers } from "@/contexts/Providers";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics } from '@next/third-parties/google';
 import "./globals.css";
 import '@solana/wallet-adapter-react-ui/styles.css';
 import "slick-carousel/slick/slick.css";
@@ -36,6 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`!bg-primary ${inter.className}`}>
       <body>
+      <GoogleAnalytics gaId="G-9PEVYHKFL5" />
         <Providers>{children}</Providers>
         </body>
     </html>

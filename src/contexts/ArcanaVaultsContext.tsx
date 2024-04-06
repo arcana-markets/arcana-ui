@@ -4,6 +4,7 @@ import { PublicKey, type Message, SystemProgram } from '@solana/web3.js';
 import { Program, BN, AnchorProvider } from '@coral-xyz/anchor';
 import { ARCANA_PROGRAM_ID } from '@/utils/constants';
 import { IDL as ArcanaVaultsIDL } from '@/utils/idl/arcana_vaults';
+import { useProvider } from '@/hooks/useProvider';
 
 interface Vault {
   address: string;
@@ -35,7 +36,7 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
   }, [publicKey, connection]);
 
   const wallet = useWallet();
-  const provider = new AnchorProvider(connection, wallet, AnchorProvider.defaultOptions());
+  const provider = useProvider();
   const program = new Program(ArcanaVaultsIDL, ARCANA_PROGRAM_ID, provider);
 
   const loadVaults = useCallback(async () => {

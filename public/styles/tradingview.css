@@ -5,7 +5,7 @@
   --bkg-dark: rgba(0, 0, 0, 0.1);
   --bkg-darker: rgba(0, 0, 0, 0.15);
   --bkg-darkest: rgba(0, 0, 0, 0.2);
-  --text: rgba(0, 0, 0, 0.6);
+  --text: rgba(255, 255, 255, 0.6);
 
   --tv-color-platform-background: transparent;
   --tv-color-pane-background: transparent;

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import Navbar from '@/components/Shared/Navbar';
 import Image from 'next/image';
 import HeroSwap from '@/components/Swap/HeroSwap';
@@ -13,7 +14,9 @@ const Page = () => {
   }, []);
 
   return (
+    
     <div className="flex flex-col min-h-screen overflow-hidden relative">
+     <GoogleAnalytics gaId="G-9PEVYHKFL5" />
       <div className="flex-grow">
         <div className="bg-[#0B0F13] relative">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1234px] h-[834px]">
