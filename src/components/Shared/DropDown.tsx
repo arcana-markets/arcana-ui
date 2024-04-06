@@ -22,7 +22,14 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect, value }) => {
     onSelect(optionValue); // Assuming onSelect expects a string value
     // Close the dropdown or other logic as needed
   };
-  
+
+  const dropdownOptions: Option[] = [
+    { label: "APY", value: "APY" },
+    { label: "TVL", value: "TVL" },
+    { label: "Hot", value: "Hot" },
+    { label: "24h Gainers", value: "24h Gainers" },
+    { label: "7D Delta", value: "7D Delta" },
+  ];
 
   return (
     <div className="relative inline-block">

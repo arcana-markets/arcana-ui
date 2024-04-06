@@ -7,13 +7,28 @@ import Disclaimer from "./Disclaimer";
 import ValutGridDataEnd from "./ValutGridDataEnd";
 import VaultGridDataStart from "./VaultGridDataStart";
 
+interface Option {
+  label: string;
+  value: string;
+}
+
 const VaultsMobile = () => {
   const [showToggle, setShowToggle] = useState(true);
-  const [selectedValue, setSelectedValue] = useState("24h Gainers");
+  const [selectedValue, setSelectedValue] = useState<string>("");
 
   const handleSelectValue = (value: string) => {
     setSelectedValue(value);
   };
+
+  // This should be placed in VaultsMobile component or a higher scope that VaultsMobile can access
+const dropdownOptions: Option[] = [
+  { label: "APY", value: "APY" },
+  { label: "TVL", value: "TVL" },
+  { label: "Hot", value: "Hot" },
+  { label: "24h Gainers", value: "24h Gainers" },
+  { label: "7D Delta", value: "7D Delta" },
+];
+
 
   return (
     <div className="md:hidden">
@@ -29,9 +44,9 @@ const VaultsMobile = () => {
       </div>
       <div className="bg-[#11171D] py-6">
         <div className="container px-4 flex justify-between items-center mx-auto">
-          <Dropdown
+        <Dropdown
             value={selectedValue}
-            options={["APY", "TVL", "Hot", "24h Gainers", "7D Delta"]}
+            options={dropdownOptions}
             onSelect={handleSelectValue}
           />
           <div className="flex items-center gap-2">
