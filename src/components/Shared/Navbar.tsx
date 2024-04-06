@@ -264,7 +264,7 @@ const Navbar = () => {
             </button>
             </div>
             <button
-            className={`${modal.visible === true ? "hidden" : "block"} z-50 mt-2 relative min-[1024px]:hidden bg-[#013746] rounded-lg text-white h-12 w-12 flex items-center justify-center`}
+            className={`${modal.visible === true ? "hidden" : "block"} z-50 mt-2 -ml-2 relative min-[1024px]:hidden bg-[#013746] rounded-lg text-white h-12 w-12 flex items-center justify-center`}
             onClick={toggleMenu}
           >
             {show ? <MdClose size={24} /> : <NavMenu />}
