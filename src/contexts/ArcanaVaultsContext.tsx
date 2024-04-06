@@ -1,10 +1,8 @@
-{/*
-
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey, SystemProgram } from '@solana/web3.js';
 import { Program, BN, AnchorProvider } from '@coral-xyz/anchor';
-import { ARCANA_VAULTS_PROGRAM_ID } from '@/utils/constants';
+import { ARCANA_PROGRAM_ID } from '@/utils/constants';
 import { IDL as ArcanaVaults } from '@/utils/idl/arcana_vaults';
 
 interface Vault {
@@ -43,7 +41,7 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
 
     try {
       const provider = new AnchorProvider(connection, wallet, AnchorProvider.defaultOptions());
-      const program = new Program(ArcanaVaults, ARCANA_VAULTS_PROGRAM_ID, provider);
+      const program = new Program(ArcanaVaults, ARCANA_PROGRAM_ID, provider);
 
       const [vaultPDA] = await PublicKey.findProgramAddress(
         [Buffer.from("vault"), wallet.publicKey.toBuffer()],
@@ -55,7 +53,6 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
           vault: vaultPDA,
           owner: wallet.publicKey,
           systemProgram: SystemProgram.programId,
-          // Add any other accounts required by your program
         },
       });
 
@@ -93,4 +90,3 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
 function throwError() {
   throw new Error('useArcanaVaults must be used within an ArcanaVaultsProvider');
 }
-*/}

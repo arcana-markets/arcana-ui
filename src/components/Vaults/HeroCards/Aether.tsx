@@ -6,7 +6,7 @@ const Aether = () => {
     <Link href="/vaults/3" className="px-4 block relative">
     <div className="px-4 block relative pt-10 pb-4 sm:py-10">
     <div className="py-[2px] z-[11] px-[6px] rounded-lg gap-[10px] bg-darkblue300 flex items-center absolute top-[28px] left-1/2 -translate-x-1/2">
-    <p className="text-markergreen text-sm font-medium ">Devnet ONLY</p>
+    <p className="text-yellow text-sm font-medium ">Devnet ONLY</p>
         <div className="p-2 rounded-full animate-wiggle">
             <div className="h-2 w-2 rounded-full bg-[#06D6A0]"></div>
         </div>

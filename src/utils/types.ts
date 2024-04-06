@@ -3,6 +3,111 @@ import { Connection, PublicKey, Signer, Transaction } from '@solana/web3.js';
 import { OpenbookV2 } from './idl/openbook_v2';
 import { ConditionalVault } from './idl/conditional_vault';
 import CoinLogos from '../config/logos.json';
+import { ArcanaVaults } from './idl/arcana_vaults';
+
+export type ArcVaultAccount = IdlAccounts<ArcanaVaults>['vault']; // Adjust 'vault' if your actual account name differs
+export type ConditionalVaultAccount = IdlAccounts<ConditionalVault>['conditionalVault']; // Example for ConditionalVault
+
+export type PublicKeyString = string; // For simplicity, assuming public keys are handled as strings
+export type u8 = number;
+export type u64 = bigint;
+
+export enum SelfTradeBehavior {
+  DecrementTake,
+  CancelProvide,
+  AbortTransaction,
+}
+
+export enum PlaceOrderType {
+  Limit,
+  ImmediateOrCancel,
+  PostOnly,
+  Market,
+  PostOnlySlide,
+}
+
+export enum Side {
+  Bid,
+  Ask,
+}
+
+export interface DepositReceipt {
+  bump: u8;
+  isInitialized: boolean;
+  owner: PublicKeyString;
+  vault: PublicKeyString;
+  baseTokenLiquidityShares: u64;
+  quoteTokenLiquidityShares: u64;
+}
+
+export interface UnifiedVault {
+  bump: u8;
+  owner: PublicKeyString;
+  marketIdentifier: PublicKeyString;
+  baseVault: PublicKeyString;
+  quoteVault: PublicKeyString;
+  baseLiquidityShares: u64;
+  quoteLiquidityShares: u64;
+  downtimeStartTimestamp: u64;
+  downtimeEndTimestamp: u64;
+  cycleDurationInSeconds: u64;
+  downtimeInSeconds: u64;
+  lastUpdateSlot: u64;
+}
+
+export interface InitializeVaultInstruction {
+  owner: PublicKeyString;
+  marketIdentifier: PublicKeyString;
+  vault: PublicKeyString;
+  baseMint: PublicKeyString;
+  quoteMint: PublicKeyString;
+  vaultBaseTokenAccount: PublicKeyString;
+  vaultQuoteTokenAccount: PublicKeyString;
+  associatedTokenProgram: PublicKeyString;
+  tokenProgram: PublicKeyString;
+  systemProgram: PublicKeyString;
+  cycleDurationInSeconds: u64;
+  downtimeInSeconds: u64;
+}
+
+export interface CloseVaultInstruction {
+  owner: PublicKeyString;
+  vault: PublicKeyString;
+  baseVault: PublicKeyString;
+  quoteVault: PublicKeyString;
+}
+
+export interface DepositFundsInstruction {
+  owner: PublicKeyString;
+  marketIdentifier: PublicKeyString;
+  vault: PublicKeyString;
+  depositReceipt: PublicKeyString;
+  mint: PublicKeyString;
+  userTokenAccount: PublicKeyString;
+  vaultTokenAccount: PublicKeyString;
+  tokenProgram: PublicKeyString;
+  systemProgram: PublicKeyString;
+  amount: u64;
+}
+
+export interface WithdrawAllFundsInstruction {
+  owner: PublicKeyString;
+  marketIdentifier: PublicKeyString;
+  vault: PublicKeyString;
+  depositReceipt: PublicKeyString;
+  userTokenAccount: PublicKeyString;
+  vaultTokenAccount: PublicKeyString;
+  tokenProgram: PublicKeyString;
+}
+
+// Add similar interfaces for other instructions as needed
+export interface ArcanaVaultsError {
+  code: number;
+  name: string;
+  msg: string;
+}
+
+
 
 export interface MarketData {
   marketId: string;
