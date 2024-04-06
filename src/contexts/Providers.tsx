@@ -12,6 +12,7 @@ import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useNetworkConfiguration } from '@/hooks/useNetworkConfiguration';
 import { notify } from '@/utils/notifications';
+import Notifications from '@/components/Shared/Notifications';
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ export function Providers({ children }: { children: React.ReactNode; }) {
 
   return (
     <ConnectionProvider endpoint={endpoint}>
+    <Notifications />
       <WalletProvider wallets={wallets} onError={onError}>
         <WalletModalProvider>
           <QueryClientProvider client={queryClient}>

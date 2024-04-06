@@ -14,8 +14,8 @@ function useLocalStorageState<T>({
   key,
   defaultValue,
   getInitialValueInEffect = true,
-  serialize = JSON.stringify, // Use JSON.stringify by default
-  deserialize = JSON.parse, // Use JSON.parse by default
+  serialize = JSON.stringify, 
+  deserialize = JSON.parse,
 }: UseLocalStorageStateOptions<T>): [T, (newState: T | ((prevState: T) => T)) => void] {
   const [state, setState] = useState<T>(defaultValue);
 

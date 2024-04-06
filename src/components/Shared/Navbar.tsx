@@ -13,9 +13,8 @@ import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import Image from 'next/image';
 import * as Icons from '@/app/data/svg/Icons';
-
+import { MdClose } from "react-icons/md";
 import { NUMERAL_FORMAT } from '@/utils/constants';
-import ModalCustom from './ModalCustom';
 
 import Link from 'next/link';
 import Dropdown from './DropDown';
@@ -64,6 +63,7 @@ const Navbar = () => {
   const wallet = useWallet();
   const connected = useWallet();
   const modal = useWalletModal();
+  const [modal2, setmodal] = useState(false)
   const { network, endpoint, setNetwork, setCustomEndpoint } = useNetworkConfiguration();
   // const { explorer, setExplorer } = useExplorerConfiguration();
   // const { priorityFee, setPriorityFee } = usePriorityFee();
@@ -76,7 +76,27 @@ const Navbar = () => {
 
     const balance = useUserSOLBalanceStore((s) => s.balance)
     const { getUserSOLBalance } = useUserSOLBalanceStore()
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+      if (show) {
+        document.body.classList.add("overflow-hidden");
+      } else {
+        document.body.classList.remove("overflow-hidden");
+      }
+    }, [show]);
+    useEffect(() => {
+      if (modal2) {
+        document.body.classList.add("overflow-hidden");
+      } else {
+        document.body.classList.remove("overflow-hidden");
+      }
+    }, [modal2]);
   
+    const toggleMenu = () => {
+      setShow(!show);
+    };
+
     useEffect(() => {
       if (wallet.publicKey && wallet.connected) {
         console.log(wallet.publicKey.toBase58());
@@ -114,12 +134,6 @@ const Navbar = () => {
   const tokenPrice = useTokenPrice();
   // const feesCost = (((priorityFee / 100000) * 200000) / LAMPORTS_PER_SOL) * (solPrice || 0);
 
-  const [show, setShow] = useState(false);
-
-  const toggleMenu = () => {
-    setShow(!show);
-  };
-
   const handleDepositWithdrawModal = (action: 'deposit' | 'withdraw') => {
     if (!connected) {
       setAction(action)
@@ -131,16 +145,16 @@ const Navbar = () => {
 
   return (
     <nav className={`w-full py-6 sm:py-10 z-[11] relative`}>
-      <div className='flex container  px-4 mx-auto justify-between items-center'>
-        <div className='flex gap-12'>
+      <div className="flex container  px-4 mx-auto justify-between items-center">
+        <div className=" flex gap-12">
           <Link href='/' className='mr-4'>
             <NavIcon />
           </Link>
           <div
-            className={`transition-all duration-300 ${show ? '!left-0' : ''
+            className={`transition-all duration-300 ${show ? "!left-0" : ""
               } max-[1024px]:flex-col justify-center items-center gap-5 max-[1024px]:fixed max-[1024px]:w-full max-[1024px]:h-screen h-screen min-[1024px]:h-auto top-0 left-[-100%] max-[1024px]:bg-primary backdrop-blur-3xl max-lg:z-50 flex min-[1024px]:flex min-[1024px]:static`}
           >
-            <ul className='flex items-center gap-6 sm:gap-10 min-[1024px]:flex-row flex-col'>
+            <ul className="flex items-center gap-6 sm:gap-10 min-[1024px]:flex-row flex-col">
               <Link href='/'>
                 <li className='nav-link'>
                   Vaults
@@ -168,7 +182,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className='flex items-center'>
-        <div className='flex text-foxflowerviola gap-4 mr-4 items-center'>
+        <div className='hidden md:flex text-foxflowerviola gap-4 mr-4 items-center'>
           <Dropdown
             value={network}
             options={networks}
@@ -184,6 +198,8 @@ const Navbar = () => {
             />
           )}
         </div>
+        <div className="flex gap-5">
+
         {wallet?.publicKey ? (
             <Menu as="div" className="relative inline-block text-left text-foxflowerviola z-30 cursor-pointer p-3">
               <Menu.Button className="flex items-center justify-between text-foxflowerviola sm:text-white text-sm sm:text-base font-medium p-3 rounded-xl bg-[#013746] sm:bg-[#252B32] Connect_btn transition-all duration-300 ease-linear">
@@ -229,18 +245,33 @@ const Navbar = () => {
               </Menu.Items>
             </Menu>
           ) : (
+            <div className="flex gap-5">
             <div className="text-white z-30 cursor-pointer p-3">
-              <button
+            <button
                 onClick={() => modal.setVisible(true)}
                 disabled={modal.visible || wallet.connecting}
                 className={`text-foxflowerviola sm:text-white text-sm sm:text-base font-medium sm:py-[10px] p-3 sm:px-4 rounded-xl bg-[#013746] sm:bg-[#252B32] Connect_btn transition-all duration-300 ease-linear ${
                   (modal.visible || wallet.connecting) ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
-                {modal.visible || wallet.connecting ? 'Loading...' : 'Connect Wallet'}
-              </button>
+              {modal.visible || wallet.connecting ? (
+                'Loading...'
+              ) : (
+                <>
+                  Connect <span className="sm:inline hidden">Wallet</span>
+                </>
+              )}
+            </button>
+            </div>
+            <button
+            className={`${modal.visible === true ? "hidden" : "block"} z-50 mt-2 relative min-[1024px]:hidden bg-[#013746] rounded-lg text-white h-12 w-12 flex items-center justify-center`}
+            onClick={toggleMenu}
+          >
+            {show ? <MdClose size={24} /> : <NavMenu />}
+          </button>
             </div>
           )}
+        </div>
         </div>
       </div>
     </nav>

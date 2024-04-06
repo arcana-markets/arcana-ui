@@ -29,7 +29,6 @@ const dropdownOptions: Option[] = [
   { label: "7D Delta", value: "7D Delta" },
 ];
 
-
   return (
     <div className="md:hidden">
       <div className="container pt-10 sm:pt-[50px] px-4 mx-auto">

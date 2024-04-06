@@ -7,6 +7,9 @@ interface NotificationStore {
     message: string;
     description?: string;
     txid?: string;
+    show: boolean;
+    id: number;
+    notificationIdCounter: number;
   }>;
   set: (fn: (state: NotificationStore) => void) => void;
 }
