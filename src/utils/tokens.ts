@@ -1,6 +1,6 @@
 import { PublicKey, Connection } from '@solana/web3.js'
 import { toUiDecimals } from '@openbook-dex/openbook-v2'
-import { TOKEN_PROGRAM_ID, WRAPPED_SOL_MINT } from '../../../arcana-ui/src/utils/constants'
+import { TOKEN_PROGRAM_ID, WRAPPED_SOL_MINT } from '@/utils/constants'
 
 export class TokenAccount {
   publicKey!: PublicKey
