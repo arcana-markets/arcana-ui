@@ -33,7 +33,7 @@ const DepositToVault = ({ params }: {
                   Total Deposited
                 </p>
                 <h2 className=" font-poppins text-white font-semibold text-[28px] leading-[28px] mt-[10px] hover:text-markergreen duration-300">
-                  $24,117.93
+                  $0
                 </h2>
               </div>
               <div>
@@ -41,7 +41,7 @@ const DepositToVault = ({ params }: {
                   Earned Fees
                 </p>
                 <h2 className=" font-poppins font-semibold text-[28px] leading-[28px] mt-[10px] text-markergreen duration-300 ">
-                  +$231.77
+                  +$0
                 </h2>
               </div>
               <div>
@@ -59,7 +59,7 @@ const DepositToVault = ({ params }: {
             <div className=" sm:flex gap-[13px] items-center ">
               <h3 className=" flex items-center gap-[8px]">
                 <span className=" font-Inter font-semibold text-[16px] leading-[20px] text-white">
-                  11,872.4981
+                  0
                 </span>
                 <span className="font-Inter font-bold text-[16px] leading-[28px] text-white">
                   PYTH
@@ -68,7 +68,7 @@ const DepositToVault = ({ params }: {
               <hr className=" max-sm:hidden bg-[#63779C] w-[3px] h-[19px] p-0 border-0" />
               <h3 className=" flex items-center gap-[8px]">
                 <span className=" font-Inter font-semibold text-[16px] leading-[20px] text-white">
-                  10,331.2980
+                  0
                 </span>
                 <span className="font-Inter font-bold text-[16px] leading-[28px] text-white">
                   USDC

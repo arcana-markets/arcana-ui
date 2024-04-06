@@ -1,4 +1,4 @@
-import { CoinFire, EyeIcon, RedirectIcon, WhaleIcon } from "@/common/Icons";
+import { CoinFire, EyeIcon, OpenBook, RedirectIcon, WhaleIcon } from "@/common/Icons";
 import Image from "next/image";
 import React from "react";
 
@@ -14,7 +14,7 @@ const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
                   Annual Percentage Yield
                 </p>
                 <h2 className=" font-poppins font-semibold text-[28px] leading-[28px] mt-3 text-markergreen duration-300">
-                  724.12%
+                  0%
                 </h2>
               </div>
               <div className="w-[40px] h-[40px] bg-[#384257] rounded-[50%] flex justify-center items-center">
@@ -26,7 +26,7 @@ const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
                 Total Value Locked
               </p>
               <h2 className=" font-poppins text-white font-semibold text-[28px] leading-[28px] mt-3 hover:text-markergreen duration-300">
-                $782,471,229.40
+                $0
               </h2>
             </div>
             <div className="under_line w-full h-[1px] bg-[linear-gradient(90deg,#1E232E_0%,#3C465D_50%,#1E232E_100%)] mt-[24px]"></div>
@@ -52,7 +52,7 @@ const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
                 </span>
               </button>
               <p className=" font-Inter font-medium text-[16px] leading-[28px] text-white">
-                289,998,153.4972
+                0
               </p>
             </div>
             <div className=" pt-[16px] flex justify-between items-center">
@@ -77,7 +77,7 @@ const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
                 </span>
               </button>
               <p className=" font-Inter font-medium text-[16px] leading-[28px] text-white">
-                145,157,224.1311
+                0
               </p>
             </div>
             <div className=" flex items-center justify-between w-full gap-[6px] pt-[20px]">
@@ -103,7 +103,7 @@ const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
                 Market 24h Vol
               </h3>
               <p className="   font-Inter text-[14px]  leading-[24px] font-medium text-[#FFFFFF]  ">
-                $313,981,498.40
+                $0
               </p>
             </div>
             <div className=" flex justify-between items-center mt-[8px]">
@@ -111,7 +111,7 @@ const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
                 Market 24h Fee
               </h3>
               <p className="   font-Inter text-[14px]  leading-[24px] font-medium text-[#FFFFFF]  ">
-                $124,876.11
+                $0
               </p>
             </div>
             {/* button_here */}
@@ -123,7 +123,7 @@ const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
             </button>
             <button className=" max-w-[300px] w-full py-[8px] bg-[#2C3444] rounded-xl  font-Inter font-medium text-[14px] leading-[24px]  flex   items-center  justify-center gap-[8.56px] mt-[8px] text-[#FFFFFF] ">
               <span>
-                <WhaleIcon />
+                <OpenBook />
               </span>
               1jH8...Bj8H
               <span>

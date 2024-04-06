@@ -52,31 +52,31 @@ const Technicals = () => {
                 <p className="text-sm font-normal text-foxflowerviola">
                   Current capacity
                 </p>
-                <h2 className="text-sm font-bold text-white">45.2%</h2>
+                <h2 className="text-sm font-bold text-white">0%</h2>
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-normal text-foxflowerviola">
                   Deposit per tx capacity
                 </p>
-                <h2 className="text-sm font-bold text-white">$250,000.00</h2>
+                <h2 className="text-sm font-bold text-white">$0</h2>
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-normal text-foxflowerviola">
                   PYTH withdrawal limit
                 </p>
-                <h2 className="text-sm font-bold text-white">300,000 JUP/h</h2>
+                <h2 className="text-sm font-bold text-white">0</h2>
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-normal text-foxflowerviola">
                   USDC withdrawal limit
                 </p>
-                <h2 className="text-sm font-bold text-white">200,000 USDC/h</h2>
+                <h2 className="text-sm font-bold text-white">0</h2>
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-normal text-foxflowerviola">
                   Epoch resets in
                 </p>
-                <h2 className="text-sm font-bold text-white">1h 28m 31s</h2>
+                <h2 className="text-sm font-bold text-white">NA</h2>
               </div>
             </div>
           </div>

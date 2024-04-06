@@ -1,4 +1,5 @@
 import { EmptyIcon } from "./Icons";
+import Link, { LinkProps } from 'next/link';
 
 type vaultsData = {
   coinImg: string;
@@ -10,6 +11,7 @@ type vaultsData = {
   Volume: string;
   VenueImg: string;
   btnText: string;
+  btnLink: string;
 };
 export const vaultsData: vaultsData[] = [
   {
@@ -20,19 +22,21 @@ export const vaultsData: vaultsData[] = [
     APY: "0%",
     TVL: "$0",
     Volume: "$0",
-    VenueImg: "/img/svg/r-logo.svg",
+    VenueImg: "/img/svg/phoenix.svg",
     btnText: "Manage",
+    btnLink: "/vaults/pyth-usdc",
   },
   {
-    coinImg: "/img/svg/sol.svg",
+    coinImg: "/img/svg/jto-usdc.svg",
     Vault1: "SOL",
     Vault2: "USDC",
     Liquidity: <EmptyIcon />,
     APY: "0%",
     TVL: "$0",
     Volume: "$0",
-    VenueImg: "/img/svg/fish.svg",
+    VenueImg: "/img/svg/openbook.svg",
     btnText: "Manage",
+    btnLink: "/vaults/pyth-usdc",
   },
   {
     coinImg: "/img/svg/jto.svg",
@@ -42,19 +46,21 @@ export const vaultsData: vaultsData[] = [
     APY: "0%",
     TVL: "$0",
     Volume: "$0",
-    VenueImg: "/img/svg/fish.svg",
+    VenueImg: "/img/svg/openbook.svg",
     btnText: "Deposit",
+    btnLink: "/vaults/pyth-usdc",
   },
   {
-    coinImg: "/img/svg/jto-usdc.svg",
+    coinImg: "/img/svg/jup.svg",
     Vault1: "JUP",
     Vault2: "USDC",
     Liquidity: <EmptyIcon />,
     APY: "0%",
     TVL: "$0",
     Volume: "$0",
-    VenueImg: "/img/svg/fish.svg",
+    VenueImg: "/img/svg/openbook.svg",
     btnText: "Deposit",
+    btnLink: "/vaults/pyth-usdc",
   },
   {
     coinImg: "/img/svg/seth.svg",
@@ -64,12 +70,13 @@ export const vaultsData: vaultsData[] = [
     APY: "0%",
     TVL: "$0",
     Volume: "$0",
-    VenueImg: "/img/svg/fish.svg",
+    VenueImg: "/img/svg/meteora.svg",
     btnText: "Deposit",
+    btnLink: "/vaults/pyth-usdc",
   },
   {
     coinImg: "/img/svg/jlp.svg",
-    Vault1: "BONK",
+    Vault1: "BTC",
     Vault2: "USDC",
     Liquidity: <EmptyIcon />,
     APY: "0%",
@@ -77,6 +84,7 @@ export const vaultsData: vaultsData[] = [
     Volume: "$0",
     VenueImg: "/img/svg/r-logo.svg",
     btnText: "Deposit",
+    btnLink: "/vaults/pyth-usdc",
   },
   {
     coinImg: "/img/svg/jto-bonk.svg",
@@ -88,6 +96,7 @@ export const vaultsData: vaultsData[] = [
     Volume: "$0",
     VenueImg: "/img/svg/fish.svg",
     btnText: "Deposit",
+    btnLink: "/vaults/pyth-usdc",
   },
 ];
 
@@ -139,8 +148,8 @@ export const arcanaCardsData: ArcanaCard[] = [
   },
   {
     title: "Augury",
-    currOne: "BTC",
-    currTwo: "BONK",
+    currOne: "SOL",
+    currTwo: "USDC",
     coinImg: "/img/svg/Augury-icon.svg",
     bgImg: "/img/png/Augury-vector.png",
     bgImgHover: "/img/png/Augury-hover.png",
@@ -160,8 +169,8 @@ export const arcanaCardsData: ArcanaCard[] = [
   },
   {
     title: "Aether",
-    currOne: "JTO",
-    currTwo: "USDT",
+    currOne: "JUP",
+    currTwo: "USDC",
     coinImg: "/img/svg/Aether-icon.svg",
     bgImg: "/img/png/Aether-vector.png",
     bgImgHover: "/img/png/Aether-hover.png",

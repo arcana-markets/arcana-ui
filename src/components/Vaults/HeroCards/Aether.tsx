@@ -1,14 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Aether = () => {
   return (
+    <Link href="/vaults/3" className="px-4 block relative">
     <div className="px-4 block relative pt-10 pb-4 sm:py-10">
-    <div className="py-[2px] z-[11] px-[6px] rounded-lg gap-[10px] bg-darkblue300  flex items-center absolute top-[28px] left-1/2 -translate-x-1/2">
+    <div className="py-[2px] z-[11] px-[6px] rounded-lg gap-[10px] bg-darkblue300 flex items-center absolute top-[28px] left-1/2 -translate-x-1/2">
     <p className="text-markergreen text-sm font-medium ">Devnet ONLY</p>
         <div className="p-2 rounded-full animate-wiggle">
             <div className="h-2 w-2 rounded-full bg-[#06D6A0]"></div>
         </div>
-    </div>      <div className="rounded-3xl relative z-10 group bg-darkblue duration-500 hover:shadow-light-red sm:px-6 sm:pb-4 sm:pt-8 p-4 overflow-hidden">
+    </div>      
+    <div className="rounded-3xl relative z-10 group bg-darkblue duration-500 hover:shadow-light-red sm:px-6 sm:pb-4 sm:pt-8 p-4 overflow-hidden">
         <Image
           className="absolute group-hover:opacity-0 duration-500 top-0 left-0 w-full h-full object-cover -z-10"
           width={364}
@@ -88,6 +91,7 @@ const Aether = () => {
         </button>
       </div>
     </div>
+    </Link>
   );
 };
 

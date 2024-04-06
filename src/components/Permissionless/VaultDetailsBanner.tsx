@@ -49,7 +49,7 @@ const VaultDetailsBanner = ({ params }: {
                 </div>
                 <div className="sm:hidden py-2 px-3 ml-2 bg-daintree rounded-xl text-sm flex items-center gap-[10.5px]">
                   APY
-                  <p className=" text-markergreen font-bold">724.12%</p>
+                  <p className=" text-markergreen font-bold">0%</p>
                 </div>
               </div>
             </div>

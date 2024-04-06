@@ -13,7 +13,7 @@ const WithdrawalForm = () => {
           <div className=" flex justify-between px-[16px] ">
             <div className=" flex items-center gap-[10px] ">
               <Image
-                src="/img/svg/polis.svg"
+                src="/assets/arcanaswap.svg"
                 alt="pyth"
                 width={20}
                 height={20}

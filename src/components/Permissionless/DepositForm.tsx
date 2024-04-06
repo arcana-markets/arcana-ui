@@ -48,7 +48,7 @@ const DepositForm = ({ params }: { params: { permission: string } }) => {
       <div className="mt-[17px] sm:flex gap-[24px]  justify-between  ">
         <div className={` ${deposit === true ? "w-full" : " max-w-[332px]"}  `}>
           <div className="pyth-box  w-full    flex justify-between items-center rounded-xl border-[1px] border-[#3C465D] py-[12px] px-[16px] ">
-            <div className=" flex items-center justify-between w-full  gap-[10px]">
+            <div className=" flex items-center justify-between w-full gap-[10px]">
               <Image
                 src={
                   params.permission === "pyth-usdc"
@@ -78,12 +78,12 @@ const DepositForm = ({ params }: { params: { permission: string } }) => {
                 Balance:{" "}
               </span>{" "}
               <span className=" text-white font-inter font-medium text-[12px] leading-[16px] tracking-[0.2px]">
-                1,248,992.4787
+                0
               </span>
               {deposit && (
                 <>
                   <span className=" text-white font-inter font-medium text-[12px] leading-[16px] tracking-[0.2px]">
-                    &nbsp; PYTH &nbsp; / &nbsp; 1,248,992.4787
+                    &nbsp; PYTH &nbsp; / &nbsp; 0
                   </span>
                 </>
               )}
@@ -128,7 +128,7 @@ const DepositForm = ({ params }: { params: { permission: string } }) => {
                 Balance:{" "}
               </span>{" "}
               <span className=" text-white font-inter font-medium text-[12px] leading-[16px] tracking-[0.2px]">
-                25,283.2098
+                0
               </span>
             </p>
             <div className="flex gap-[8px]  items-center">

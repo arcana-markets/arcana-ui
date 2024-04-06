@@ -873,7 +873,6 @@ export const LinkExternal = () => {
     </svg>
   );
 };
-
 interface ArrowsProps {
   color: string;
 }
@@ -901,7 +900,6 @@ export const Arrows: React.FC<ArrowsProps> = ({ color }) => {
     </svg>
   );
 };
-
 export const AccordionUPArrow = () => {
   return (
     <svg
@@ -918,5 +916,44 @@ export const AccordionUPArrow = () => {
         fill="#A1ADC4"
       />
     </svg>
+  );
+};
+export const OpenBook = () => {
+  return (
+<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="10.5" cy="10" r="10" fill="#1B1F2B"/>
+<path d="M14.7891 6.76292V13.2104L16.5 13.9637V6.03629L14.7891 6.76292Z" fill="url(#paint0_linear_1439_19471)"/>
+<path d="M12.7515 6.17029V13.8031L13.8907 14.4819V5.51816L12.7515 6.17029Z" fill="url(#paint1_linear_1439_19471)"/>
+<path d="M10.9497 5.65213V14.3212L11.8523 15V5L10.9497 5.65213Z" fill="url(#paint2_linear_1439_19471)"/>
+<path d="M4.5 6.03629V13.9637L6.21094 13.2104V6.76292L4.5 6.03629Z" fill="url(#paint3_linear_1439_19471)"/>
+<path d="M7.10986 5.51816V14.4819L8.24854 13.8031V6.17029L7.10986 5.51816Z" fill="url(#paint4_linear_1439_19471)"/>
+<path d="M9.14795 5V15L10.0506 14.3212V5.65213L9.14795 5Z" fill="url(#paint5_linear_1439_19471)"/>
+<defs>
+<linearGradient id="paint0_linear_1439_19471" x1="13.9971" y1="12.2862" x2="18.5284" y2="8.40349" gradientUnits="userSpaceOnUse">
+<stop stop-color="#A100FF"/>
+<stop offset="1" stop-color="#00E9B2"/>
+</linearGradient>
+<linearGradient id="paint1_linear_1439_19471" x1="11.5466" y1="12.397" x2="16.2967" y2="8.32671" gradientUnits="userSpaceOnUse">
+<stop stop-color="#A100FF"/>
+<stop offset="1" stop-color="#00E9B2"/>
+</linearGradient>
+<linearGradient id="paint2_linear_1439_19471" x1="9.46369" y1="12.587" x2="14.5901" y2="8.19434" gradientUnits="userSpaceOnUse">
+<stop stop-color="#A100FF"/>
+<stop offset="1" stop-color="#00E9B2"/>
+</linearGradient>
+<linearGradient id="paint3_linear_1439_19471" x1="3.06846" y1="12.293" x2="7.61265" y2="8.39866" gradientUnits="userSpaceOnUse">
+<stop stop-color="#A100FF"/>
+<stop offset="1" stop-color="#00E9B2"/>
+</linearGradient>
+<linearGradient id="paint4_linear_1439_19471" x1="5.32864" y1="12.4038" x2="10.0923" y2="8.32197" gradientUnits="userSpaceOnUse">
+<stop stop-color="#A100FF"/>
+<stop offset="1" stop-color="#00E9B2"/>
+</linearGradient>
+<linearGradient id="paint5_linear_1439_19471" x1="7.08557" y1="12.5938" x2="12.2253" y2="8.19026" gradientUnits="userSpaceOnUse">
+<stop stop-color="#A100FF"/>
+<stop offset="1" stop-color="#00E9B2"/>
+</linearGradient>
+</defs>
+</svg>
   );
 };

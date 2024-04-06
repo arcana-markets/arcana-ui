@@ -145,7 +145,7 @@ const Navbar = () => {
 
   return (
     <nav className={`w-full py-6 sm:py-10 z-[11] relative`}>
-      <div className="flex container  px-4 mx-auto justify-between items-center">
+      <div className="flex container px-4 mx-auto justify-between items-center">
         <div className=" flex gap-12">
           <Link href='/' className='mr-4'>
             <NavIcon />
@@ -155,20 +155,23 @@ const Navbar = () => {
               } max-[1024px]:flex-col justify-center items-center gap-5 max-[1024px]:fixed max-[1024px]:w-full max-[1024px]:h-screen h-screen min-[1024px]:h-auto top-0 left-[-100%] max-[1024px]:bg-primary backdrop-blur-3xl max-lg:z-50 flex min-[1024px]:flex min-[1024px]:static`}
           >
             <ul className="flex items-center gap-6 sm:gap-10 min-[1024px]:flex-row flex-col">
-              <Link href='/'>
-                <li className='nav-link'>
-                  Vaults
-                </li>
-              </Link>
+            <Link href='/'>
+              <div className="nav-link flex items-center relative">
+                Vaults
+              </div>
+            </Link>
               <Link href='/swap'>
-                <li className=' nav-link'>
-                  Swap
-                </li>
+              <div className="nav-link flex items-center relative">
+              Swap
+              </div>
               </Link>
               <Link href='/data'>
-                <li className='nav-link '>
+                <div className='nav-link '>
                   Markets
-                </li>
+                  <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-markergreen text-white opacity-70 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                Live
+              </span>
+              </div>
               </Link>
               <a href="https://github.com/arcana-markets/arcana-trading-bot" target="_blank" rel="noopener noreferrer" className="nav-link flex items-center gap-2">
                   <span>Tools</span>
@@ -264,7 +267,7 @@ const Navbar = () => {
             </button>
             </div>
             <button
-            className={`${modal.visible === true ? "hidden" : "block"} z-50 mt-2 -ml-2 relative min-[1024px]:hidden bg-[#013746] rounded-lg text-white h-12 w-12 flex items-center justify-center`}
+            className={`${modal.visible === true ? "hidden" : "block"} z-50 mt-2.5 -ml-4 relative min-[1024px]:hidden bg-[#013746] rounded-lg text-white h-12 w-12 flex items-center justify-center`}
             onClick={toggleMenu}
           >
             {show ? <MdClose size={24} /> : <NavMenu />}

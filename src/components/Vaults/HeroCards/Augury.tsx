@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Augury = () => {
   return (
+    <Link href="/vaults/2" className="px-4 block relative">
         <div className="px-4 block relative pt-10 pb-4 sm:py-10">
             <div className="py-[2px] z-[11] px-[6px] rounded-lg gap-[10px] bg-darkblue300  flex items-center absolute top-[28px] left-1/2 -translate-x-1/2">
             <p className="text-markergreen text-sm font-medium ">Devnet ONLY</p>
@@ -89,6 +91,7 @@ const Augury = () => {
         </button>
       </div>
     </div>
+    </Link>
   );
 };
 
