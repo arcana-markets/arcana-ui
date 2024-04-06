@@ -1,5 +1,13 @@
-import { PublicKey, TransactionSignature } from '@solana/web3.js';
+import { Connection, PublicKey, Transaction, TransactionSignature } from '@solana/web3.js';
 import { InstructionFieldTypes } from './types';
+import EventEmitter from "eventemitter3";
+
+export interface WalletAdapter extends EventEmitter {
+  publicKey: PublicKey | null;
+  signTransaction: (transaction: Transaction) => Promise<Transaction>;
+  connect: () => any;
+  disconnect: () => any;
+}
 
 export const shortKey = (key?: PublicKey | string) => {
   if (!key) return '???';
