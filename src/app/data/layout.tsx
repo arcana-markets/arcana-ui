@@ -10,8 +10,8 @@ const Loading = lazy(() => import('@/components/marketData/Loading'));
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://arcana.markets'),
-     title: 'Arcana Markets',
-     description: 'DeFi Liquidity on Solana',
+    title: 'Arcana | Data',
+    description: 'DeFi Liquidity on Solana',
      keywords: ['DeFi', 'Crypto', 'Solana', 'Arcana', 'Arcana Markets', 'Finance', 'Decentralized Finance', 'Token Vaults', 'Crypto API', 'DeFi Data'],
      creator: 'Arcana Labs',
      twitter: {
