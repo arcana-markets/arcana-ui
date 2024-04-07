@@ -2,7 +2,6 @@
 
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
-import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { Networks, useNetworkConfiguration } from '@/hooks/useNetworkConfiguration';
 import { Explorers, useExplorerConfiguration } from '@/hooks/useExplorerConfiguration';
 import { usePriorityFee } from '@/hooks/usePriorityFee';
@@ -31,47 +30,14 @@ const explorers = [
   { label: 'Solana Explorer', value: Explorers.Solana.toString() },
 ];
 
-function getTokenPrice(data: any) {
-  const price = Math.round((Number(data.outAmount) / Number(data.inAmount)) * 1000000) / 1000;
-  return price;
-}
-
-function useTokenPrice() {
-  const url =
-    'https://quote-api.jup.ag/v6/quote?inputMint=So11111111111111111111111111111111111111112&' +
-    'outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&' +
-    'amount=100000000&' +
-    'slippageBps=50&' +
-    'swapMode=ExactIn&' +
-    'onlyDirectRoutes=false&' +
-    'maxAccounts=64&' +
-    'experimentalDexes=Jupiter%20LO';
-  const tokenPriceFetcher = () =>
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => getTokenPrice(data));
-  const { data, error, isLoading } = useSWR('wsolSpotPrice', tokenPriceFetcher);
-
-  return {
-    price: data,
-    isLoading,
-    isError: error,
-  };
-}
-
 const Navbar = () => {
   const wallet = useWallet();
-  const connected = useWallet();
   const modal = useWalletModal();
   const [modal2, setmodal] = useState(false)
   const { network, endpoint, setNetwork, setCustomEndpoint } = useNetworkConfiguration();
   // const { explorer, setExplorer } = useExplorerConfiguration();
   // const { priorityFee, setPriorityFee } = usePriorityFee();
   const [solPrice, setSolPrice] = useState<number>();
-  const [showDepositWithdrawModal, setShowDepositWithdrawModal] =
-    useState(false);
-    const [showCreateAccountModal, setShowCreateAccountModal] = useState(false)
-    const [action, setAction] = useState<'deposit' | 'withdraw'>('deposit');
     const { connection } = useConnection();
 
     const balance = useUserSOLBalanceStore((s) => s.balance)
@@ -131,17 +97,8 @@ const Navbar = () => {
     // Call fetchData immediately when component mounts
     fetchData();
   }, []);
-  const tokenPrice = useTokenPrice();
-  // const feesCost = (((priorityFee / 100000) * 200000) / LAMPORTS_PER_SOL) * (solPrice || 0);
 
-  const handleDepositWithdrawModal = (action: 'deposit' | 'withdraw') => {
-    if (!connected) {
-      setAction(action)
-      setShowDepositWithdrawModal(true)
-    } else {
-      setShowCreateAccountModal(true)
-    }
-  }
+  // const feesCost = (((priorityFee / 100000) * 200000) / LAMPORTS_PER_SOL) * (solPrice || 0);
 
   return (
     <nav className={`w-full py-6 sm:py-10 z-[11] relative`}>
