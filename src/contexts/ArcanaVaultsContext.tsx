@@ -80,7 +80,6 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
     // vaultAccount?.account.baseLiquidityShares
     // vaultAccount?.account.
 
-    // (await program.account.depositReceipt.all()).find(item => item.publicKey.toBase58() == vault.toBase58())
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletPublickey, connection]);
 
@@ -162,6 +161,14 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
       walletPublickey.toBuffer(),
       vault.toBuffer(),
     ], program.programId);
+
+    // quick to find the target pda account and read pda's data
+    const depositReceiptAccount  = (await program.account.depositReceipt.all()).find(item => item.publicKey.toBase58() == deposit_receipt_pda.toBase58())
+    // depositReceiptAccount?.account.baseTokenLiquidityShares // user deposit amount in this vault
+    // depositReceiptAccount?.account.quoteTokenLiquidityShares // user deposit amount in this vault
+    // depositReceiptAccount?.account.owner // deposit account owner
+    // depositReceiptAccount?.account.vault // amount deposit where
+
     const transaction = new Transaction();
 
     assert(amountList.length == tokenMint.length, "If deposit two token must be two amount and mint address");
