@@ -349,24 +349,6 @@ export const totalInOrder = (orders: OpenOrdersAccountWithKey[]) => {
   return numeral(totalValueLocked).format(NUMERAL_FORMAT);
 };
 
-export const totalUsdcInOrder = (orders: OpenOrdersAccountWithKey[]) => {
-  let sumOrders = [];
-  sumOrders = orders.map((order) => {
-    if (isBidOrAsk(order)) {
-      return (
-        (order.account.position.bidsBaseLots.toNumber() * order.account.openOrders[0].lockedPrice) /
-          10_000 +
-        (order.account.position.asksBaseLots.toNumber() * order.account.openOrders[0].lockedPrice) /
-          10_000
-      );
-    }
-    return 0;
-  });
-
-  const totalValueLocked = sumOrders.reduce((partialSum, amount) => partialSum + amount, 0);
-  return numeral(totalValueLocked).format(NUMERAL_FORMAT);
-};
-
 export const totalMetaInOrder = (orders: OpenOrdersAccountWithKey[]) => {
   let sumOrders = [];
   sumOrders = orders.map((order) => {
