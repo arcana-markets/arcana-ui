@@ -164,6 +164,7 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
 
     // quick to find the target pda account and read pda's data
     const depositReceiptAccount  = (await program.account.depositReceipt.all()).find(item => item.publicKey.toBase58() == deposit_receipt_pda.toBase58())
+
     // depositReceiptAccount?.account.baseTokenLiquidityShares // user deposit amount in this vault
     // depositReceiptAccount?.account.quoteTokenLiquidityShares // user deposit amount in this vault
     // depositReceiptAccount?.account.owner // deposit account owner
@@ -171,9 +172,9 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
 
     const transaction = new Transaction();
 
-    assert(amountList.length == tokenMint.length, "If deposit two token must be two amount and mint address");
-    assert(amountList.length <= 2, "Deposit amoun only has two")
-    assert(tokenMint.length <= 2, "Vault only contains two token")
+    assert(amountList.length == tokenMint.length, "If deposit two tokens, must be two amount and mint address");
+    assert(amountList.length <= 2, "Deposit amount only has two")
+    assert(tokenMint.length <= 2, "Vault only contains two tokens")
 
     for (let index = 0; index < tokenMint.length; index++) {
       const amount = amountList[index];
@@ -196,9 +197,31 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
     }
 
     const txHash = await sendTransaction(transaction, connection)
+    
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletPublickey, connection]);
 
+      // Assume this function is triggered after a successful deposit transaction
+    const updateDepositReceiptData = async (vault: PublicKey) => {
+      if (!walletPublickey) return;
+
+      // Find the deposit receipt PDA as before
+      const depositReceiptPDA = findPda([
+        Buffer.from("deposit-receipt"),
+        walletPublickey.toBuffer(), // Assuming this is the depositor's public key
+        vault.toBuffer(), // The vault into which the deposit was made
+      ], program.programId);
+
+      // Fetch the deposit receipt account data
+      const depositReceiptAccount = (await program.account.depositReceipt.fetch(depositReceiptPDA));
+
+        // Call this function after your deposit transaction has been confirmed
+        updateDepositReceiptData(walletPublickey);
+
+      // Now, depositReceiptAccount contains the updated deposit data, which you can use as needed
+      console.log(depositReceiptAccount.baseTokenLiquidityShares, depositReceiptAccount.quoteTokenLiquidityShares);
+    };
+    
 
   const withdrawAllFunds = useCallback(async (marketIdentifier: PublicKey, tokenMint: PublicKey[], vault: PublicKey) => {
     if (!walletPublickey) return;

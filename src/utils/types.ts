@@ -1,4 +1,4 @@
-import { Idl, IdlAccounts, IdlTypes } from '@coral-xyz/anchor';
+import { BN, Idl, IdlAccounts, IdlTypes } from '@coral-xyz/anchor';
 import { Connection, PublicKey, Signer, Transaction } from '@solana/web3.js';
 import { OpenbookV2 } from './idl/openbook_v2';
 import CoinLogos from '../config/logos.json';
@@ -46,6 +46,70 @@ export interface UnifiedVault {
   cycleDurationInSeconds: bigint;
   downtimeInSeconds: bigint;
   lastUpdateSlot: bigint;
+}
+
+export interface InitializeVaultArgs {
+  cycleDurationInSeconds: BN
+  downtimeInSeconds: BN
+}
+
+export interface InitializeVaultAccounts {
+  owner: PublicKey
+  marketIdentifier: PublicKey
+  vault: PublicKey
+  baseMint: PublicKey
+  quoteMint: PublicKey
+  vaultBaseTokenAccount: PublicKey
+  vaultQuoteTokenAccount: PublicKey
+  associatedTokenProgram: PublicKey
+  tokenProgram: PublicKey
+  systemProgram: PublicKey
+}
+
+export interface DepositFundsAccounts {
+  owner: PublicKey
+  marketIdentifier: PublicKey
+  vault: PublicKey
+  depositReceipt: PublicKey
+  mint: PublicKey
+  userTokenAccount: PublicKey
+  vaultTokenAccount: PublicKey
+  tokenProgram: PublicKey
+  systemProgram: PublicKey
+}
+
+export interface CloseVaultAccounts {
+  owner: PublicKey
+  vault: PublicKey
+  baseVault: PublicKey
+  quoteVault: PublicKey
+}
+
+export interface WithdrawAllFundsAccounts {
+  owner: PublicKey
+  marketIdentifier: PublicKey
+  vault: PublicKey
+  depositReceipt: PublicKey
+  userTokenAccount: PublicKey
+  vaultTokenAccount: PublicKey
+  tokenProgram: PublicKey
+}
+
+export interface RefreshQuotesOnOpenbookV2Accounts {
+  owner: PublicKey
+  vault: PublicKey
+  openOrdersAccount: PublicKey
+  baseVault: PublicKey
+  quoteVault: PublicKey
+  market: PublicKey
+  bids: PublicKey
+  asks: PublicKey
+  eventHeap: PublicKey
+  baseTokenMarketVault: PublicKey
+  quoteTokenMarketVault: PublicKey
+  tokenProgram: PublicKey
+  openbookProgram: PublicKey
+  systemProgram: PublicKey
 }
 
 // Error Types
