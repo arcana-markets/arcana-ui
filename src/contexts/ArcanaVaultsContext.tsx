@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { useConnection, useWallet, useAnchorWallet } from '@solana/wallet-adapter-react';
-import { PublicKey, type Message, SystemProgram } from '@solana/web3.js';
+import { PublicKey, sendAndConfirmTransaction, Transaction, type Message, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { Program, AnchorProvider } from '@coral-xyz/anchor';
 import { ARCANA_PROGRAM_ID } from '@/utils/constants';
 import { IDL as ArcanaVaultsIDL } from '@/utils/idl/arcana_vaults';
@@ -9,6 +9,7 @@ import { BN } from "bn.js";
 import { getAssociatedTokenAddressSync  } from "@solana/spl-token";
 import * as spl from "@solana/spl-token";
 import { findPda } from "../utils/idl/util";
+import { assert } from 'console';
 
 
 interface Vault {
@@ -22,9 +23,9 @@ interface ArcanaVaultsInterface {
   initializeVault: (
     cycleDurationInSeconds: number, downtimeInSeconds: number,
     base: PublicKey, quote: PublicKey, marketIdentifier: PublicKey) => Promise<void>;
-  closeVault: (vaultAddress: PublicKey) => Promise<void>;
-  depositFunds: (vaultAddress: PublicKey, amount: number) => Promise<void>;
-  withdrawAllFunds: (vaultAddress: PublicKey) => Promise<void>;
+  closeVault: (base: PublicKey,quote: PublicKey,marketIdentifier: PublicKey) => Promise<void>;
+  depositFunds: (vault: PublicKey, marketIdentifier: PublicKey, amountList: number[], tokenMint: PublicKey[]) => Promise<void>;
+  withdrawAllFunds: (marketIdentifier: PublicKey, tokenMint: PublicKey[], vault: PublicKey) => Promise<void>;
   loadVaults: (base: PublicKey, quote: PublicKey, marketIdentifier: PublicKey) => Promise<void>;
 }
 
@@ -34,9 +35,9 @@ export const useArcanaVaults = () => useContext(arcanaVaultsContext) ?? throwErr
 
 export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }) => {
   const { connection } = useConnection();
-  const wallet = useAnchorWallet();
+  const { publicKey, signTransaction, sendTransaction } = useWallet();
+  const walletPublickey = publicKey;
 
-  // const { publicKey, signTransaction } = useWallet();
   const provider = useProvider();
   const program = new Program(ArcanaVaultsIDL, ARCANA_PROGRAM_ID, provider);
 
@@ -44,7 +45,7 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
 
   useEffect(() => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wallet?.publicKey, connection]);
+  }, [walletPublickey, connection]);
 
 
   const loadVaults = useCallback(async (
@@ -52,28 +53,36 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
     quote: PublicKey,
     marketIdentifier: PublicKey
   ) => {
-    if (!wallet?.publicKey) return;
+    if (!walletPublickey) return;
     // Implement logic to fetch and set vaults for the logged-in user
     // This may involve calling a program method or querying a Solana account directly
-    const vaultPDA = findPda(
+    const vault = findPda(
       [
         Buffer.from("unified-vault"),
-        wallet?.publicKey.toBuffer(), // user wallet publicKey
+        walletPublickey.toBuffer(), // user wallet publicKey
         marketIdentifier.toBuffer(),
       ],
       program.programId
     );
-    const vault_base_token_account = getAssociatedTokenAddressSync(base,vaultPDA,true);
-    const vault_quote_token_account = getAssociatedTokenAddressSync(quote, vaultPDA, true);
 
+    // get the vault balance of then token.
+    const vault_base_token_account = getAssociatedTokenAddressSync(base,vault,true);
+    const vault_quote_token_account = getAssociatedTokenAddressSync(quote, vault, true);
     const baseInfo = await connection.getTokenAccountBalance(vault_base_token_account)
     const quoteInfo = await connection.getTokenAccountBalance(vault_quote_token_account)
-
     console.log(baseInfo.value.uiAmount);
     console.log(quoteInfo.value.uiAmount);
 
+    // quick to find the target pda account and read pda's data
+    const vaultAccount = (await program.account.unifiedVault.all()).find(item => item.publicKey.toBase58() == vault.toBase58());
+    // vaultAccount?.account.baseVault // -> vault_base_token_account
+    // vaultAccount?.account.quoteVault // -> vault_quote_token_account
+    // vaultAccount?.account.baseLiquidityShares
+    // vaultAccount?.account.
+
+    // (await program.account.depositReceipt.all()).find(item => item.publicKey.toBase58() == vault.toBase58())
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wallet?.publicKey, connection]);
+  }, [walletPublickey, connection]);
 
   const initializeVault = useCallback(async (
     cycleDurationInSeconds: number,
@@ -81,12 +90,12 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
     base: PublicKey,
     quote: PublicKey,
     marketIdentifier: PublicKey) => {
-    if (!wallet?.publicKey) return;
+    if (!walletPublickey) return;
     try {
       const vaultPDA = findPda(
         [
           Buffer.from("unified-vault"),
-          wallet?.publicKey.toBuffer(), // user wallet publicKey
+          walletPublickey.toBuffer(), // user wallet publicKey
           marketIdentifier.toBuffer(),
         ],
         program.programId
@@ -114,20 +123,103 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
       console.error("Error initializing vault: ", error);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wallet?.publicKey, connection]);
+  }, [walletPublickey, connection]);
 
-  const closeVault = useCallback(async (vaultAddress: PublicKey) => {
-    // Add implementation logic to close a vault
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wallet?.publicKey, connection]);
+  const closeVault = useCallback(async (
+    base: PublicKey,
+    quote: PublicKey,
+    marketIdentifier: PublicKey) => {
+    if (!walletPublickey) return;
 
-  const depositFunds = useCallback(async (vaultAddress: PublicKey, amount: number) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wallet?.publicKey, connection]);
+    const vault = findPda(
+      [
+        Buffer.from("unified-vault"),
+        walletPublickey.toBuffer(), // user wallet publicKey
+        marketIdentifier.toBuffer(),
+      ],
+      program.programId
+    );
+    const vault_base_token_account = getAssociatedTokenAddressSync(base,vault,true);
+    const vault_quote_token_account = getAssociatedTokenAddressSync(quote,vault,true);
 
-  const withdrawAllFunds = useCallback(async (vaultAddress: PublicKey) => {
+		const txHash = await program.methods.closeVault()
+			.accounts({
+				vault: vault,
+				baseVault: vault_base_token_account,
+				quoteVault: vault_quote_token_account
+			})
+			.rpc();
+      console.log(txHash);
+      console.log("Vault closed");
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wallet?.publicKey, connection]);
+  }, [walletPublickey, connection]);
+
+  const depositFunds = useCallback(async (vault: PublicKey, marketIdentifier: PublicKey, amountList: number[], tokenMint: PublicKey[]) => {
+    if (!walletPublickey) return;
+
+    const deposit_receipt_pda = findPda([
+      Buffer.from("deposit-receipt"),
+      walletPublickey.toBuffer(),
+      vault.toBuffer(),
+    ], program.programId);
+    const transaction = new Transaction();
+
+    assert(amountList.length == tokenMint.length, "If deposit two token must be two amount and mint address");
+    assert(amountList.length <= 2, "Deposit amoun only has two")
+    assert(tokenMint.length <= 2, "Vault only contains two token")
+
+    for (let index = 0; index < tokenMint.length; index++) {
+      const amount = amountList[index];
+      const mint = tokenMint[index];
+
+      const user_token_account = getAssociatedTokenAddressSync(mint,vault);
+      const vault_token_account = getAssociatedTokenAddressSync(mint,vault,true);
+      let ui_amount = new BN(amount * LAMPORTS_PER_SOL);
+      const depositIx = await program.methods.depositFunds(ui_amount)
+        .accounts({
+          marketIdentifier: marketIdentifier,
+          vault: vault,
+          depositReceipt: deposit_receipt_pda,
+          mint: mint,
+          userTokenAccount: user_token_account,
+          vaultTokenAccount: vault_token_account
+        })
+        .instruction()
+      transaction.add(depositIx)
+    }
+
+    const txHash = await sendTransaction(transaction, connection)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [walletPublickey, connection]);
+
+
+  const withdrawAllFunds = useCallback(async (marketIdentifier: PublicKey, tokenMint: PublicKey[], vault: PublicKey) => {
+    if (!walletPublickey) return;
+    const deposit_receipt_pda = findPda([
+      Buffer.from("deposit-receipt"),
+      walletPublickey.toBuffer(),
+      vault.toBuffer(),
+    ], program.programId);
+		const transaction = new Transaction();
+
+    for (const mint of tokenMint) {
+      const user_token_account = getAssociatedTokenAddressSync(mint,vault);
+      const vault_token_account = getAssociatedTokenAddressSync(mint,vault,true);
+      const withdrawIx = await program.methods.withdrawAllFunds()
+      .accounts({
+        marketIdentifier: marketIdentifier,
+        vault: vault,
+        depositReceipt: deposit_receipt_pda,
+        userTokenAccount: user_token_account,
+        vaultTokenAccount: vault_token_account
+      }).instruction()
+      transaction.add(withdrawIx)
+    }
+
+    const txHash = await sendTransaction(transaction, connection)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [walletPublickey, connection]);
+
 
   return (
     <arcanaVaultsContext.Provider value={{
