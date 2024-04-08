@@ -1,4 +1,4 @@
-# 🧙‍♂️ Arcana Markets UI
+# 🧙‍♂️ Arcana Markets Web App
 
 The Arcana web app provides permissionless market making vaults designed to operate seamlessly on top of decentralized exchanges within the Solana ecosystem. Leveraging the power of Solana's high-speed blockchain, Arcana Markets aims to revolutionize liquidity provision, making it more accessible, efficient, and decentralized.
 
