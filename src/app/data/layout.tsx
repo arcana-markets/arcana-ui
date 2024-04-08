@@ -4,7 +4,6 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import { Suspense, lazy } from 'react';
 import '@/app/data/css/styles.css';
 import '@/app/data/css/marketDepth.css';
-import '@solana/wallet-adapter-react-ui/styles.css';
 
 const inter = Inter({ subsets: ['latin'] });
 const Loading = lazy(() => import('@/components/marketData/Loading'));

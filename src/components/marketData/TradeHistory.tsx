@@ -58,8 +58,8 @@ const fetchTradeHistory = async () => {
   
   const renderTradeRow = (item: OpenBookTradeEvent | null, index: number) => {
     const rowBackground = index % 2 === 0
-    ? "bg-background-800 dark:bg-[#012a36]"
-    : "bg-background-900 dark:bg-[#09303c]";
+      ? "bg-background-800 dark:bg-[#012a36]"
+      : "bg-background-900 dark:bg-[#09303c]";
   
     const priceColorStyle = item && item.takerSide === 0 
       ? { color: '#06D6A0', opacity: 0.8 } 
@@ -131,10 +131,10 @@ const fetchTradeHistory = async () => {
             <div className='flex justify-center items-center overflow-hidden'>
               <div className='flex items-center'>
               <Tooltip placement={'top'} content={
-                  <p className='text-[12px] cursor-default text-white dark:opacity-80 opacity-80'>
+                  <p className='text-[12px] cursor-default text-primary2-100 dark:opacity-100 opacity-80'>
                     {formatDateFull(item.timeStamp)}
                   </p>}>
-                <p className='text-[13px] cursor-default shiny-gradient-text text-white dark:opacity-80 opacity-80'>
+                <p className='text-[13px] cursor-default text-white dark:opacity-100 opacity-80'>
                   {formatTimestamp(item.timeStamp)}
                 </p>
                 </Tooltip>

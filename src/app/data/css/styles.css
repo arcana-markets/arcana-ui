@@ -16,28 +16,6 @@
   --up-muted: 116, 131, 114;
 }
 
-@layer base {
-  .footer-header-title {
-    @apply font-medium text-xl sm:text-base leading-7 text-missioncontrol mb-1 sm:mb-2;
-  }
-
-  .footer-link {
-    @apply font-medium text-xl sm:text-base leading-7 text-white cursor-pointer transition-all duration-200 ease-in-out hover:opacity-60;
-  }
-  .nav-link {
-    @apply text-base max-sm:text-2xl max-[1024px]:text-3xl font-normal max-lg:text-white text-foxflowerviola hover:text-white duration-200 after:absolute relative after:w-0 after:duration-300 cursor-pointer after:bg-white after:-bottom-[2px] after:left-0 after:h-px after:hover:w-full;
-  }
-  .card-btn {
-    @apply bg-daintree mt-2 leading-6 duration-500 w-full rounded-lg py-2 px-3 text-white text-sm font-medium group-hover:!text-daintree group-hover:!bg-white;
-  }
-  .vault-headings {
-    @apply text-base whitespace-nowrap justify-end flex items-center gap-[2px] font-normal text-foxflowerviola;
-  }
-  .deposit-btn {
-    @apply text-sm mr-4 my-2 group-hover:!text-daintree group-hover:!bg-white duration-500 leading-6 text-white font-medium py-2 px-3 rounded-xl bg-[#1b1f2b];
-  }
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;

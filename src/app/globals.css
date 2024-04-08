@@ -589,3 +589,23 @@ background-color: #AB9FF2; /* Change the background to green */
   line-height: 18px;
   font-weight: 300;
 };
+
+.shiny-gradient-text {
+  font-weight: bold; /* Makes the text bold */
+  background: linear-gradient(45deg, #5099CC, #5099CC, #FFFFFF, #5099CC);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: moveGradient 3s ease infinite;
+}
+
+.shiny-gradient-text2 {
+  font-weight: bold; /* Makes the text bold */
+  background: linear-gradient(45deg, #C77DFF, #FFFFFF, #C77DFF, #C77DFF);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: moveGradient 3s ease infinite;
+}
