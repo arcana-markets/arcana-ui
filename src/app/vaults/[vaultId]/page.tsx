@@ -26,7 +26,9 @@ const Page = () => {
           }} />
         </div>
       </div>
-      <VaultPermissionless params={} />
+      <VaultPermissionless params={{
+            permission: ""
+          }} />
       <Technicals />
       <TopVaults />
       <Footer />

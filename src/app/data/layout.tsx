@@ -36,7 +36,6 @@ export const metadata: Metadata = {
       <Suspense fallback={<div><Loading /></div>}>
         <GoogleAnalytics gaId="G-9PEVYHKFL5" />
           {children}
-          </div>
       </Suspense>
       </div>
     );
