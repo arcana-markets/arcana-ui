@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Suspense, lazy } from 'react';
-import "@/app/globals.css";
 import '@/app/data/css/styles.css';
 import '@/app/data/css/marketDepth.css';
 import '@solana/wallet-adapter-react-ui/styles.css';
