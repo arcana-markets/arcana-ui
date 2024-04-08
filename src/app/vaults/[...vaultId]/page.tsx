@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect } from "react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Footer from "@/components/Shared/Footer";
@@ -8,16 +9,11 @@ import VaultPermissionless from "@/components/Permissionless/VaultPermissionless
 import Technicals from "@/components/Vaults/Technicals";
 import TopVaults from "@/components/Vaults/TopVaults";
 
-const VaultPermissionlessDetailsPage = ({
-  params,
-}: {
-  params: { permission: string };
-}) => {
-  const { permission } = params;
+const Page = () => {
 
   useEffect(() => {
-    document.title = `Arcana Vaults | ${permission}`;
-  }, [permission]);
+    document.title = `Arcana | Vaults `;
+  }, []);
 
   return (
     <div className=" overflow-hidden relative">
@@ -25,10 +21,12 @@ const VaultPermissionlessDetailsPage = ({
       <div className=" sm:h-[486px] flex flex-col">
         <Navbar />
         <div className=" flex-grow flex justify-center w-full items-center">
-          <VaultDetailsBanner params={params} />
+          <VaultDetailsBanner params={{
+            permission: ""
+          }} />
         </div>
       </div>
-      <VaultPermissionless params={params} />
+      <VaultPermissionless params={} />
       <Technicals />
       <TopVaults />
       <Footer />
@@ -36,4 +34,4 @@ const VaultPermissionlessDetailsPage = ({
   );
 };
 
-export default VaultPermissionlessDetailsPage;
+export default Page;
