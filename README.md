@@ -8,7 +8,7 @@ Responsive                     |  Desktop
 
 ## 👋 Introduction
 
-Arcana Vaults aims to simplify and decentralize liquidity provision on Solana-based decentralized exchanges. By harnessing cutting-edge technology and an innovative approach, the project seeks to empower users and enhance DeFi accessibility.
+Arcana Vaults aims to simplify and decentralize liquidity provision on Solana-based decentralized exchanges. Vaults can provide this passive liquidity by quoting similar to an AMM. By harnessing cutting-edge technology and an innovative approach, the project seeks to empower users and enhance DeFi accessibility.
 
 ## 🚀 Quickstart
 
