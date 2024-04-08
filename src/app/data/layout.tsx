@@ -33,10 +33,12 @@ export const metadata: Metadata = {
     // Optional: Dynamically set page metadata
     // usePageMetadata(metadata);    
     return (
-      <div className={`dark:bg-black-gradient bg-[#012A36] z-50 ${inter.className}`}>
+      <div className={`dark:bg-black-gradient bg-[#012A36] ${inter.className}`}>
       <Suspense fallback={<div><Loading /></div>}>
         <GoogleAnalytics gaId="G-9PEVYHKFL5" />
+        <div className="dark:bg-black-gradient bg-[#012A36]">
           {children}
+          </div>
       </Suspense>
       </div>
     );
