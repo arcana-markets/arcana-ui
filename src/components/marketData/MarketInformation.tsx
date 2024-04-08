@@ -49,7 +49,7 @@ const MarketInformation = () => {
 
   const getPriceChangeClassName = () =>
     priceChange === null || priceChange === 0
-      ? "text-foreground-400"
+      ? "text-white"
       : priceChange > 0
       ? "text-success-100"
       : "text-danger-100";

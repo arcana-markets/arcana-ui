@@ -131,10 +131,10 @@ const fetchTradeHistory = async () => {
             <div className='flex justify-center items-center overflow-hidden'>
               <div className='flex items-center'>
               <Tooltip placement={'top'} content={
-                  <p className='text-[12px] cursor-default text-foreground-100 dark:opacity-100 opacity-80'>
+                  <p className='text-[12px] cursor-default text-primary2-100 dark:opacity-100 opacity-80'>
                     {formatDateFull(item.timeStamp)}
                   </p>}>
-                <p className='text-[13px] cursor-default shiny-gradient-text text-foreground-100 dark:opacity-100 opacity-80'>
+                <p className='text-[13px] cursor-default text-white dark:opacity-100 opacity-80'>
                   {formatTimestamp(item.timeStamp)}
                 </p>
                 </Tooltip>

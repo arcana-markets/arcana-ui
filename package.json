@@ -13,6 +13,7 @@
     "@coral-xyz/borsh": "^0.29.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@headlessui/react": "^1.7.18",
+    "@jup-ag/api": "^6.0.19",
     "@mantine/core": "^7.7.1",
     "@mantine/hooks": "^7.7.1",
     "@next/third-parties": "^14.1.4",

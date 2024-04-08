@@ -28,14 +28,15 @@ export const metadata: Metadata = {
     },
   };
   
-  export default function DashboardLayout({ children }: { children: React.ReactNode; }) {
+  export default function DataLayout ({ children }: { children: React.ReactNode; }) {
     // Optional: Dynamically set page metadata
     // usePageMetadata(metadata);    
     return (
       <div className={`dark:bg-black-gradient bg-[#012A36] ${inter.className}`}>
-      <Suspense fallback={<div><Loading/></div>}>
+      <Suspense fallback={<div><Loading /></div>}>
         <GoogleAnalytics gaId="G-9PEVYHKFL5" />
           {children}
+          </div>
       </Suspense>
       </div>
     );
