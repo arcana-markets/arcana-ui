@@ -117,8 +117,3 @@ Provides an overview of Arcana Vaults' system architecture, detailing its compon
 # License
 
 Arcana Vaults is licensed under the MIT License. For more information, see the LICENSE file in the project repository.
-
-# Acknowledgments
-
-Special thanks to the Solana community, contributors to the Anchor framework, and all the developers and enthusiasts supporting decentralized finance.
-
