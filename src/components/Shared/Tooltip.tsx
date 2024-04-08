@@ -31,7 +31,7 @@ const Tooltip = ({
     content={
       content && (
         <div
-          className={`rounded-md bg-background-200 dark:bg-[#012A36] p-3 cursor-default font-body text-center text-xs leading-4 text-white dark:text-white outline-none focus:outline-none ${className}`}
+          className={`rounded-md bg-[#012A36] p-3 cursor-default font-body text-center text-xs leading-4 text-white outline-none focus:outline-none ${className}`}
           style={{ 
             boxShadow: '0px 0px 8px 0px rgba(0,0,0,0.25)',
             maxWidth: '360px',

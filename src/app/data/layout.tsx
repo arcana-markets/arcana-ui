@@ -2,8 +2,10 @@ import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Suspense, lazy } from 'react';
+import "@/app/globals.css";
 import '@/app/data/css/styles.css';
 import '@/app/data/css/marketDepth.css';
+import '@solana/wallet-adapter-react-ui/styles.css';
 
 const inter = Inter({ subsets: ['latin'] });
 const Loading = lazy(() => import('@/components/marketData/Loading'));
@@ -28,16 +30,14 @@ export const metadata: Metadata = {
     },
   };
   
-  export default function DashboardLayout({ children }: { children: React.ReactNode; }) {
+  export default function DataLayout ({ children }: { children: React.ReactNode; }) {
     // Optional: Dynamically set page metadata
     // usePageMetadata(metadata);    
     return (
-      <div className={`dark:bg-black-gradient bg-[#012A36] ${inter.className}`}>
-      <Suspense fallback={<div><Loading/></div>}>
+      <div className={`dark:bg-black-gradient bg-[#012A36] z-50 ${inter.className}`}>
+      <Suspense fallback={<div><Loading /></div>}>
         <GoogleAnalytics gaId="G-9PEVYHKFL5" />
-        <div className="dark:bg-black-gradient bg-[#012A36]">
           {children}
-        </div>
       </Suspense>
       </div>
     );

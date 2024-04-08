@@ -168,7 +168,7 @@ const AdditionalDetails = () => {
   
   return (
     <div className='w-full flex justify-start items-center cursor-default'>
-      <div className='w-full max-w-[607px] lg:max-w-[607px] h-fit flex flex-col bg-background-900 dark:bg-[#09303c] border-[1px] borderColor rounded-[16px]'>
+      <div className='w-full max-w-[607px] lg:max-w-[607px] h-fit flex flex-col bg-[#09303c] border-[1px] borderColor rounded-[16px]'>
         {/* Header */}
         <div className='w-full h-[60px] flex justify-start border-b-[1px] borderColor items-center px-4 sm:px-8'>
           <p className='text-[16px] sm:text-[20px] text-white dark:opacity-100 opacity-80 font-semibold'>
@@ -190,7 +190,7 @@ const AdditionalDetails = () => {
                 height={32}
                 className='object-fill'
               />
-              <p className='text-foreground-100 dark:opacity-100 opacity-80 dark:text-white text-[18px] sm:text-[24px] font-semibold'>
+              <p className='text-foreground-100 dark:opacity-100 opacity-80 text-white text-[18px] sm:text-[24px] font-semibold'>
                 {/* Dynamic value from API */}
                 {(
                   (marketData?.market?.baseDepositTotal ?? 0) /

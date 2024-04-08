@@ -97,7 +97,7 @@ const MarketList = () => {
         } else if (performance < 0) {
           return 'text-danger-100 font-bold'; 
         } else {
-          return 'text-foreground-400 font-bold'; 
+          return 'text-white font-bold'; 
         }
       };
 
@@ -234,7 +234,7 @@ const MarketList = () => {
     </div>
       <div className='w-full flex justify-between items-center border-b-[1px] borderColor py-3 sm:py-5 px-3 sm:px-3'>
             {/* Rows */}
-            <div className='w-full overflow-auto hideScrollBar h-[300px] md:h-[300px] rounded-[4px]'>
+            <div className='w-full overflow-auto text-white hideScrollBar h-[300px] md:h-[300px] rounded-[4px]'>
             {markets.map((market, index) => (
           <Fragment key={index}>
             {renderMarketOption(market)}

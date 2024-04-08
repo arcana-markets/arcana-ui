@@ -19,8 +19,8 @@ import '@/app/data/css/styles.css';
 const Page = () => {
   return (
     <main className='w-full'>
+     <GoogleAnalytics gaId="G-9PEVYHKFL5" />
       <Navbar />
-      <GoogleAnalytics gaId="G-9PEVYHKFL5" />
       <CarouselSlider />
       <ComponentWrapper>
         <div className='w-full flex flex-col'>

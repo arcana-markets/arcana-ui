@@ -14,7 +14,6 @@ import Image from 'next/image';
 import * as Icons from '@/app/data/svg/Icons';
 import { MdClose } from "react-icons/md";
 import { NUMERAL_FORMAT } from '@/utils/constants';
-
 import Link from 'next/link';
 import Dropdown from './DropDown';
 import useUserSOLBalanceStore from '@/stores/useUserSOLBalanceStore';
@@ -33,13 +32,12 @@ const explorers = [
 const Navbar = () => {
   const wallet = useWallet();
   const modal = useWalletModal();
+  const { connection } = useConnection();
   const [modal2, setmodal] = useState(false)
   const { network, endpoint, setNetwork, setCustomEndpoint } = useNetworkConfiguration();
   // const { explorer, setExplorer } = useExplorerConfiguration();
   // const { priorityFee, setPriorityFee } = usePriorityFee();
   const [solPrice, setSolPrice] = useState<number>();
-    const { connection } = useConnection();
-
     const balance = useUserSOLBalanceStore((s) => s.balance)
     const { getUserSOLBalance } = useUserSOLBalanceStore()
     const [show, setShow] = useState(false);
@@ -76,27 +74,6 @@ const Navbar = () => {
   useEffect(() => {
     if (!wallet.connected && wallet.wallet) wallet.connect();
   }, [wallet]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(
-          'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd',
-        );
-        const data = await res.json();
-
-        if (data?.solana?.usd) {
-          setSolPrice(data.solana.usd);
-        } else {
-          setSolPrice(0);
-        }
-      } catch {
-        setSolPrice(0);
-      }
-    };
-    // Call fetchData immediately when component mounts
-    fetchData();
-  }, []);
 
   // const feesCost = (((priorityFee / 100000) * 200000) / LAMPORTS_PER_SOL) * (solPrice || 0);
 

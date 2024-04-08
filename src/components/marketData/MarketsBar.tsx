@@ -40,12 +40,11 @@ const MarketsBar = () => {
           const baseTokenData = findTokenDataByAddress(marketData?.market.baseMint, tokenMintsData);
           const baseMint = marketData?.market.baseMint || '';
           const baseTokenName = baseTokenData.name;
-      
           // Directly use the logo from the data returned by your function
           const baseTokenLogo = baseTokenData.logo;
 
     return (
-    <div className="border-t border-l border-r p-2 mb-1 flex flex-col md:flex-row items-center cardShadowBor rounded-t-[16px] bg-[#012732] dark:bg-[#012732]">
+    <div className="border-t border-l border-r p-2 mb-1 flex flex-col md:flex-row items-center cardShadowBor rounded-t-[16px] bg-[#012732]">
         <div className="flex flex-col justify-start items-start border-b md:border-b-0 md:border-r pr-1 borderColor w-full md:w-auto md:flex-basis[30%]">
         <div className="w-full">
             <div className="w-full">
@@ -61,12 +60,12 @@ const MarketsBar = () => {
                         <div className="text-sm font-bold text-foreground-100 cursor-default">{baseTokenName}</div>
                         <div className="flex cursor-help items-center">
                             <Tooltip placement={'bottom'} content={baseMint}>
-                                <div className="flex text-xs mt-1 text-foreground-100 text-center cardShadowBor bg-[#09303c] dark:bg-[#09303c] z-50 opacity-70 rounded-[4px] px-2">
+                                <div className="flex text-xs mt-1 text-foreground-100 text-center cardShadowBor bg-[#09303c] z-10 opacity-70 rounded-[4px] px-2">
                                     {abbreviateAddressSmaller(baseMint || 'Base Mint')}
                                     <div className="ml-1">
-                                        <Link href={`https://solscan.io/token/${baseMint}`} target="_blank" rel="noopener noreferrer">
+                                        <a href={`https://solscan.io/token/${baseMint}`} target="_blank" rel="noopener noreferrer">
                                             <Icons.shareSmall/>
-                                        </Link>
+                                        </a>
                                     </div>
                                 </div>
                             </Tooltip>

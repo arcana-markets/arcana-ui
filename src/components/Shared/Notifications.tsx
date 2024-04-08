@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { IconCheck, IconInfoCircle, IconCircleXFilled, IconX } from '@tabler/icons-react';
 import useNotificationStore from '@/stores/useNotificationStore'
 import { useConnection } from '@solana/wallet-adapter-react';
-import { getExplorerUrl } from '@/utils/explorer'
 import { useNetworkConfiguration } from '@/contexts/NetworkConfigurationProvider';
 
 interface NotificationStore {

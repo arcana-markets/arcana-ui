@@ -58,8 +58,8 @@ const fetchTradeHistory = async () => {
   
   const renderTradeRow = (item: OpenBookTradeEvent | null, index: number) => {
     const rowBackground = index % 2 === 0
-      ? "bg-background-800 dark:bg-[#012a36]"
-      : "bg-background-900 dark:bg-[#09303c]";
+      ? "bg-[#012a36] dark:bg-[#012a36]"
+      : "bg-[#09303c] dark:bg-[#09303c]";
   
     const priceColorStyle = item && item.takerSide === 0 
       ? { color: '#06D6A0', opacity: 0.8 } 
