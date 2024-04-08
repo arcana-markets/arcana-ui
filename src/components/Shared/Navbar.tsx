@@ -107,6 +107,10 @@ const Navbar = () => {
               </span>
               </div>
               </Link>
+              <a href="https://spl-token-faucet-p9ad.vercel.app/" target="_blank" rel="noopener noreferrer" className="nav-link flex items-center gap-2">
+                  <span>SPL Faucet</span>
+                  <Icons.RedirectIcon />
+                </a>
               <a href="https://github.com/arcana-markets/arcana-trading-bot" target="_blank" rel="noopener noreferrer" className="nav-link flex items-center gap-2">
                   <span>Tools</span>
                   <Icons.RedirectIcon />
