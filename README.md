@@ -82,7 +82,6 @@ The Token Vaults program is a crucial component of our ecosystem, enabling secur
 To deploy and run tests ensuring everything is set up correctly, use the following command:
 
 ```bash
-anchor build
 anchor test
 ```
 
