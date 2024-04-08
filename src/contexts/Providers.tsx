@@ -31,7 +31,7 @@ export function Providers({ children }: { children: React.ReactNode; }) {
   return (
   <ConnectionProvider endpoint={endpoint}>
     <Notifications />
-      <WalletProvider wallets={wallets} onError={onError}>
+      <WalletProvider wallets={wallets} autoConnect={false} onError={onError}>
         <WalletModalProvider>
             {children}
         </WalletModalProvider>

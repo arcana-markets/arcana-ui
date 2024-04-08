@@ -107,7 +107,7 @@ const Navbar = () => {
               </span>
               </div>
               </Link>
-              <a href="https://faucet.arcana.markets" target="_blank" rel="noopener noreferrer" className="nav-link flex items-center gap-2">
+              <a href="https://spl-token-faucet-p9ad.vercel.app" target="_blank" rel="noopener noreferrer" className="nav-link flex items-center gap-2">
                   <span>SPL Faucet</span>
                   <Icons.RedirectIcon />
                 </a>
