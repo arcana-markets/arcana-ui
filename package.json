@@ -47,6 +47,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/bn.js": "^5.1.0",
     "@types/bs58": "^4.0.4",
     "@types/node": "^20",
     "@types/numeral": "^2.0.4",
