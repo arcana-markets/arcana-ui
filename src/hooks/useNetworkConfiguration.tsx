@@ -25,9 +25,9 @@ export function useNetworkConfiguration() {
   const endpoint = useMemo(() => {
     switch (network) {
       case Networks.Mainnet:
-        return 'https://rpc-proxy.themetadao-org.workers.dev/';
+        return 'https://mainnet.helius-rpc.com/?api-key=3dd7ea99-47d5-4c7a-a0fc-b0da53975d88';
       case Networks.Devnet:
-        return 'https://netty-8ka8l7-fast-devnet.helius-rpc.com/';
+        return 'https://devnet.helius-rpc.com/?api-key=3dd7ea99-47d5-4c7a-a0fc-b0da53975d88';
       case Networks.Localnet:
         return 'http://127.0.0.1:8899';
       case Networks.Custom:
