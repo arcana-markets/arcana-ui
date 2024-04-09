@@ -19,7 +19,7 @@ export const BASE_OPENBOOK_URL = 'https://prod.arcana.markets/api/openbookv2/mar
 
 export const BASE_PHOENIX_URL = 'https://prod.arcana.markets/api/phoenix/markets';
 
-export const DEFAULT_MARKET_ID = 'CFSMrBssNG8Ud1edW59jNLnq2cwrQ9uY5cM3wXmqRJj3';
+export const DEFAULT_MARKET_ID = 'Gudvr1FPgxKfnMoEEBXDgXWzmoavTY7nGC9TcdM4s3SP';
 
 export const RPC_ENDPOINT = 'https://anabelle-40mqhl-fast-mainnet.helius-rpc.com';
 
