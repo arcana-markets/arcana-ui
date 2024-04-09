@@ -16,7 +16,7 @@ const nextConfig = {
     return [
       {
         source: '/data',
-        destination: '/data/CFSMrBssNG8Ud1edW59jNLnq2cwrQ9uY5cM3wXmqRJj3',
+        destination: '/data/Gudvr1FPgxKfnMoEEBXDgXWzmoavTY7nGC9TcdM4s3SP',
         permanent: true,
       },
     ];
