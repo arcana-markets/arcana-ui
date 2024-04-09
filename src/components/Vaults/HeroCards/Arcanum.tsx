@@ -81,7 +81,7 @@ const Arcanum = () => {
                         </p>
                         <div className="bg-[#181E27] rounded h-[10px] sm:h-[14px] w-full">
                             <div
-                                className={`relative bg-[#40779e] h-full rounded w-[59%]`}
+                                className={`relative bg-[#40779e] h-full rounded w-[5%]`}
                             >
                                 <span
                                     className={`text-white p-[6px] bg-bluelguana font-bold text-[11px] sm:text-xs rounded absolute right-[-30px] top-1.5 -translate-y-1/2`}

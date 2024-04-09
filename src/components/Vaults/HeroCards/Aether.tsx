@@ -76,7 +76,7 @@ const Aether = () => {
               Capacity
             </p>
             <div className="bg-[#181E27] rounded h-[10px] sm:h-[14px] w-full">
-              <div className={`relative bg-[#7f324a] h-full rounded w-[98%]`}>
+              <div className={`relative bg-[#7f324a] h-full rounded w-[10%]`}>
                 <span
                   className={`text-white p-[6px] bg-[#EF476F] font-bold text-[11px] sm:text-xs rounded absolute right-[-10px] top-1.5 -translate-y-1/2`}
                 >

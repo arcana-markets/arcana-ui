@@ -13,7 +13,7 @@ const Vaults = () => {
     const marketId = pathSegments.length > 2 ? pathSegments[2] : null;
 
     if (!marketId) {
-      router.replace('/vaults/DqnVLdkSZti24hho93iUipSG7GQYnFrYR7ABwQnjPQZ8');
+      router.replace('/vaults/');
     }
   }, [pathname, router]);
 

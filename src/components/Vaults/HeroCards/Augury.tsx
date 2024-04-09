@@ -76,7 +76,7 @@ const Augury = () => {
               Capacity
             </p>
             <div className="bg-[#181E27] rounded h-[10px] sm:h-[14px] w-full">
-              <div className={`relative bg-[#847445] h-full rounded w-[14%]`}>
+              <div className={`relative bg-[#847445] h-full rounded w-[5%]`}>
                 <span
                   className={`text-black p-[6px] bg-yellow font-bold text-[11px] sm:text-xs rounded absolute right-[-30px] top-1.5 -translate-y-1/2`}
                 >
