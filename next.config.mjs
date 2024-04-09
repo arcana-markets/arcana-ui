@@ -1,13 +1,26 @@
-/** @type {import('next').NextConfig} */
+// next.config.mjs
+
+// @ts-check
+
+/**
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 's2.coinmarketcap.com' },
-      // Allows any images from s2.coinmarketcap.com over HTTPS
       { protocol: 'https', hostname: 'raw.githubusercontent.com' },
-      // Allows any images from raw.githubusercontent.com over HTTPS
     ],
   },
-}
+  async redirects() {
+    return [
+      {
+        source: '/data',
+        destination: '/data/CFSMrBssNG8Ud1edW59jNLnq2cwrQ9uY5cM3wXmqRJj3',
+        permanent: true,
+      },
+    ];
+  },
+};
 
 export default nextConfig;

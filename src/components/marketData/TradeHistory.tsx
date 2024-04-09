@@ -119,7 +119,7 @@ const fetchTradeHistory = async () => {
                 >
                   <button className='flex cursor-pointer items-center'>
                     <Tooltip placement={'top'} content={
-                      <p className='text-[12px] cursor-default shiny-gradient-text2 text-foreground-100 dark:opacity-100 opacity-80 truncate'>
+                      <p className='text-[12px] cursor-default text-foreground-100 dark:opacity-100 opacity-80 truncate'>
                         {`Taker: ${abbreviateAddressSmaller(item.takerOwner)}`}
                       </p>
                     }>
@@ -134,7 +134,7 @@ const fetchTradeHistory = async () => {
                   <p className='text-[12px] cursor-default text-primary2-100 dark:opacity-100 opacity-80'>
                     {formatDateFull(item.timeStamp)}
                   </p>}>
-                <p className='text-[13px] cursor-default text-white dark:opacity-100 opacity-80'>
+                <p className='text-[13px] cursor-default shiny-gradient-text2 dark:opacity-100 opacity-80'>
                   {formatTimestamp(item.timeStamp)}
                 </p>
                 </Tooltip>

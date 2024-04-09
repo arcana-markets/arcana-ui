@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { IconCheck, IconInfoCircle, IconCircleXFilled, IconX } from '@tabler/icons-react';
 import useNotificationStore from '@/stores/useNotificationStore'
 import { useConnection } from '@solana/wallet-adapter-react';
-import { useNetworkConfiguration } from '@/contexts/NetworkConfigurationProvider';
+import { useNetworkConfiguration } from '@/hooks/useNetworkConfiguration';
 
 interface NotificationStore {
   type: 'success' | 'info' | 'error';
@@ -48,7 +48,7 @@ const NotificationList = () => {
 }
 
 const Notification: React.FC<NotificationStore> = ({ type, message, description, txid, onHide }) => {
-  const { networkConfiguration } = useNetworkConfiguration(); // Assuming this hook returns an object with a network property
+  const { network } = useNetworkConfiguration(); // Assuming this hook returns an object with a network property
   const { connection } = useConnection();
 
   useEffect(() => {
@@ -85,7 +85,7 @@ const Notification: React.FC<NotificationStore> = ({ type, message, description,
               <div className="flex flex-row">
          
                 <a
-                  href={'https://explorer.solana.com/tx/' + txid + `?cluster=${networkConfiguration}`}
+                  href={'https://explorer.solana.com/tx/' + txid + `?cluster=${network}`}
                   target="_blank"
                   rel="noreferrer"
                   className="flex flex-row link link-accent text-emerald-200"

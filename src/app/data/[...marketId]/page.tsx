@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { GoogleAnalytics } from '@next/third-parties/google'
 import ComponentWrapper from '@/components/marketData/ComponentWrapper';
 import CarouselSlider from '@/components/marketData/CarouselSlider';
@@ -17,11 +17,23 @@ import Navbar from '@/components/Shared/Navbar';
 import '@/app/data/css/styles.css';
 
 const Page = () => {
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  // Function to increment the refreshKey, triggering refresh
+  const refreshData = () => setRefreshKey(prevKey => prevKey + 1);
+
   return (
     <main className='w-full'>
       <Navbar />
       <GoogleAnalytics gaId="G-9PEVYHKFL5" />
       <CarouselSlider />
+      <button
+        onClick={refreshData}
+        className="fixed bottom-4 right-4 bg-[#5099CC] hover:opacity-50 text-white font-bold p-4 rounded-full"
+        style={{width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+      >
+        ↻
+      </button>
       <ComponentWrapper>
         <div className='w-full flex flex-col'>
           <div className='w-full grid grid-cols-1 lg:grid-cols-[1.9fr,1fr] lg:gap-0 gap-8 justify-center items-start py-2 sm:py-6'>

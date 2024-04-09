@@ -1,24 +1,24 @@
 :root:not(.theme-dark) {
   --black: #012732;
   --primary: #C77DFF;
-  --bkg-light: rgba(0, 0, 0, 0.05);
+  --bkg-light: rgba(255, 255, 255, 0.1);
   --bkg-dark: rgba(0, 0, 0, 0.1);
-  --bkg-darker: rgba(0, 0, 0, 0.15);
-  --bkg-darkest: rgba(0, 0, 0, 0.2);
+  --bkg-darker: rgba(0, 0, 0, 0.2);
+  --bkg-darkest: rgba(0, 0, 0, 0.4);
   --text: rgba(255, 255, 255, 0.6);
 
   --tv-color-platform-background: transparent;
   --tv-color-pane-background: transparent;
   --tv-color-pane-background-secondary: var(--bkg-dark);
+  --tv-color-toolbar-button-text: var(--text);
   --tv-color-toolbar-button-background-hover: transparent;
   --tv-color-toolbar-button-background-secondary-hover: var(--bkg-darker);
-  --tv-color-toolbar-button-background-expanded: var(--bkg-dark);
-  --tv-color-pane-background-secondary: var(--bkg-dark);
+  --tv-color-toolbar-button-background-expanded: var(--bkg-darkest);
   --tv-color-toolbar-button-text: var(--text);
   --tv-color-toolbar-button-text-hover: var(--primary);
   --tv-color-toolbar-button-text-active: var(--primary);
   --tv-color-toolbar-button-text-active-hover: var(--primary);
-  --tv-color-item-active-text: var(--primary);
+  --tv-color-item-active-text: var(--text);
   --tv-color-toolbar-toggle-button-background-active: var(--primary);
   --tv-color-toolbar-toggle-button-background-active-hover: var(--primary);
 }
