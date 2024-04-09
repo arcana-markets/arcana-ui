@@ -48,7 +48,7 @@ const Arcanum = () => {
                         <Image
                             width={28}
                             height={28}
-                            src="/tokens/wUSDC.png"
+                            src="/tokens/WUSDC.png"
                             alt="USDC icon"
                         />
                         <p className="text-foxflowerviola text-sm font-bold">USDC</p>
