@@ -11,6 +11,7 @@ Responsive                     |  Desktop
 
 To get started, follow these steps:
 
+#### **Hackathon Judges:** Download the repo and run a local project:
 1. **Clone the repo:** Begin by cloning the repository using the command:
 
 ```bash
@@ -56,7 +57,7 @@ tailwind, package, configuration, and other project files
 
 - **Token Vaults UI:** Yield-generating DeFi protocol.
 - **DEX Data Analytics:** Advanced data structures for Solana decentralized exchanges.
-- **Services & Tools:** Swap, trading-bots, SPL token-faucets and other utilities.
+- **Services & Tools:** Swap, devnet SPL token-faucets, external bots.
 
 
 # 🏦 Token Vaults Program
