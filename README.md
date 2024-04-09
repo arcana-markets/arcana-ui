@@ -44,23 +44,22 @@ The below is an example structure for the project
 ```
 ├── public : publically hosted files
 ├── src : primary code folders and files 
-│   ├── components : should house anything considered a resuable UI component
-│   ├── contexts` : any context considered reusable and useuful to many compoennts that can be passed down through a component tree
-│   ├── hooks` : any functions that let you 'hook' into react state or lifecycle features from function components
-│   ├── models` : any data structure that may be reused throughout the project
-│   ├── pages` : the pages that host meta data and the intended `View` for the page
-│   ├── stores` : stores used in state management
-│   ├── styles` : contain any global and reusable styles
-│   ├── utils` : any other functionality considered reusable code that can be referenced
-│   ├── views` : contains the actual views of the project that include the main content and components within
-style, package, configuration, and other project files
+│   ├── app
+│   ├── components`
+│   ├── hooks` 
+│   ├── config` 
+│   ├── contexts`
+│   ├── stores`
+│   ├── types` 
+│   ├── utils` 
+tailwind, package, configuration, and other project files
 
 ```
 ## Key Features
 
-- **Permissionless Participation:** Enables a true DeFi experience by allowing anyone to participate without needing permissions.
-- **Decentralized Exchanges Compatibility:** Seamlessly works with various Solana DEXs, broadening its applicability.
-- **High Performance and Security:** Utilizes the Rust programming language and the Anchor framework to ensure robust, secure operations.
+- **Token Vaults UI:** Yield-generating DeFi protocol.
+- **DEX Data Analytics:** Advanced data structures for Solana decentralized exchanges.
+- **Services & Tools:** Swap, trading-bots, SPL token-faucets and other utilities.
 
 
 # 🏦 Token Vaults Program
