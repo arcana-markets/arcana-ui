@@ -41,12 +41,14 @@ const Vaults = () => {
             You can easily create permissionless{" "}
             <span className="max-lg:">vaults with Arcana’s Vault Engine.</span>
           </p>
-          <button className="max-lg:my-1 whitespace-nowrap bg-[#023646] font-bold text-bluelguana px-5 py-[9px] hover:bg-bluelguana duration-300 hover:text-white rounded-xl ml-2">
+          <button className="max-lg:my-1 cursor-not-allowed whitespace-nowrap bg-[#023646] font-bold text-bluelguana px-5 py-[9px] hover:bg-bluelguana duration-300 hover:text-white rounded-xl ml-2">
             Create Vault
           </button>
-          <span className="text-colonyblue text-base font-medium flex items-center gap-1 ml-2 cursor-pointer">
-            Docs <UpArrowIcon />
-          </span>
+          <a href="https://github.com/arcana-markets/arcana-vaults" target="_blank" rel="noopener noreferrer" className="ml-2">
+            <span className="text-colonyblue text-base font-medium flex items-center gap-1 cursor-pointer">
+              Code <UpArrowIcon />
+            </span>
+          </a>
         </div>
       </div>
       <div className="bg-[#141820] py-6 mb-6">
@@ -67,7 +69,7 @@ const Vaults = () => {
               <Toggle ValIsChecked={true} lable="Only my positions" id="two" />
             </div>
           </div>
-          <button className="py-2 px-3 rounded-xl text-sm lg:text-base flex items-center gap-[6px] duration-300 hover:bg-[#023646] leading-6 bg-bluelguana text-white font-medium">
+          <button className="cursor-not-allowed py-2 px-3 rounded-xl text-sm lg:text-base flex items-center gap-[6px] duration-300 hover:bg-[#023646] leading-6 bg-bluelguana text-white font-medium">
             <PlusIcon /> Create Vault
           </button>
         </div>

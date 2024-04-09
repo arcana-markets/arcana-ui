@@ -20,8 +20,8 @@ export const vaultsData: vaultsData[] = [
     APY: "0%",
     TVL: "$0",
     Volume: "$0",
-    VenueImg: "/img/svg/phoenix.svg",
-    btnText: "Manage",
+    VenueImg: "/img/svg/phoenix-dex.svg",
+    btnText: "Deposit",
   },
   {
     coinImg: "/img/svg/jto-usdc.svg",
@@ -31,8 +31,8 @@ export const vaultsData: vaultsData[] = [
     APY: "0%",
     TVL: "$0",
     Volume: "$0",
-    VenueImg: "/img/svg/openbook.svg",
-    btnText: "Manage",
+    VenueImg: "/img/svg/openbook-dex.svg",
+    btnText: "Deposit",
   },
   {
     coinImg: "/img/svg/jtousdc.svg",
@@ -42,7 +42,7 @@ export const vaultsData: vaultsData[] = [
     APY: "0%",
     TVL: "$0",
     Volume: "$0",
-    VenueImg: "/img/svg/openbook.svg",
+    VenueImg: "/img/svg/openbook-dex.svg",
     btnText: "Deposit",
   },
   {
@@ -53,7 +53,7 @@ export const vaultsData: vaultsData[] = [
     APY: "0%",
     TVL: "$0",
     Volume: "$0",
-    VenueImg: "/img/svg/openbook.svg",
+    VenueImg: "/img/svg/orca-dex.svg",
     btnText: "Deposit",
   },
   {
@@ -64,7 +64,7 @@ export const vaultsData: vaultsData[] = [
     APY: "0%",
     TVL: "$0",
     Volume: "$0",
-    VenueImg: "/img/svg/meteora.svg",
+    VenueImg: "/img/svg/meteora-dex.svg",
     btnText: "Deposit",
   },
   {
@@ -75,20 +75,10 @@ export const vaultsData: vaultsData[] = [
     APY: "0%",
     TVL: "$0",
     Volume: "$0",
-    VenueImg: "/img/svg/r-logo.svg",
+    VenueImg: "/img/svg/raydium-dex.svg",
     btnText: "Deposit",
   },
-  {
-    coinImg: "/img/svg/jto-bonk.svg",
-    Vault1: "JTO",
-    Vault2: "BONK",
-    Liquidity: <EmptyIcon />,
-    APY: "0%",
-    TVL: "$0",
-    Volume: "$0",
-    VenueImg: "/img/svg/fish.svg",
-    btnText: "Deposit",
-  },
+
 ];
 
 type ArcanaCard = {
@@ -126,11 +116,11 @@ export const arcanaCardsData: ArcanaCard[] = [
     subTitleTwo: "TVL",
     subTitleThree: "Capacity",
     buttonText: "Open Vault",
-    capacityValue: "59%",
-    price: "$184.84M",
+    capacityValue: "0%",
+    price: "$0",
     time: "7D",
-    apyValue: "221.57%",
-    apyValueChange: "+22.7%",
+    apyValue: "0%",
+    apyValueChange: "0%",
     capacityClr: "#40779e",
     capacityClrTwo: "#5099CC",
     ellipseClr: "ellipse",
@@ -148,11 +138,11 @@ export const arcanaCardsData: ArcanaCard[] = [
     subTitleTwo: "TVL",
     subTitleThree: "Capacity",
     buttonText: "Open Vault",
-    capacityValue: "14%",
-    price: "$184.84M",
+    capacityValue: "0%",
+    price: "$0M",
     time: "7D",
-    apyValue: "85.12%",
-    apyValueChange: "-8.3%",
+    apyValue: "0%",
+    apyValueChange: "0%",
     capacityClr: "#877445",
     capacityClrTwo: "#FFD166",
     shadow: "shadow-light-orange",
@@ -169,11 +159,11 @@ export const arcanaCardsData: ArcanaCard[] = [
     subTitleTwo: "TVL",
     subTitleThree: "Capacity",
     buttonText: "Open Vault",
-    capacityValue: "98%",
-    price: "$184.84M",
+    capacityValue: "0%",
+    price: "$0",
     time: "7D",
-    apyValue: "44.56%",
-    apyValueChange: "+5.1%",
+    apyValue: "0%",
+    apyValueChange: "0%",
     capacityClr: "#877445",
     capacityClrTwo: "#FFD166",
     shadow: "shadow-light-orange",
@@ -184,30 +174,30 @@ export const arcanaCardsData: ArcanaCard[] = [
 export const faqlist = [
   {
     question: "What does this vault do?",
-    answer: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quam vitae facilis debitis at fugit earum, nostrum ab amet optio porro! Sed explicabo magni accusamus voluptatum itaque. Consequuntur, omnis cum!`,
+    answer: "This vault securely stores digital assets and manages transactions efficiently. It combines advanced security protocols with user-friendly access, ensuring your assets are both safe and readily available for trading or investment purposes."
   },
   {
     question: "Where does the yield (APY) come from?",
-    answer: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quam vitae facilis debitis at fugit earum, nostrum ab amet optio porro! Sed explicabo magni accusamus voluptatum itaque. Consequuntur, omnis cum!`,
+    answer: "The yield (APY) originates from a combination of strategies, including staking, lending, and providing liquidity to decentralized finance (DeFi) protocols. By allocating assets across various platforms and optimizing for the best returns, the vault generates yield."
   },
   {
     question: "When is this vault profitable?",
-    answer: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quam vitae facilis debitis at fugit earum, nostrum ab amet optio porro! Sed explicabo magni accusamus voluptatum itaque. Consequuntur, omnis cum!`,
+    answer: "This vault becomes profitable under conditions of favorable market dynamics and effective asset management strategies. Profitability is influenced by the performance of the underlying assets, the efficiency of the yield-generating strategies."
   },
   {
     question: "How is the APY calculated?",
-    answer: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quam vitae facilis debitis at fugit earum, nostrum ab amet optio porro! Sed explicabo magni accusamus voluptatum itaque. Consequuntur, omnis cum!`,
+    answer: "The APY (Annual Percentage Yield) is calculated based on the interest earned on an investment over a one-year period, taking into account the effect of compounding interest. This involves reinvesting the earnings to generate additional earnings."
   },
   {
     question: "What should I do after depositing?",
-    answer: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quam vitae facilis debitis at fugit earum, nostrum ab amet optio porro! Sed explicabo magni accusamus voluptatum itaque. Consequuntur, omnis cum!`,
+    answer: "After depositing into the vault, monitor your investment through the platform's dashboard to see real-time updates on your yield. Consider reinvesting your earnings to compound your returns."
   },
   {
     question: "Do I have to deposit both tokens?",
-    answer: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quam vitae facilis debitis at fugit earum, nostrum ab amet optio porro! Sed explicabo magni accusamus voluptatum itaque. Consequuntur, omnis cum!`,
+    answer: "For our token vaults, you're not required to deposit both tokens. We offer weighted single-asset deposits, allowing you to invest in the vault with just one type of token."
   },
   {
     question: "What are the risks?",
-    answer: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quam vitae facilis debitis at fugit earum, nostrum ab amet optio porro! Sed explicabo magni accusamus voluptatum itaque. Consequuntur, omnis cum!`,
+    answer: "Investing in token vaults, like any financial venture, carries inherent risks. These include market volatility, which can lead to fluctuating yields and potential loss of principal. Smart contract vulnerabilities, despite rigorous audits, could also pose a risk of hacks or funds being locked."
   },
 ];

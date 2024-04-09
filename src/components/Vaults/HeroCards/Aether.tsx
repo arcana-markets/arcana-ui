@@ -39,7 +39,7 @@ const Aether = () => {
               alt="icon"
               className="max-sm:!max-w-11"
             />
-            <p className="text-foxflowerviola text-sm font-bold ">USDT</p>
+            <p className="text-foxflowerviola text-sm font-bold ">USDC</p>
           </div>
         </div>
         <div className="rounded-lg py-4 px-3 sm:p-6 bg-[#242a3880] backdrop-blur-[50px]">

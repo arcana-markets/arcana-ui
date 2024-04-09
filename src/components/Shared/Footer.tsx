@@ -28,9 +28,12 @@ const Footer = () => {
           <div className="grid sm:grid-cols-3 sm:gap-10 lg:gap-[96px] gap-8">
             <ul className="flex flex-col gap-3 sm:gap-2">
               <li className="footer-header-title">Company</li>
-              <Link href="/about"><div className="footer-link">About us</div></Link>
-              <Link href="/blog"><div className="footer-link">Blog</div></Link>
-              <Link href="/media-kit"><div className="footer-link">Media Kit</div></Link>
+              <a href="https://arcana.markets" target="_blank" rel="noopener noreferrer">
+              <div className="footer-link">About us</div>
+              </a>
+              <a href="https://x.com/arcanamarkets" target="_blank" rel="noopener noreferrer">
+              <div className="footer-link">Socials</div>
+              </a>              <Link href="/media-kit"><div className="footer-link">Media Kit</div></Link>
               <a href="https://github.com/arcana-markets" target="_blank" rel="noopener noreferrer">
               <div className="footer-link">Developer?</div>
               </a>

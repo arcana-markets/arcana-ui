@@ -29,7 +29,7 @@ const Page = () => {
       <CarouselSlider />
       <button
         onClick={refreshData}
-        className="fixed bottom-4 right-4 bg-[#5099CC] hover:opacity-50 text-white font-bold p-4 rounded-full"
+        className="fixed bottom-4 right-4 bg-lightgrey hover:opacity-50 text-white font-bold p-4 rounded-full"
         style={{width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
       >
         ↻
