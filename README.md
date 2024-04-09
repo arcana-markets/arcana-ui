@@ -1,14 +1,11 @@
 # 🧙‍♂️ Arcana Markets Web App
 
-The Arcana web app provides permissionless market making vaults designed to operate seamlessly on top of decentralized exchanges within the Solana ecosystem. Leveraging the power of Solana's high-speed blockchain, Arcana Markets aims to revolutionize liquidity provision, making it more accessible, efficient, and decentralized.
+The arcana web app elevates the DeFi experience on Solana by offering a comprehensive suite including token vaults, data analytics, interactive charts, a swap application, customized tools and bots. 
+Streamline the decentralized financial ecosystem, moving beyond just liquidity provision to empowering users with a full array of advanced functionalities and insights.
 
 Responsive                     |  Desktop
 :-------------------------:|:-------------------------:
 ![](arcana-ui-mobile.png)  |  ![](arcana-ui-desktop.png)
-
-## 👋 Introduction
-
-Arcana Vaults aims to simplify and decentralize liquidity provision on Solana-based decentralized exchanges. Vaults can provide this passive liquidity by quoting similar to an AMM. By harnessing cutting-edge technology and an innovative approach, the project seeks to empower users and enhance DeFi accessibility.
 
 ## 🚀 Quickstart
 
@@ -111,4 +108,4 @@ To complement our data repository, the **Arcana Data Indexer** plays a pivotal r
 
 # License
 
-Arcana Vaults is licensed under the MIT License. For more information, see the LICENSE file in the project repository.
+Arcana Web App is licensed under the MIT License. For more information, see the LICENSE file in the project repository.
