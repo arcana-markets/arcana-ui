@@ -73,14 +73,6 @@ The Token Vaults program is a crucial component of our ecosystem, enabling secur
 | ---- | ------- | ------------------------------------------- |
 | v0.1 | Devnet  | `FVbmcn58GVgYAGYqtQwVWwWrTDbSFqwXfCrErGEGo1mx` |
 
-## Running the Project
-
-To deploy and run tests ensuring everything is set up correctly, use the following command:
-
-```bash
-anchor test
-```
-
 # 📈 Data & Infrastructure
 
 Our ecosystem leverages cutting-edge data management and analytics to ensure seamless operations and performance enhancement. Below are the key components of our Data & Infrastructure layer:
