@@ -109,10 +109,6 @@ To complement our data repository, the **Arcana Data Indexer** plays a pivotal r
   <img src="https://img.shields.io/badge/Arcana-Indexer-blue" alt="Arcana Indexer" style="height: 30px;"/>
 </a>
 
-## Architecture
-
-Provides an overview of Arcana Vaults' system architecture, detailing its components, their interactions, and how the Solana blockchain plays a crucial role in its functionality.
-
 # License
 
 Arcana Vaults is licensed under the MIT License. For more information, see the LICENSE file in the project repository.
