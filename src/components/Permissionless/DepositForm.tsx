@@ -3,12 +3,13 @@ import { InfoDeposit, TickIcon } from "@/common/Icons";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const DepositForm = ({ params }: { params: { permission: string } }) => {
+const DepositForm = ({ params }: { params: { arcVault: string } }) => {
   const [deposit, setDeposit] = useState(false);
   const [typing, setTyping] = useState(false);
 
   const handleDepositchange = () => {
     setDeposit(!deposit);
+
   };
   return (
     <div className="w-full">
@@ -47,11 +48,11 @@ const DepositForm = ({ params }: { params: { permission: string } }) => {
       </div>
       <div className="mt-[17px] sm:flex gap-[24px]  justify-between  ">
         <div className={` ${deposit === true ? "w-full" : " max-w-[332px]"}  `}>
-          <div className="pyth-box  w-full    flex justify-between items-center rounded-xl border-[1px] border-[#3C465D] py-[12px] px-[16px] ">
+          <div className="pyth-box w-full flex justify-between items-center rounded-xl border-[1px] border-[#3C465D] py-[12px] px-[16px] ">
             <div className=" flex items-center justify-between w-full gap-[10px]">
               <Image
                 src={
-                  params.permission === "pyth-usdc"
+                  params.arcVault === "arcanum"
                     ? "/img/png/pyth.png"
                     : "/img/svg/btc.svg"
                 }
@@ -60,7 +61,7 @@ const DepositForm = ({ params }: { params: { permission: string } }) => {
                 height={32}
               />
               <h4 className=" font-Inter font-medium text-[16px]  leading-[28px] text-white ">
-                {params.permission === "pyth-usdc" ? "PYTH " : "BTC"}
+                {params.arcVault === "arcanum" ? "PYTH " : "BTC"}
               </h4>
 
               <input
@@ -103,7 +104,7 @@ const DepositForm = ({ params }: { params: { permission: string } }) => {
             <div className=" flex items-center  gap-[10px]">
               <Image
                 src={
-                  params.permission === "pyth-usdc"
+                  params.arcVault === "arcanum"
                     ? "/img/png/usdc.png"
                     : "/img/svg/bonk.svg"
                 }
@@ -112,7 +113,7 @@ const DepositForm = ({ params }: { params: { permission: string } }) => {
                 height={32}
               />
               <h4 className=" font-Inter font-medium text-[16px]  leading-[28px] text-white ">
-                {params.permission === "pyth-usdc" ? "USDC " : "BONK"}
+                {params.arcVault === "arcanum" ? "USDC " : "BONK"}
               </h4>
               <input
                 onChange={() => setTyping(true)}

@@ -2,7 +2,7 @@ import { CoinFire, EyeIcon, OpenBook, RedirectIcon, WhaleIcon } from "@/common/I
 import Image from "next/image";
 import React from "react";
 
-const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
+const CoinMarketDetails = ({ params }: { params: { arcVault: string } }) => {
   return (
     <>
       <div className="w-1/2 max-lg:w-full">
@@ -35,7 +35,7 @@ const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
                 <span>
                   <Image
                     src={
-                      params.permission === "pyth-usdc"
+                      params.arcVault === "arcanum"
                         ? "/img/png/pyth.png"
                         : "/img/svg/btc.svg"
                     }
@@ -45,7 +45,7 @@ const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
                   />
                 </span>
                 <span className="flex-grow">
-                  {params.permission === "pyth-usdc" ? "PYTH " : "BTC"}
+                  {params.arcVault === "arcanum" ? "PYTH " : "BTC"}
                 </span>
                 <span>
                   <RedirectIcon />
@@ -60,7 +60,7 @@ const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
                 <span>
                   <Image
                     src={
-                      params.permission === "pyth-usdc"
+                      params.arcVault === "arcanum"
                         ? "/img/png/usdc.png"
                         : "/img/svg/bonk.svg"
                     }
@@ -70,7 +70,7 @@ const CoinMarketDetails = ({ params }: { params: { permission: string } }) => {
                   />
                 </span>
                 <span>
-                  {params.permission === "pyth-usdc" ? "USDC " : "BONK"}
+                  {params.arcVault === "arcanum" ? "USDC " : "BONK"}
                 </span>
                 <span>
                   <RedirectIcon />

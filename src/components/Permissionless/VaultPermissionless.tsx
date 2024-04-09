@@ -5,13 +5,13 @@ import CoinMarketDetails from "./CoinMarketDetails";
 const VaultPermissionless = ({
   params,
 }: {
-  params: { permission: string };
+  params: { arcVault: string };
 }) => {
   return (
     <div>
       <div
         className={`${
-          params.permission === "pyth-usdc" ? "bg-transparent" : "bg-[#FFC53F]"
+          params.arcVault === "arcanum" ? "bg-transparent" : "bg-[#FFC53F]"
         } h-[8px] w-full  mt-5 `}
       ></div>
       <div className="bg-[#11171D] relative z-10 ">

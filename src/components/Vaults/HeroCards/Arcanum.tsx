@@ -3,9 +3,9 @@ import Image, { StaticImageData } from "next/image";
 import Link from 'next/link';
 
 
-const FirstCard = () => {
+const Arcanum = () => {
     return (
-        <Link href="/vaults/pyth-usdc" className="px-4 block relative pt-10 pb-4 sm:py-10">
+        <Link href="/vaults/arcanum" className="px-4 block relative pt-10 pb-4 sm:py-10">
             <div className="py-[2px] z-[11] px-[6px] rounded-lg gap-[10px] bg-darkblue300  flex items-center absolute top-[28px] left-1/2 -translate-x-1/2">
             <p className="text-yellow text-sm font-medium ">Devnet ONLY</p>
                 <div className="p-2 rounded-full animate-wiggle">
@@ -103,4 +103,4 @@ const FirstCard = () => {
     )
 }
 
-export default FirstCard
+export default Arcanum

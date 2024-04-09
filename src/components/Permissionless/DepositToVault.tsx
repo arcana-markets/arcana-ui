@@ -6,7 +6,7 @@ import WithdrawalForm from "./WithdrawalForm";
 import { DepositeIcon, WithdrawIcon } from "@/common/Icons";
 
 const DepositToVault = ({ params }: {
-  params: { permission: string }
+  params: { arcVault: string }
 }) => {
 
   const [deposit, setDeposit] = useState(true)

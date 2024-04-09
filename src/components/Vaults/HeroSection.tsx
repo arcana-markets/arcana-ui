@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import Sliders from "react-slick";
 import Link from 'next/link';
-import FirstCard from "./HeroCards/FirstCard";
+import Arcanum from "./HeroCards/Arcanum";
 import Augury from "./HeroCards/Augury";
 import Aether from "./HeroCards/Aether";
 
@@ -50,7 +50,7 @@ const HeroSection = () => {
         <span className="max-sm:d-block">for Solana DEXs.</span>
       </p>
       <Sliders {...settings}>
-        <FirstCard />
+        <Arcanum />
         <Augury />
         <Aether />
       </Sliders>

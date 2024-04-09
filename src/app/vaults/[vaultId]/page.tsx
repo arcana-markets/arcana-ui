@@ -22,12 +22,12 @@ const Page = () => {
         <Navbar />
         <div className=" flex-grow flex justify-center w-full items-center">
           <VaultDetailsBanner params={{
-            permission: ""
+            arcVault: "arcanum"
           }} />
         </div>
       </div>
       <VaultPermissionless params={{
-            permission: ""
+            arcVault: "arcanum"
           }} />
       <Technicals />
       <TopVaults />
