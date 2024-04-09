@@ -39,7 +39,7 @@ const VaultDetailsBanner = ({ params }: {
                   alt="icon"
                 />
                 <h2 className=" text-[28px] sm:text-[34px] font-semibold font-poppins">
-                  {params.arcVault === "pyth-usdc" ? "PYTH / USDC " : "BTC / BONK "}
+                  {params.arcVault === "pyth-usdc" ? "PYTH / USDC " : "JUP / USDC "}
                 </h2>
               </div>
               <div className=" flex  ">

@@ -30,16 +30,26 @@ const Aether = () => {
           <h3 className="text-center font-poppins !leading-[unset] group-hover:text-white bg-clip-text text-transparent bg-aether font-bold text-[28px] sm:text-3xl md:text-[40px] text-">
             Aether
           </h3>
-          <div className="flex items-center gap-2 sm:gap-4 justify-center sm:pt-4 sm:mb-8">
-            <p className="text-foxflowerviola text-sm font-bold">JTO</p>
-            <Image
-              width={55}
-              height={30}
-              src="/img/svg/Aether-icon.svg"
-              alt="icon"
-              className="max-sm:!max-w-11"
-            />
-            <p className="text-foxflowerviola text-sm font-bold ">USDC</p>
+          <div className="flex justify-center items-center gap-2 sm:gap-4 sm:pt-4 sm:mb-8">
+            <div className="flex items-center gap-4 z-10">
+              <p className="text-foxflowerviola text-sm font-bold">JTO</p>
+              <Image
+                width={32}
+                height={32}
+                src="/tokens/JTO.png"
+                alt="JTO icon"
+              />
+            </div>
+            {/* Apply negative margin to bring the second token closer to the first one */}
+            <div className="flex items-center gap-4 -ml-6"> {/* Adjusted negative margin */}
+              <Image
+                width={28}
+                height={28}
+                src="/tokens/wUSDC.png"
+                alt="USDC icon"
+              />
+              <p className="text-foxflowerviola text-sm font-bold">USDC</p>
+            </div>
           </div>
         </div>
         <div className="rounded-lg py-4 px-3 sm:p-6 bg-[#242a3880] backdrop-blur-[50px]">
