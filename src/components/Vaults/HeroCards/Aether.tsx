@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Aether = () => {
   return (
-    <Link href="/vaults/aether" className="px-4 block relative">
+    <Link href="/vaults/aether">
     <div className="px-4 block relative pt-10 pb-4 sm:py-10">
     <div className="py-[2px] z-[11] px-[6px] rounded-lg gap-[10px] bg-darkblue300 flex items-center absolute top-[28px] left-1/2 -translate-x-1/2">
     <p className="text-yellow text-sm font-medium ">Devnet ONLY</p>
@@ -38,6 +38,7 @@ const Aether = () => {
                 height={32}
                 src="/tokens/JTO.png"
                 alt="JTO icon"
+                className="max-sm:!max-w-11"
               />
             </div>
             {/* Apply negative margin to bring the second token closer to the first one */}
@@ -47,6 +48,7 @@ const Aether = () => {
                 height={28}
                 src="/tokens/WUSDC.png"
                 alt="USDC icon"
+                className="max-sm:!max-w-11"
               />
               <p className="text-foxflowerviola text-sm font-bold">USDC</p>
             </div>

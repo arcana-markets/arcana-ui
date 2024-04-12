@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Augury = () => {
   return (
-    <Link href="/vaults/augury" className="px-4 block relative">
+    <Link href="/vaults/augury">
         <div className="px-4 block relative pt-10 pb-4 sm:py-10">
             <div className="py-[2px] z-[11] px-[6px] rounded-lg gap-[10px] bg-darkblue300 flex items-center absolute top-[28px] left-1/2 -translate-x-1/2">
             <p className="text-yellow text-sm font-medium ">Devnet ONLY</p>
@@ -38,6 +38,7 @@ const Augury = () => {
                 height={32}
                 src="/img/png/juplogo.png"
                 alt="JUP icon"
+                className="max-sm:!max-w-11"
               />
             </div>
             <div className="flex items-center gap-4 -ml-6">
@@ -46,6 +47,7 @@ const Augury = () => {
                 height={28}
                 src="/tokens/WUSDC.png"
                 alt="USDC icon"
+                className="max-sm:!max-w-11"
               />
               <p className="text-foxflowerviola text-sm font-bold">USDC</p>
             </div>

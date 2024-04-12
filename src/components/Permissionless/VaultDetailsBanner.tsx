@@ -2,8 +2,7 @@
 import { InfoIcon, NextIcon } from "@/components/Shared/Icons";
 import Image from "next/image";
 import React from "react";
-
-
+import Link from 'next/link';
 
 const VaultDetailsBanner = ({ params }: {
   params: { arcVault: string }
@@ -19,9 +18,12 @@ const VaultDetailsBanner = ({ params }: {
         alt="icon"
       />
       <div className={`w-[1000px] h-[1000px]  ${params.arcVault === "pyth-usdc" ? "bg-gradient-radial-permissionless" : "bg-gradient-radial-permissionless-yellow"} absolute -top-[30%] -left-[20%] z-0`}></div>
-
-      <p className="text-[#a1adc1] bg-[#161A22] text-center font-medium py-1 text-sm sm:hidden relative z-10 my-5">	&lt;- Go back to vaults overview</p>
-      <div className="container relative z-10 xl:max-w-[1140px] w-full px-4 mx-auto sm:pt-9 pb-10    text-white">
+      <Link href="/" passHref>
+      <div className="text-[#a1adc1] bg-[#161A22] text-center font-medium py-1 text-sm sm:hidden relative z-10 my-5 block cursor-pointer">
+          ← Go back to vaults overview
+      </div>
+      </Link>      
+      <div className="container relative z-10 xl:max-w-[1140px] w-full px-4 mx-auto sm:pt-9 pb-10 text-white">
         <div className=" flex justify-between items-center">
           <div>
             <h1 className=" font-poppins font-semibold text-3xl sm:text-5xl text-[#ffd166] sm:pb-4">{params.arcVault === "pyth-usdc" ? "" : "Augury"}</h1>
