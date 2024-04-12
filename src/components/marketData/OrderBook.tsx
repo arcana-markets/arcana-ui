@@ -89,9 +89,10 @@ const OrderBook = () => {
     return !previousOrder || currentOrder.size !== previousOrder.size ? 'red-flash' : '';
   };
 
-    // Assuming bidOrders and askOrders are sorted with highest bid and lowest ask at index 0
-    const bidPrice = orderBookData?.market.bidOrders[0]?.price;
-    const askPrice = orderBookData?.market.askOrders[0]?.price;
+  // Safely attempting to access the first bid and ask orders if they exist
+  const bidPrice = orderBookData?.market?.bidOrders?.[0]?.price ?? null;
+  const askPrice = orderBookData?.market?.askOrders?.[0]?.price ?? null;
+
   
     // Calculate the spread
     const spread = bidPrice && askPrice ? askPrice - bidPrice : null;
