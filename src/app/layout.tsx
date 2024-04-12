@@ -1,4 +1,4 @@
-// import { Providers } from "@/contexts/Providers";
+import { Providers } from "@/contexts/Providers";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from '@next/third-parties/google';
@@ -38,7 +38,7 @@ export default function RootLayout({
     <html lang="en" className={`!bg-primary ${inter.className}`}>
       <body>
       <GoogleAnalytics gaId="G-9PEVYHKFL5" />
-        {children}
+        <Providers>{children}</Providers>
         </body>
     </html>
   );
