@@ -58,12 +58,12 @@ const SwapWidget = () => {
 
   return (
     <div className={`relative w-full flex flex-col bg-coarsewool rounded-[16px] pt-2 sm:pt-4`}>
-    <div className="relative -mt-4 pb-4">
+    <div className="relative md:-mt-4 pb-4">
       <button onClick={refreshWidget} className="absolute top-[-50px] left-4 bg-[#013746] sm:bg-[#252B32] transition-all duration-300 ease-linear hover:bg-lightgrey text-white font-bold py-2 px-4 rounded-[18px]" title="Refresh">
         ↻
       </button>
       <span className="absolute top-[-50px] left-[calc(4rem+1rem)] bg-markergreen text-lightgrey opacity-70 text-sm font-medium px-4 py-1 rounded-full">
-        Jupiter Swap - Live on Mainnet
+        Jupiter Swap - Live
       </span>
     </div>
     

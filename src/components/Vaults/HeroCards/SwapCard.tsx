@@ -1,4 +1,3 @@
-import Footer from "@/components/Shared/Footer";
 import SwapWidget from "@/components/Swap/SwapWidget";
 import Image from "next/image";
 
