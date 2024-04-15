@@ -45,7 +45,7 @@ const CoinMarketDetails = ({ params }: { params: { arcVault: string } }) => {
                   />
                 </span>
                 <span className="flex-grow">
-                  {params.arcVault === "arcanum" ? "PYTH " : "BTC"}
+                  {params.arcVault === "arcanum" ? "PYTH" : "BTC"}
                 </span>
                 <span>
                   <RedirectIcon />

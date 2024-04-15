@@ -11,13 +11,13 @@ const VaultDetailsBanner = ({ params }: {
   return (
     <div className="w-full ">
       <Image
-        className={`w-[1000px] h-[500px] absolute top-0 -left-[25%] blend-exclusion ${params.arcVault === "pyth-usdc" ? "" : "!w-full h-full -left-[35%] !-top-1/2"}`}
+        className={`w-[1000px] h-[500px] absolute top-0 -left-[25%] blend-exclusion ${params.arcVault === "arcanum" ? "" : "!w-full h-full -left-[35%] !-top-1/2"}`}
         width={104}
         height={64}
-        src={params.arcVault === "pyth-usdc" ? "/img/png/hero-vector.png" : "/img/svg/btc-bg.svg"}
+        src={params.arcVault === "arcanum" ? "/img/png/hero-vector.png" : "/img/svg/btc-bg.svg"}
         alt="icon"
       />
-      <div className={`w-[1000px] h-[1000px]  ${params.arcVault === "pyth-usdc" ? "bg-gradient-radial-permissionless" : "bg-gradient-radial-permissionless-yellow"} absolute -top-[30%] -left-[20%] z-0`}></div>
+      <div className={`w-[1000px] h-[1000px]  ${params.arcVault === "arcanum" ? "bg-gradient-radial-permissionless" : "bg-gradient-radial-permissionless-yellow"} absolute -top-[30%] -left-[20%] z-0`}></div>
       <Link href="/" passHref>
       <div className="text-[#a1adc1] bg-[#161A22] text-center font-medium py-1 text-sm sm:hidden relative z-10 my-5 block cursor-pointer">
           ← Go back to vaults overview
@@ -26,10 +26,10 @@ const VaultDetailsBanner = ({ params }: {
       <div className="container relative z-10 xl:max-w-[1140px] w-full px-4 mx-auto sm:pt-9 pb-10 text-white">
         <div className=" flex justify-between items-center">
           <div>
-            <h1 className=" font-poppins font-semibold text-3xl sm:text-5xl text-[#ffd166] sm:pb-4">{params.arcVault === "pyth-usdc" ? "" : "Augury"}</h1>
+            <h1 className=" font-poppins font-semibold text-3xl sm:text-5xl text-[#ffd166] sm:pb-4">{params.arcVault === "arcanum" ? "" : "Augury"}</h1>
             <p className="max-sm:hidden text-foxflowerviola font-medium flex items-center cursor-pointer w-fit text-sm">
               Vaults <NextIcon /> Permissionless <NextIcon />{" "}
-              <span className=" font-bold"> {params.arcVault === "pyth-usdc" ? "PYTH/USDC" : "Augury"}</span>
+              <span className=" font-bold"> {params.arcVault === "arcanum" ? "PYTH/USDC" : "Augury"}</span>
             </p>
             <div className=" flex max-sm:flex-col sm:items-center gap-4 pt-6">
               <div className="flex  items-center gap-4">
@@ -37,11 +37,11 @@ const VaultDetailsBanner = ({ params }: {
                   className="max-sm:w-[65px] max-sm:h-10 "
                   width={104}
                   height={64}
-                  src={params.arcVault === "pyth-usdc" ? "/img/svg/pyth.svg" : "/img/svg/btc-bonk.svg"}
+                  src={params.arcVault === "arcanum" ? "/img/svg/pyth.svg" : "/img/svg/btc-bonk.svg"}
                   alt="icon"
                 />
                 <h2 className=" text-[28px] sm:text-[34px] font-semibold font-poppins">
-                  {params.arcVault === "pyth-usdc" ? "PYTH / USDC " : "JUP / USDC "}
+                  {params.arcVault === "arcanum" ? "PYTH / USDC " : "JUP / USDC "}
                 </h2>
               </div>
               <div className=" flex  ">

@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Footer from "@/components/Shared/Footer";
 import Navbar from "@/components/Shared/Navbar";
-import VaultDetailsBanner from "@/components/Permissionless/VaultDetailsBanner";
-import VaultPermissionless from "@/components/Permissionless/VaultPermissionless";
+import VaultDetailsBanner from "@/components/Vaults/Permissionless/VaultDetailsBanner";
+import VaultPermissionless from "@/components/Vaults/Permissionless/VaultPermissionless";
 import Technicals from "@/components/Vaults/Technicals";
 import TopVaults from "@/components/Vaults/TopVaults";
 
