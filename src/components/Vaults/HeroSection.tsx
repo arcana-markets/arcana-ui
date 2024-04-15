@@ -43,10 +43,8 @@ const HeroSection = () => {
   return (
     <div className="container px-4 mx-auto pt-4 sm:pt-9 pb-10 z-[1] relative">
       <div className="relative flex justify-center text-center font-poppins bg-clip-text text-transparent bg-hero-text font-semibold text-[32px] sm:text-3xl md:text-[40px] mx-auto">
-        {/* Title, centered by flex container */}
         <div>Arcana Vaults</div>
 
-        {/* Badge with responsive visibility and adjusted position */}
         <span className="hidden sm:inline-flex bg-red text-white opacity-70 text-sm font-medium px-4 py-1 rounded-full absolute" style={{ transform: 'translateX(calc(100% + 8px))', top: '10%', left: '48%' }}>
           UI Playground 🛝 Not live
         </span>
