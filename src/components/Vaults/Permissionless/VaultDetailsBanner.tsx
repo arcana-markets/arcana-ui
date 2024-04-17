@@ -31,7 +31,7 @@ const vaultTypes = {
   augury: {
     title: "Augury",
     subtitle: "JUP / USDC",
-    bgImage: "/img/svg/augury-bg.svg",
+    bgImage: "/img/png/hero-vector.png",
     iconImage: ["/img/png/juplogo.png", "/img/svg/usdc.svg"],
     bgClass: "bg-gradient-radial-permissionless-yellow",
     titleColor: "#ffd166", // Example color
@@ -39,19 +39,18 @@ const vaultTypes = {
   aether: {
     title: "Aether",
     subtitle: "JTO / USDC",
-    bgImage: "/img/svg/aether-bg.svg",
+    bgImage: "/img/png/hero-vector.png",
     iconImage: ["/tokens/jto.png", "/img/svg/usdc.svg"],
-    bgClass: "bg-gradient-radial-permissionless-blue", // Assuming a blue gradient
-    titleColor: "#ffd166", // Example color
-    titleClass: "bg-clip-text text-transparent bg-aether", // Specific class for red title color
+    bgClass: "bg-gradient-radial-permissionless-",
+    titleClass: "bg-clip-text text-transparent bg-aether",
   },
   permissionless: {
-    title: "Permissionless Vault",
-    subtitle: "Generic / USDC",
+    title: "Permissionless",
+    subtitle: "GEN / USDC",
     bgImage: "/img/svg/permissionless-bg.svg",
-    iconImage: "/img/svg/permissionless-icon.svg",
-    bgClass: "bg-gradient-radial-permissionless-generic", // Assuming a generic gradient
-    titleColor: "#ffd166", // Example color
+    iconImage: ["/tokens/jto.png", "/img/svg/usdc.svg"],
+    bgClass: "bg-gradient-radial-permissionless",
+    titleColor: "#ffd166",
   },
 };
 
@@ -89,23 +88,22 @@ const VaultDetailsBanner = ({ params }) => {
     <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-6">
       {/* Token images and subtitle */}
       <div className="flex items-center">
-        <div className="flex -space-x-2"> {/* Adjust the space between tokens */}
+        <div className="flex -space-x-2">
           {vault.iconImage.map((imagePath, index) => (
             <Image
               key={index}
               className="w-10 h-10"
-              width={40} // Ensure this matches your className or desired size
-              height={40} // Ensure this matches your className or desired size
+              width={40}
+              height={40}
               src={imagePath}
               alt={`${vault.title} Token ${index + 1}`}
             />
           ))}
         </div>
-        <h2 className="text-[28px] sm:text-[34px] font-semibold font-poppins pl-2"> {/* Add padding to separate subtitle from tokens */}
+        <h2 className="text-[28px] sm:text-[34px] font-semibold font-poppins pl-2">
           {vault.subtitle}
         </h2>
       </div>
-      {/* Additional info */}
       <div className="flex">
         <div className="py-2 px-3 ml-2 bg-daintree rounded-xl text-sm flex items-center gap-[10.5px]">
           <InfoIcon />

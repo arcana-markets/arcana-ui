@@ -1,6 +1,6 @@
 import styles from "./index.module.css";
 import { useEffect, useRef } from "react";
-import { ChartingLibraryWidgetOptions, LanguageCode, ResolutionString, widget } from "../../../public/charting_library";
+import { ChartingLibraryWidgetOptions, LanguageCode, ResolutionString, widget } from "../../../public/charting_library/charting_library";
 import arcanaStore from "@/stores/arcanaStore";
 import { FullMarketData } from "@/utils/types";
 

@@ -16,7 +16,7 @@ const VaultPermissionless = ({
       ></div>
       <div className="bg-[#11171D] relative z-10 ">
         <section className="container xl:max-w-[1140px] px-4 mx-auto sm:pt-9 z-[1] text-white">
-          <div className="flex flex-row  max-lg:flex-col justify-between my-[-12px] max-sm:gap-4 gap-6 sm:-mt-32">
+          <div className="flex flex-row max-lg:flex-col justify-between my-[-12px] max-sm:gap-4 gap-6 sm:-mt-32">
             <DepositToVault params={params} />
             <CoinMarketDetails params={params} />
           </div>

@@ -22,7 +22,7 @@ const defaultWidgetProps: Partial<ChartingLibraryWidgetOptions> = {
 
 const TVChartContainer = dynamic(
   () =>
-    import("../tradingViewCharts").then((mod) => mod.TVChartContainer),
+    import("../TradingViewCharts").then((mod) => mod.TVChartContainer),
   { ssr: false }
 );
 
