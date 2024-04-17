@@ -44,6 +44,8 @@ const MarketSelectModal = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [markets, setMarkets] = useState<TokenData[]>([]);
   const [filteredMarkets, setFilteredMarkets] = useState<TokenData[]>([]);
+  const [selected, setSelected] = useState(null);
+
   const {
     updateMarketId,
     initializeMarketIdFromURL,
@@ -52,7 +54,13 @@ const MarketSelectModal = () => {
     setTradeHistory,
     setOrderBook,
   } = arcanaStore((state) => state);
-  const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    // Attempt to initialize marketId from URL immediately after component mounts
+    initializeMarketIdFromURL();
+    // This effect should ideally run once unless the specific method it depends on changes.
+    // This ensures that the marketId is read from the URL as early as possible.
+  }, [initializeMarketIdFromURL]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -148,19 +156,25 @@ const MarketSelectModal = () => {
 
   useEffect(() => {
     const populateMarketDetails = async () => {
-      const result = await fetchMarketData(marketId);
-      const tradeHistory = await fetchTradeHistory(marketId);
-      let orderBook = await fetchOrderBook(marketId);
-
-      orderBook?.market?.bidOrders.sort((a: any, b: any) => b.price - a.price);
-      orderBook?.market?.askOrders.sort((a: any, b: any) => a.price - b.price);
-
-      setOrderBook(orderBook);
-      setTradeHistory(tradeHistory?.trades || []);
-      setMarketData(result);
+      if (!marketId) return; // Ensure marketId is available
+      try {
+        const result = await fetchMarketData(marketId);
+        const tradeHistory = await fetchTradeHistory(marketId);
+        let orderBook = await fetchOrderBook(marketId);
+  
+        orderBook?.market?.bidOrders.sort((a: { price: number; }, b: { price: number; }) => b.price - a.price);
+        orderBook?.market?.askOrders.sort((a: { price: number; }, b: { price: number; }) => a.price - b.price);
+  
+        setOrderBook(orderBook);
+        setTradeHistory(tradeHistory?.trades || []);
+        setMarketData(result);
+      } catch (error) {
+        console.error('Error fetching market details:', error);
+        // Consider setting an error state here to inform the user
+      }
     };
     populateMarketDetails();
-  }, [marketId, setMarketData, setOrderBook, setTradeHistory]);
+  }, [marketId, setMarketData, setOrderBook, setTradeHistory]);  
 
     const renderMarketOption = (marketData: any, context: 'button' | 'modal') => {
       const baseTokenData = findTokenDataByAddress(marketData?.market.baseMint, tokenMintsData);

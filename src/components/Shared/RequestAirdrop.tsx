@@ -3,7 +3,7 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { LAMPORTS_PER_SOL, TransactionSignature } from '@solana/web3.js';
 import { notify } from "@/utils/notifications";
 import useUserSOLBalanceStore from '@/stores/useUserSOLBalanceStore';
-import Loading from '../marketData/Loading';
+import Loading from '../MarketData/Loading';
 import { SignMessage } from './SignMessage';
 import useLocalStorageState from '@/hooks/useLocalStorageState';
 
