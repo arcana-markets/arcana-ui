@@ -1,68 +1,120 @@
-'use client'
+'use client';
 import { InfoIcon, NextIcon } from "@/components/Shared/Icons";
 import Image from "next/image";
 import React from "react";
 import Link from 'next/link';
 
-const VaultDetailsBanner = ({ params }: {
-  params: { arcVault: string }
-}) => {
+interface VaultDetailsProps {
+  params: { arcVault: keyof typeof vaultTypes };
+}
+
+interface VaultType {
+  title: string;
+  subtitle: string;
+  bgImage: string;
+  iconImage: string;
+  bgClass: string;
+  titleColor?: string;  // Make titleColor optional since aether uses titleClass instead
+  titleClass?: string;  // Only used by aether for now
+}
+
+// Define a mapping for each vault type to its specific properties
+const vaultTypes = {
+  arcanum: {
+    title: "Arcanum",
+    subtitle: "PYTH / USDC",
+    bgImage: "/img/png/hero-vector.png",
+    iconImage: "/img/svg/pyth.svg",
+    bgClass: "bg-gradient-radial-permissionless",
+    titleColor: "#a1adc1", // Example color
+  },
+  augury: {
+    title: "Augury",
+    subtitle: "JUP / USDC",
+    bgImage: "/img/svg/augury-bg.svg",
+    iconImage: "/img/svg/augury-icon.svg",
+    bgClass: "bg-gradient-radial-permissionless-yellow",
+    titleColor: "#ffd166", // Example color
+  },
+  aether: {
+    title: "Aether",
+    subtitle: "JTO / USDC",
+    bgImage: "/img/svg/aether-bg.svg",
+    iconImage: "/img/svg/aether-icon.svg",
+    bgClass: "bg-gradient-radial-permissionless-blue", // Assuming a blue gradient
+    titleClass: "bg-clip-text text-transparent bg-aether", // Specific class for red title color
+  },
+  permissionless: {
+    title: "Permissionless Vault",
+    subtitle: "Generic / USDC",
+    bgImage: "/img/svg/permissionless-bg.svg",
+    iconImage: "/img/svg/permissionless-icon.svg",
+    bgClass: "bg-gradient-radial-permissionless-generic", // Assuming a generic gradient
+    titleColor: "#ffd166", // Example color
+  },
+};
+
+const VaultDetailsBanner = ({ params }) => {
+  const { arcVault } = params;
+  const vault = vaultTypes[arcVault] || vaultTypes.permissionless; // Fallback to permissionless details
 
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <Image
-        className={`w-[1000px] h-[500px] absolute top-0 -left-[25%] blend-exclusion ${params.arcVault === "arcanum" ? "" : "!w-full h-full -left-[35%] !-top-1/2"}`}
+        className={`w-[1000px] h-[500px] absolute top-0 -left-[25%] blend-exclusion ${vault.bgClass}`}
         width={104}
         height={64}
-        src={params.arcVault === "arcanum" ? "/img/png/hero-vector.png" : "/img/svg/btc-bg.svg"}
-        alt="icon"
+        src={vault.bgImage}
+        alt={vault.title}
       />
-      <div className={`w-[1000px] h-[1000px]  ${params.arcVault === "arcanum" ? "bg-gradient-radial-permissionless" : "bg-gradient-radial-permissionless-yellow"} absolute -top-[30%] -left-[20%] z-0`}></div>
       <Link href="/" passHref>
-      <div className="text-[#a1adc1] bg-[#161A22] text-center font-medium py-1 text-sm sm:hidden relative z-10 my-5 block cursor-pointer">
-          ← Go back to vaults overview
-      </div>
-      </Link>      
+        <div className="text-[#a1adc1] bg-[#161A22] text-center font-medium py-1 text-sm sm:hidden relative z-10 my-5 block cursor-pointer">
+            ← Go back to vaults overview
+        </div>
+      </Link>
       <div className="container relative z-10 xl:max-w-[1140px] w-full px-4 mx-auto sm:pt-9 pb-10 text-white">
-        <div className=" flex justify-between items-center">
+        <div className="flex justify-between items-center">
           <div>
-            <h1 className=" font-poppins font-semibold text-3xl sm:text-5xl text-[#ffd166] sm:pb-4">{params.arcVault === "arcanum" ? "" : "Augury"}</h1>
+          <h1 className={`font-poppins font-semibold text-3xl sm:text-5xl sm:pb-4 ${vault.titleClass || ''}`} 
+              style={{ color: vault.titleColor }}>
+            {vault.title}
+          </h1>
             <p className="max-sm:hidden text-foxflowerviola font-medium flex items-center cursor-pointer w-fit text-sm">
-              Vaults <NextIcon /> Permissionless <NextIcon />{" "}
-              <span className=" font-bold"> {params.arcVault === "arcanum" ? "PYTH/USDC" : "Augury"}</span>
+              Vaults <NextIcon /> {vault.title} <NextIcon /> 
+              <span className="font-bold">{vault.subtitle}</span>
             </p>
-            <div className=" flex max-sm:flex-col sm:items-center gap-4 pt-6">
-              <div className="flex  items-center gap-4">
+            <div className="flex max-sm:flex-col sm:items-center gap-4 pt-6">
+              <div className="flex items-center gap-4">
                 <Image
-                  className="max-sm:w-[65px] max-sm:h-10 "
+                  className="max-sm:w-[65px] max-sm:h-10"
                   width={104}
                   height={64}
-                  src={params.arcVault === "arcanum" ? "/img/svg/pyth.svg" : "/img/svg/btc-bonk.svg"}
-                  alt="icon"
+                  src={vault.iconImage}
+                  alt={vault.title}
                 />
-                <h2 className=" text-[28px] sm:text-[34px] font-semibold font-poppins">
-                  {params.arcVault === "arcanum" ? "PYTH / USDC " : "JUP / USDC "}
+                <h2 className="text-[28px] sm:text-[34px] font-semibold font-poppins">
+                  {vault.subtitle}
                 </h2>
               </div>
-              <div className=" flex  ">
-                <div className=" py-2 px-3 ml-2 bg-daintree rounded-xl text-sm flex items-center gap-[10.5px]">
+              <div className="flex">
+                <div className="py-2 px-3 ml-2 bg-daintree rounded-xl text-sm flex items-center gap-[10.5px]">
                   <InfoIcon />
-                  <p>Permissionless Vault</p>
+                  <p>{vault.title}</p>
                 </div>
                 <div className="sm:hidden py-2 px-3 ml-2 bg-daintree rounded-xl text-sm flex items-center gap-[10.5px]">
                   APY
-                  <p className=" text-markergreen font-bold">0%</p>
+                  <p className="text-markergreen font-bold">0%</p>
                 </div>
               </div>
             </div>
           </div>
-          <div className=" max-sm:hidden">
+          <div className="max-sm:hidden">
             <Image
-              className=" "
+              className=""
               width={384}
               height={105}
               src="/img/svg/apy.svg"
-              alt="icon"
+              alt="APY chart"
             />
           </div>
         </div>
