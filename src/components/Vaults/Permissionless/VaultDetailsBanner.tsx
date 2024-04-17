@@ -24,7 +24,7 @@ const vaultTypes = {
     title: "Arcanum",
     subtitle: "PYTH / USDC",
     bgImage: "/img/png/hero-vector.png",
-    iconImage: "/img/svg/pyth.svg",
+    iconImage: ["/tokens/pyth.png", "/img/svg/usdc.svg"],
     bgClass: "bg-gradient-radial-permissionless",
     titleColor: "#a1adc1", // Example color
   },
@@ -32,7 +32,7 @@ const vaultTypes = {
     title: "Augury",
     subtitle: "JUP / USDC",
     bgImage: "/img/svg/augury-bg.svg",
-    iconImage: "/img/svg/augury-icon.svg",
+    iconImage: ["/img/png/juplogo.png", "/img/svg/usdc.svg"],
     bgClass: "bg-gradient-radial-permissionless-yellow",
     titleColor: "#ffd166", // Example color
   },
@@ -40,8 +40,9 @@ const vaultTypes = {
     title: "Aether",
     subtitle: "JTO / USDC",
     bgImage: "/img/svg/aether-bg.svg",
-    iconImage: "/img/svg/aether-icon.svg",
+    iconImage: ["/tokens/jto.png", "/img/svg/usdc.svg"],
     bgClass: "bg-gradient-radial-permissionless-blue", // Assuming a blue gradient
+    titleColor: "#ffd166", // Example color
     titleClass: "bg-clip-text text-transparent bg-aether", // Specific class for red title color
   },
   permissionless: {
@@ -83,41 +84,50 @@ const VaultDetailsBanner = ({ params }) => {
               Vaults <NextIcon /> {vault.title} <NextIcon /> 
               <span className="font-bold">{vault.subtitle}</span>
             </p>
-            <div className="flex max-sm:flex-col sm:items-center gap-4 pt-6">
-              <div className="flex items-center gap-4">
-                <Image
-                  className="max-sm:w-[65px] max-sm:h-10"
-                  width={104}
-                  height={64}
-                  src={vault.iconImage}
-                  alt={vault.title}
-                />
-                <h2 className="text-[28px] sm:text-[34px] font-semibold font-poppins">
-                  {vault.subtitle}
-                </h2>
-              </div>
-              <div className="flex">
-                <div className="py-2 px-3 ml-2 bg-daintree rounded-xl text-sm flex items-center gap-[10.5px]">
-                  <InfoIcon />
-                  <p>{vault.title}</p>
-                </div>
-                <div className="sm:hidden py-2 px-3 ml-2 bg-daintree rounded-xl text-sm flex items-center gap-[10.5px]">
-                  APY
-                  <p className="text-markergreen font-bold">0%</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="max-sm:hidden">
+
+    {/* Wrap the tokens, subtitle, and additional info in a div */}
+    <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-6">
+      {/* Token images and subtitle */}
+      <div className="flex items-center">
+        <div className="flex -space-x-2"> {/* Adjust the space between tokens */}
+          {vault.iconImage.map((imagePath, index) => (
             <Image
-              className=""
-              width={384}
-              height={105}
-              src="/img/svg/apy.svg"
-              alt="APY chart"
+              key={index}
+              className="w-10 h-10"
+              width={40} // Ensure this matches your className or desired size
+              height={40} // Ensure this matches your className or desired size
+              src={imagePath}
+              alt={`${vault.title} Token ${index + 1}`}
             />
-          </div>
+          ))}
         </div>
+        <h2 className="text-[28px] sm:text-[34px] font-semibold font-poppins pl-2"> {/* Add padding to separate subtitle from tokens */}
+          {vault.subtitle}
+        </h2>
+      </div>
+      {/* Additional info */}
+      <div className="flex">
+        <div className="py-2 px-3 ml-2 bg-daintree rounded-xl text-sm flex items-center gap-[10.5px]">
+          <InfoIcon />
+          <p>{vault.title}</p>
+        </div>
+        <div className="sm:hidden py-2 px-3 ml-2 bg-daintree rounded-xl text-sm flex items-center gap-[10.5px]">
+          APY
+          <p className="text-markergreen font-bold">0%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div className="max-sm:hidden">
+    <Image
+      className=""
+      width={384}
+      height={105}
+      src="/img/svg/apy.svg"
+      alt="APY chart"
+    />
+  </div>
+</div>
       </div>
     </div>
   );
