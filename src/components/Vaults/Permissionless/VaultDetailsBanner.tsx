@@ -23,7 +23,7 @@ const vaultTypes = {
   arcanum: {
     title: "Arcanum",
     subtitle: "PYTH / USDC",
-    bgImage: "/img/png/hero-vector.png",
+    bgImage: "/img/svg/augory-vector.svg",
     iconImage: ["/tokens/pyth.png", "/img/svg/usdc.svg"],
     bgClass: "bg-gradient-radial-permissionless",
     titleColor: "#a1adc1", // Example color
@@ -31,7 +31,7 @@ const vaultTypes = {
   augury: {
     title: "Augury",
     subtitle: "JUP / USDC",
-    bgImage: "/img/png/hero-vector.png",
+    bgImage: "/img/svg/augory-vector.svg",
     iconImage: ["/img/png/juplogo.png", "/img/svg/usdc.svg"],
     bgClass: "bg-gradient-radial-permissionless-yellow",
     titleColor: "#ffd166", // Example color
@@ -39,9 +39,9 @@ const vaultTypes = {
   aether: {
     title: "Aether",
     subtitle: "JTO / USDC",
-    bgImage: "/img/png/hero-vector.png",
+    bgImage: "/img/svg/augory-vector.svg",
     iconImage: ["/tokens/jto.png", "/img/svg/usdc.svg"],
-    bgClass: "bg-gradient-radial-permissionless-",
+    bgClass: "bg-gradient-radial-red",
     titleClass: "bg-clip-text text-transparent bg-aether",
   },
   permissionless: {
@@ -84,8 +84,8 @@ const VaultDetailsBanner = ({ params }) => {
               <span className="font-bold">{vault.subtitle}</span>
             </p>
 
-    {/* Wrap the tokens, subtitle, and additional info in a div */}
-    <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-6">
+            <div className="flex max-sm:flex-col sm:items-center gap-4 pt-6">
+              <div className="flex items-center gap-4">
       {/* Token images and subtitle */}
       <div className="flex items-center">
         <div className="flex -space-x-2">
@@ -99,6 +99,7 @@ const VaultDetailsBanner = ({ params }) => {
               alt={`${vault.title} Token ${index + 1}`}
             />
           ))}
+          </div>
         </div>
         <h2 className="text-[28px] sm:text-[34px] font-semibold font-poppins pl-2">
           {vault.subtitle}
