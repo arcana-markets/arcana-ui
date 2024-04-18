@@ -47,10 +47,10 @@ const vaultTypes = {
   permissionless: {
     title: "Permissionless",
     subtitle: "GEN / USDC",
-    bgImage: "/img/svg/permissionless-bg.svg",
+    bgImage: "/img/svg/augory-vector.svg",
     iconImage: ["/tokens/jto.png", "/img/svg/usdc.svg"],
     bgClass: "bg-gradient-radial-permissionless",
-    titleColor: "#ffd166",
+    titleColor: "#FFFFFF",
   },
 };
 
