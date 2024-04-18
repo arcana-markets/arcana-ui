@@ -47,7 +47,7 @@ export const TVChartContainer = (props: Partial<ChartingLibraryWidgetOptions>) =
 				"study_templates",
 
 			],
-			charts_storage_url: props.charts_storage_url,
+			charts_storage_url: "https://saveload.tradingview.com",
 			charts_storage_api_version: props.charts_storage_api_version,
 			client_id: props.client_id,
 			user_id: props.user_id,

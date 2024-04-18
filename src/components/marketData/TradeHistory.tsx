@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as Icons from "@/app/data/svg/Icons";
 import { abbreviateAddressSmaller, abbreviateAddressSmallest } from "@/utils/formatting";
 import { OpenBookTradeEvent } from "@/utils/types";
 import arcanaStore from "@/stores/arcanaStore";
 import Tooltip from "@/components/Shared/Tooltip";
-import { useInterval } from "@/hooks/useInterval";
 
 const formatDateFull = (timestamp: number): string => {
   return dayjs.unix(timestamp / 1000).format("YYYY-MM-DD dddd");
@@ -39,6 +38,15 @@ const TradeHistory = () => {
     }
   };
 
+    // Fetch trade history initially and on marketId changes
+    useEffect(() => {
+      if (marketId) { // Ensure marketId is available before fetching
+        fetchTradeHistory();
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [marketId]);
+  
+
 const fetchTradeHistory = async () => {
   try {
     const response = await fetch(`https://prod.arcana.markets/api/openbookv2/markets/${marketId}/trades`);
@@ -51,10 +59,19 @@ const fetchTradeHistory = async () => {
   }
 };
 
-  useInterval(() => {
-    fetchTradeHistory();
-    console.log("Fetched new trade history data:");
-  }, 3000);
+  // Set up an interval to periodically fetch trade history, but only if marketId is available
+  useEffect(() => {
+    if (marketId) {
+      const intervalId = setInterval(() => {
+        fetchTradeHistory();
+        console.log("Fetched new trade history data:");
+      }, 3000);
+
+      // Cleanup function to clear the interval when the component unmounts or marketId changes
+      return () => clearInterval(intervalId);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [marketId]); // Dependency array includes marketId to react to its changes
   
   const renderTradeRow = (item: OpenBookTradeEvent | null, index: number) => {
     const rowBackground = index % 2 === 0

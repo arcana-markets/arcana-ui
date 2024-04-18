@@ -154,7 +154,9 @@ const MarketList = () => {
             {marketData ? (
               <>
                 <div className="flex justify-start items-center gap-1">
-                <Image src={baseTokenData.logo!} alt={baseTokenData.name} width={20} height={20} className='object-fill z-0' />
+                {baseTokenData.logo && (
+                <Image src={baseTokenData.logo} alt={baseTokenData.name} width={20} height={20} className="object-fill z-0" />
+                )}
                 <span className='text-[13px]'>{baseTokenData.ticker}</span>
                 </div>
                 <div className="flex justify-start items-center ml-5 dark:opacity-80 opacity-80">
