@@ -62,7 +62,7 @@ const CoinMarketDetails = ({ params }: { params: { arcVault: string } }) => {
             </div>
             <div className="under_line w-full h-[1px] bg-[linear-gradient(90deg,#1E232E_0%,#3C465D_50%,#1E232E_100%)] mt-[24px]"></div>
             {tokens.map((token, index) => (
-              <div key={index} className="pt-[24px] flex justify-between items-center">
+              <div key={token.symbol} className="pt-[24px] flex justify-between items-center">
                 <button className="w-[107px] p-[6px_8px] flex items-center bg-[#323B4D] rounded-[8px] text-white gap-[6px] font-Inter font-medium text-[14px] leading-[24px]">
                   <span>
                     <Image src={token.imagePath} alt={token.symbol} width={24} height={24} />
@@ -79,6 +79,7 @@ const CoinMarketDetails = ({ params }: { params: { arcVault: string } }) => {
                 </p>
               </div>
             ))}
+            <div className=" pt-[16px] flex justify-between items-center">
             </div>
             <div className=" flex items-center justify-between w-full gap-[6px] pt-[20px]">
               <div className=" w-[63%] flex flex-col">
@@ -131,6 +132,7 @@ const CoinMarketDetails = ({ params }: { params: { arcVault: string } }) => {
               </span>
             </button>
           </div>
+        </div>
         </div>
     </>
   );
