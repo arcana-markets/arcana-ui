@@ -18,8 +18,6 @@ import '@/app/data/css/styles.css';
 
 const Page = () => {
   const [refreshKey, setRefreshKey] = useState(0);
-
-  // Function to increment the refreshKey, triggering refresh
   const refreshData = () => setRefreshKey(prevKey => prevKey + 1);
 
   return (

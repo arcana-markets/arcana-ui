@@ -112,20 +112,6 @@ export interface RefreshQuotesOnOpenbookV2Accounts {
   systemProgram: PublicKey
 }
 
-// Error Types
-export type ArcanaVaultError =
-  | "PhoenixHeaderError"
-  | "InvalidPhoenixProgram"
-  | "PhoenixMarketError"
-  | "PhoenixVaultSeatRetired"
-  | "VaultFundsNotEmpty"
-  | "DepositWithdrawDuringUptime"
-  | "AmountCannotBeZero"
-  | "RefreshQuotesDuringDowntime"
-  | "DepositRatioCheckFail"
-  | "InvalidVaultOwner";
-
-
 export interface MarketData {
   marketId: string;
   baseMint: string;
@@ -278,33 +264,13 @@ export type OpenbookOrderBook =
       spreadString: string;
     }
   | undefined;
-export type OrderBook =
-  | {
-      passBidsProcessed: OrderBookSide | null;
-      passAsksProcessed: OrderBookSide | null;
-      failBidsProcessed: OrderBookSide | null;
-      failAsksProcessed: OrderBookSide | null;
-      passBidsArray: any[][];
-      passAsksArray: any[][];
-      failBidsArray: any[][];
-      failAsksArray: any[][];
-      passToB: {
-        topAsk: number;
-        topBid: number;
-      };
-      failToB: {
-        topAsk: number;
-        topBid: number;
-      };
-      passSpreadString: string;
-      failSpreadString: string;
-    }
-  | undefined;
+
 export type OpenbookMarket = {
   market: MarketAccount;
   asks: LeafNode[];
   bids: LeafNode[];
 };
+
 export type Markets = {
   pass: MarketAccount;
   passAsks: LeafNode[];
@@ -369,3 +335,4 @@ export type InstructionSet = {
     name: string;
     actions: InstructionAction[];
   };
+  

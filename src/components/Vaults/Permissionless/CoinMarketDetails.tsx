@@ -2,7 +2,47 @@ import { CoinFire, EyeIcon, OpenBook, RedirectIcon, WhaleIcon } from "@/common/I
 import Image from "next/image";
 import React from "react";
 
-const CoinMarketDetails = ({ params }: { params: { arcVault: string } }) => {
+// Assuming the structure of your tokens does not change, define an interface for it
+interface Token {
+  symbol: string;
+  imagePath: string;
+}
+
+// Define a more specific type for arcVault keys
+type VaultKey = keyof typeof tokenConfigs;
+
+// Token configuration mapping for each vault type
+const tokenConfigs = {
+  arcanum: {
+    tokens: [
+      { symbol: "PYTH", imagePath: "/img/png/pyth.png" },
+      { symbol: "USDC", imagePath: "/img/png/usdc.png" }
+    ],
+  },
+  augury: {
+    tokens: [
+      { symbol: "JUP", imagePath: "/img/png/juplogo.png" },
+      { symbol: "USDC", imagePath: "/img/png/usdc.png" }
+    ],
+  },
+  aether: {
+    tokens: [
+      { symbol: "JTO", imagePath: "/tokens/jto.png" },
+      { symbol: "USDC", imagePath: "/img/png/usdc.png" }
+    ],
+  },
+  permissionless: {
+    tokens: [
+      // Assuming 'permissionless' has generic tokens, adjust as necessary
+      { symbol: "GEN", imagePath: "/img/svg/generic.svg" },
+      { symbol: "USDC", imagePath: "/img/png/usdc.png" }
+    ],
+  }
+};
+
+const CoinMarketDetails = ({ params }: { params: { arcVault: VaultKey } }) => {
+  const { tokens } = tokenConfigs[params.arcVault] || tokenConfigs.permissionless;
+
   return (
     <>
       <div className="w-1/2 max-lg:w-full">
@@ -30,55 +70,25 @@ const CoinMarketDetails = ({ params }: { params: { arcVault: string } }) => {
               </h2>
             </div>
             <div className="under_line w-full h-[1px] bg-[linear-gradient(90deg,#1E232E_0%,#3C465D_50%,#1E232E_100%)] mt-[24px]"></div>
-            <div className=" pt-[24px] flex justify-between items-center">
-              <button className=" w-[107px] p-[6px_8px] flex items-center bg-[#323B4D] rounded-[8px] text-white gap-[6px] font-Inter font-medium text-[14px] leading-[24px]">
-                <span>
-                  <Image
-                    src={
-                      params.arcVault === "arcanum"
-                        ? "/img/png/pyth.png"
-                        : "/img/svg/btc.svg"
-                    }
-                    alt="pyth"
-                    width={24}
-                    height={24}
-                  />
-                </span>
-                <span className="flex-grow">
-                  {params.arcVault === "arcanum" ? "PYTH " : "BTC"}
-                </span>
-                <span>
-                  <RedirectIcon />
-                </span>
-              </button>
-              <p className=" font-Inter font-medium text-[16px] leading-[28px] text-white">
-                0
-              </p>
-            </div>
+            {tokens.map((token, index) => (
+              <div key={token.symbol} className="pt-[24px] flex justify-between items-center">
+                <button className="w-[107px] p-[6px_8px] flex items-center bg-[#323B4D] rounded-[8px] text-white gap-[6px] font-Inter font-medium text-[14px] leading-[24px]">
+                  <span>
+                    <Image src={token.imagePath} alt={token.symbol} width={24} height={24} />
+                  </span>
+                  <span className="flex-grow">
+                    {token.symbol}
+                  </span>
+                  <span>
+                    <RedirectIcon />
+                  </span>
+                </button>
+                <p className="font-Inter font-medium text-[16px] leading-[28px] text-white">
+                  0
+                </p>
+              </div>
+            ))}
             <div className=" pt-[16px] flex justify-between items-center">
-              <button className=" w-[107px] p-[6px_8px] flex items-center bg-[#323B4D] rounded-[8px] text-white gap-[6px] font-Inter font-medium text-[14px] leading-[24px]">
-                <span>
-                  <Image
-                    src={
-                      params.arcVault === "arcanum"
-                        ? "/img/png/usdc.png"
-                        : "/img/svg/bonk.svg"
-                    }
-                    alt="pyth"
-                    width={24}
-                    height={24}
-                  />
-                </span>
-                <span>
-                  {params.arcVault === "arcanum" ? "USDC " : "BONK"}
-                </span>
-                <span>
-                  <RedirectIcon />
-                </span>
-              </button>
-              <p className=" font-Inter font-medium text-[16px] leading-[28px] text-white">
-                0
-              </p>
             </div>
             <div className=" flex items-center justify-between w-full gap-[6px] pt-[20px]">
               <div className=" w-[63%] flex flex-col">
@@ -132,7 +142,7 @@ const CoinMarketDetails = ({ params }: { params: { arcVault: string } }) => {
             </button>
           </div>
         </div>
-      </div>
+        </div>
     </>
   );
 };

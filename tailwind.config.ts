@@ -19,6 +19,7 @@ const config: Config = {
           "radial-gradient(50% 50% at 50% 50%, rgba(80, 153, 204, 0.3) 0%, rgba(121, 180, 217, 0) 100%)",
         "gradient-radial-permissionless-yellow":
           "radial-gradient(50% 50% at 50% 50%, rgba(255, 209, 102, 0.3) 0%, rgba(121, 180, 217, 0) 100%)",
+        "gradient-radial-red": "radial-gradient(50% 50% at 50% 50%, rgba(239, 71, 111, 0.3) 0%, rgba(0, 0, 0, 0) 100%)",
         "hero-text":
           "linear-gradient(111.79deg, #FFFFFF -3.9%, #99BEE5 90.53%)",
         "gradient-conic":

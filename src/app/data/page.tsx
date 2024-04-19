@@ -20,7 +20,6 @@ const Data = () => {
   return (
     <>
       <GoogleAnalytics gaId="G-9PEVYHKFL5" />
-      {/* Additional UI components or content can go here */}
     </>
   );
 };

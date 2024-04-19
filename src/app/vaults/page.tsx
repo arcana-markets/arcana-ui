@@ -17,7 +17,11 @@ const Vaults = () => {
     }
   }, [pathname, router]);
 
-  return <GoogleAnalytics gaId="G-9PEVYHKFL5" />;
+  return (
+    <>
+      <GoogleAnalytics gaId="G-9PEVYHKFL5" />
+    </>
+  );
 };
 
 export default Vaults;
