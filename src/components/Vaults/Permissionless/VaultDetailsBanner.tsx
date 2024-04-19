@@ -24,7 +24,7 @@ const vaultTypes = {
     title: "Arcanum",
     subtitle: "PYTH / USDC",
     bgImage: "/img/svg/augory-vector.svg",
-    iconImage: ["/img/png/PYTH.png", "/img/svg/usdc.svg"],
+    iconImage: ["/img/png/pyth2.png", "/img/svg/usdc.svg"],
     bgClass: "bg-gradient-radial-permissionless",
     titleColor: "#a1adc1", // Example color
   },
