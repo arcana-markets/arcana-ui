@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { GoogleAnalytics } from '@next/third-parties/google'
 import ComponentWrapper from '@/components/tempMarketData/ComponentWrapper';
 import CarouselSlider from '@/components/tempMarketData/CarouselSlider';
-import TradingChart from '@/components/tempMarketData/TradingChart';
+// import TradingChart from '@/components/tempMarketData/TradingChart';
 import MarketList from '@/components/tempMarketData/MarketsList';
 import OrderBook from '@/components/tempMarketData/OrderBook';
 import TradeHistory from '@/components/tempMarketData/TradeHistory';
@@ -38,7 +38,6 @@ const Page = () => {
             <div className='w-full flex justify-center items-center'>
               <div className='w-full max-w-[700px] lg:max-w-none bg-transparent h-full'>
                 <MarketsBar />
-                <TradingChart />
               </div>
             </div>
             <div className='w-full flex justify-center items-center'>
