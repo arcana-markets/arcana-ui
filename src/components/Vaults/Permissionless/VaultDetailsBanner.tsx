@@ -42,7 +42,7 @@ const vaultTypes = {
     bgImage: "/img/svg/augory-vector.svg",
     iconImage: ["/tokens/jto.png", "/img/svg/usdc.svg"],
     bgClass: "bg-gradient-radial-red",
-    titleClass: "bg-clip-text text-transparent bg-aether",
+    titleColor: "#F7A3B7", // Example color
   },
   permissionless: {
     title: "Permissionless",
@@ -54,7 +54,13 @@ const vaultTypes = {
   },
 };
 
-const VaultDetailsBanner = ({ params }) => {
+interface VaultDetailsProps {
+  params: { arcVault: keyof typeof vaultTypes };
+}
+
+// Your existing VaultType and vaultTypes definitions remain the same
+
+const VaultDetailsBanner: React.FC<VaultDetailsProps> = ({ params }) => {
   const { arcVault } = params;
   const vault = vaultTypes[arcVault] || vaultTypes.permissionless; // Fallback to permissionless details
 
@@ -75,7 +81,7 @@ const VaultDetailsBanner = ({ params }) => {
       <div className="container relative z-10 xl:max-w-[1140px] w-full px-4 mx-auto sm:pt-9 pb-10 text-white">
         <div className="flex justify-between items-center">
           <div>
-          <h1 className={`font-poppins font-semibold text-3xl sm:text-5xl sm:pb-4 ${vault.titleClass || ''}`} 
+          <h1 className={`font-poppins font-semibold text-3xl sm:text-5xl sm:pb-4`} 
               style={{ color: vault.titleColor }}>
             {vault.title}
           </h1>
