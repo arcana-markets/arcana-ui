@@ -24,7 +24,7 @@ const vaultTypes = {
     title: "Arcanum",
     subtitle: "PYTH / USDC",
     bgImage: "/img/svg/augory-vector.svg",
-    iconImage: ["/img/png/PYTH.png", "/img/svg/usdc.svg"],
+    iconImage: ["/tokens/PYTH.png", "/img/svg/usdc.svg"],
     bgClass: "bg-gradient-radial-permissionless",
     titleColor: "#a1adc1", // Example color
   },
@@ -40,7 +40,7 @@ const vaultTypes = {
     title: "Aether",
     subtitle: "JTO / USDC",
     bgImage: "/img/svg/augory-vector.svg",
-    iconImage: ["/img/png/JTO.png", "/img/svg/usdc.svg"],
+    iconImage: ["/tokens/JTO.png", "/img/svg/usdc.svg"],
     bgClass: "bg-gradient-radial-red",
     titleColor: "#F7A3B7", // Example color
   },
