@@ -7,7 +7,7 @@ export enum Networks {
   Devnet = 'devnet',
   Localnet = 'local',
   Custom = 'custom',
-}
+};
 
 export function useNetworkConfiguration() {
   const [network, setNetwork] = useLocalStorageState<Networks>({

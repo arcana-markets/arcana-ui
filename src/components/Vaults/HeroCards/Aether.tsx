@@ -27,7 +27,7 @@ const Aether = () => {
           alt="icon"
         />
         <div className="max-sm:flex justify-between max-sm:mb-4">
-          <h3 className="text-center font-poppins !leading-[unset] group-hover:text-white bg-clip-text text-transparent bg-aether font-bold text-[28px] sm:text-3xl md:text-[40px] text-">
+          <h3 className="text-center font-poppins !leading-[unset] group-hover:text-white bg-clip-text text-transparent bg-aether font-bold text-[28px] sm:text-3xl md:text-[40px]">
             Aether
           </h3>
           <div className="flex justify-center items-center gap-2 sm:gap-4 sm:pt-4 sm:mb-8">

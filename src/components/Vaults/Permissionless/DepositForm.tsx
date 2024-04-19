@@ -1,4 +1,5 @@
 "use client";
+
 import { InfoDeposit, TickIcon } from "@/common/Icons";
 import Image from "next/image";
 import React, { useState } from "react";
