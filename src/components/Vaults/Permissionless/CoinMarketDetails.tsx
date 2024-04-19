@@ -2,6 +2,15 @@ import { CoinFire, EyeIcon, OpenBook, RedirectIcon, WhaleIcon } from "@/common/I
 import Image from "next/image";
 import React from "react";
 
+// Assuming the structure of your tokens does not change, define an interface for it
+interface Token {
+  symbol: string;
+  imagePath: string;
+}
+
+// Define a more specific type for arcVault keys
+type VaultKey = keyof typeof tokenConfigs;
+
 // Token configuration mapping for each vault type
 const tokenConfigs = {
   arcanum: {
@@ -31,7 +40,7 @@ const tokenConfigs = {
   }
 };
 
-const CoinMarketDetails = ({ params }: { params: { arcVault: string } }) => {
+const CoinMarketDetails = ({ params }: { params: { arcVault: VaultKey } }) => {
   const { tokens } = tokenConfigs[params.arcVault] || tokenConfigs.permissionless;
 
   return (

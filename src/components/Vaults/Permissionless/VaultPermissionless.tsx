@@ -2,13 +2,16 @@ import React from "react";
 import DepositToVault from "./DepositToVault";
 import CoinMarketDetails from "./CoinMarketDetails";
 
+// Define the type for arcVault params to ensure type safety
+type VaultKey = "arcanum" | "augury" | "aether" | "permissionless";
+
 const VaultPermissionless = ({
   params,
 }: {
-  params: { arcVault: string };
+  params: { arcVault: VaultKey }; // Use the defined type instead of string
 }) => {
   // Function to determine the background color based on the arcVault value
-  const getBarColor = (arcVault: string) => {
+  const getBarColor = (arcVault: VaultKey) => { // Use VaultKey type here as well
     switch (arcVault) {
       case "arcanum":
         return "bg-[#5099CC]"; // Blue for Arcanum
