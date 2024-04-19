@@ -190,7 +190,7 @@ const AdditionalDetails = () => {
                 height={32}
                 className='object-fill'
               />
-              <p className='text-foreground-100 dark:opacity-100 opacity-80 text-white text-[18px] sm:text-[24px] font-semibold'>
+              <p className='dark:opacity-100 opacity-80 text-white text-[18px] sm:text-[24px] font-semibold'>
                 {/* Dynamic value from API */}
                 {(
                   (marketData?.market?.baseDepositTotal ?? 0) /
