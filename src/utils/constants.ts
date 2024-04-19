@@ -21,7 +21,7 @@ export const BASE_PHOENIX_URL = 'https://prod.arcana.markets/api/phoenix/markets
 
 export const DEFAULT_MARKET_ID = 'BU3EaRVo9WN44muCBy3mwkCQ4uYQWiuqay1whEmeSXK3';
 
-export const RPC_ENDPOINT = 'https://anabelle-40mqhl-fast-mainnet.helius-rpc.com';
+export const RPC_ENDPOINT = 'https://mainnet.helius-rpc.com/?api-key=47474b09-903b-4379-8605-d08741b72917';
 
 export const NUMERAL_FORMAT = '0,0.00';
 export const BASE_FORMAT = '0,0';
