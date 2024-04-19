@@ -6,7 +6,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 // import { Menu } from '@headlessui/react';
 // import { shortKey } from '@/utils/utils';
-import ComponentWrapper from '@/components/MarketData/ComponentWrapper';
+import ComponentWrapper from '@/components/tempMarketData/ComponentWrapper';
 import * as Icons from '@/app/data/svg/Icons';
 import Tooltip from './Tooltip';
 
