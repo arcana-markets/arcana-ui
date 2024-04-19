@@ -2,17 +2,17 @@
 
 import React, { useState } from 'react';
 import { GoogleAnalytics } from '@next/third-parties/google'
-import ComponentWrapper from '@/components/tempMarketData/ComponentWrapper';
-import CarouselSlider from '@/components/tempMarketData/CarouselSlider';
-import TradingChart from '@/components/tempMarketData/TradingChart';
-import MarketList from '@/components/tempMarketData/MarketsList';
-import OrderBook from '@/components/tempMarketData/OrderBook';
-import TradeHistory from '@/components/tempMarketData/TradeHistory';
-import MarketDepth from '@/components/tempMarketData/MarketDepth';
-import MarketInformation from '@/components/tempMarketData/MarketInformation';
-import AdditionalDetails from '@/components/tempMarketData/AdditionalDetails';
-import MarketsBar from '@/components/tempMarketData/MarketsBar';
-import Footer from '@/components/tempMarketData/Footer';
+import ComponentWrapper from '@/components/MarketData/ComponentWrapper';
+import CarouselSlider from '@/components/MarketData/CarouselSlider';
+import TradingChart from '@/components/MarketData/TradingChart';
+import MarketList from '@/components/MarketData/MarketsList';
+import OrderBook from '@/components/MarketData/OrderBook';
+import TradeHistory from '@/components/MarketData/TradeHistory';
+import MarketDepth from '@/components/MarketData/MarketDepth';
+import MarketInformation from '@/components/MarketData/MarketInformation';
+import AdditionalDetails from '@/components/MarketData/AdditionalDetails';
+import MarketsBar from '@/components/MarketData/MarketsBar';
+import Footer from '@/components/MarketData/Footer';
 import Navbar from '@/components/Shared/Navbar';
 import '@/app/data/css/styles.css';
 
