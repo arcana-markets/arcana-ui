@@ -1,15 +1,16 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RPC_ENDPOINT } from '../../utils/constants';
 import { PoweredBy } from "@/utils/Icons";
 import { PublicKey } from '@solana/web3.js';
 
+const PLATFORM_FEE_AND_ACCOUNTS = {
+  referralAccount: new PublicKey('6jE5KKjene8TGZPF2ZAujYkxqSNZWPZzDwNdd2f8s3dr'),
+  feeBps: 200,
+  feeAccounts: new Map(),
+};
+
 const SwapWidget = () => {
   const [refreshKey, setRefreshKey] = useState(0);
-  const PLATFORM_FEE_AND_ACCOUNTS = useMemo(() => ({
-    referralAccount: new PublicKey('6jE5KKjene8TGZPF2ZAujYkxqSNZWPZzDwNdd2f8s3dr'),
-    feeBps: 200,
-    feeAccounts: new Map(),
-  }), []);
 
   useEffect(() => {
     const scriptId = 'jupiter-terminal-script';
@@ -49,11 +50,11 @@ const SwapWidget = () => {
       if (script) {
         document.head.removeChild(script);
       }
-    };    
+    };
+  }, [refreshKey]);
 
-  }, [PLATFORM_FEE_AND_ACCOUNTS, refreshKey]);
   const refreshWidget = () => {
-    setRefreshKey(0+1);
+    setRefreshKey(prevKey => prevKey + 1);
   };
 
   return (
@@ -66,10 +67,8 @@ const SwapWidget = () => {
         Jupiter Swap - Live
       </span>
     </div>
-    
       <div key={refreshKey} id="integrated-terminal" className='w-full rounded-md'>
       </div>
-
       <div className='w-full py-2 sm:py-3 rounded-b-[16px] text-[12px] sm:text-[14px] font-medium text-white flex justify-center items-center gap-1' style={{ marginTop: '-16px' }}>
         <a href="https://jup.ag" target="_blank" rel="noopener noreferrer"
          className="flex items-center gap-1">
