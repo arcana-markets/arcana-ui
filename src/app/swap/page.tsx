@@ -2,10 +2,10 @@
 
 import { useEffect } from 'react';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import '@/app/globals.css';
 import Navbar from '@/components/Shared/Navbar';
 import Image from 'next/image';
 import HeroSwap from '@/components/Swap/HeroSwap';
-import '@/app/globals.css';
 import Footer from '@/components/Shared/Footer';
 
 const Page = () => {
