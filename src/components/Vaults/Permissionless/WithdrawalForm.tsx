@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { AdditionIcon } from "@/common/Icons";
+import { AdditionIcon } from "@/components/common/Icons";
 
 const WithdrawalForm = () => {
   return (

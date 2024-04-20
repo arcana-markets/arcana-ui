@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import * as Icons from '@/app/data/svg/Icons';
+import * as Icons from "@/components/common/svg/Icons";
 import { abbreviateAddress } from '@/utils/formatting';
 import { Order } from '@/utils/types';
 import arcanaStore from '@/stores/arcanaStore';
@@ -34,53 +34,39 @@ const getCumulativeOrders = (orders: Order[], _totalSize: number, orderType: 'bi
 };
 
 const OrderBook = () => {
-  const { orderBookData, setOrderBook, marketId } = arcanaStore(state => state);
+  const { orderBookData, setOrderBook, marketId } = arcanaStore(state => state); // Use marketId from arcanaStore
   const [error] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const prevOrderBookData = usePrevious(orderBookData);
 
   useEffect(() => {
-    if (marketId) {
-      fetchOrderBook();
-    }
+    fetchOrderBook();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [marketId]);
+  }, [marketId]); // Dependency on marketId
 
   const fetchOrderBook = async () => {
-    // Ensure marketId is present before proceeding
-    if (!marketId) {
-      console.error('marketId is not set. Unable to fetch order book.');
-      return; // Optionally set an error state to notify the user
-    }
-  
-    const url = `https://prod.arcana.markets/api/openbookv2/markets/${encodeURIComponent(marketId)}/orders`;
     try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        // Log detailed error information
-        const errorText = await response.text();
-        console.error(`Error fetching order book. Status: ${response.status}, Body: ${errorText}`);
-        return; // Optionally set an error state to notify the user
-      }
-      const data = await response.json();
-      
-      // Your existing logic for processing the data
-      const identities = data.identities || {};
-      const processOrdersWithIdentities = (orders: any[]) => orders.map(order => ({
-        ...order,
-        identity: identities[order.trader]
-      }));
-      
-      data.market.bidOrders = processOrdersWithIdentities(data.market.bidOrders);
-      data.market.askOrders = processOrdersWithIdentities(data.market.askOrders);
-      
-      setOrderBook(data);
+        const response = await fetch(`https://prod.arcana.markets/api/openbookv2/markets/${marketId}/orders`);
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        
+        // Process identities and merge them into bidOrders and askOrders
+        const identities = data.identities || {};
+        const processOrdersWithIdentities = (orders: any[]) => orders.map(order => ({
+            ...order,
+            // Replace trader with identity if available, otherwise use the trader's public key
+            identity: identities[order.trader]
+          }));
+        
+        data.market.bidOrders = processOrdersWithIdentities(data.market.bidOrders);
+        data.market.askOrders = processOrdersWithIdentities(data.market.askOrders);
+        
+        setOrderBook(data); // Update the order book with new data
     } catch (error) {
-      console.error("Error fetching order book:", error);
-      // Optionally set an error state here to notify the user
+        console.error("Error fetching order book:", error);
     }
-  };
-  
+};
+
   useInterval(() => {
     fetchOrderBook();
   }, 3000);
@@ -103,10 +89,9 @@ const OrderBook = () => {
     return !previousOrder || currentOrder.size !== previousOrder.size ? 'red-flash' : '';
   };
 
-  // Safely attempting to access the first bid and ask orders if they exist
-  const bidPrice = orderBookData?.market?.bidOrders?.[0]?.price ?? null;
-  const askPrice = orderBookData?.market?.askOrders?.[0]?.price ?? null;
-
+    // Assuming bidOrders and askOrders are sorted with highest bid and lowest ask at index 0
+    const bidPrice = orderBookData?.market.bidOrders[0]?.price;
+    const askPrice = orderBookData?.market.askOrders[0]?.price;
   
     // Calculate the spread
     const spread = bidPrice && askPrice ? askPrice - bidPrice : null;

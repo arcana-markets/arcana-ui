@@ -6,7 +6,7 @@ import '@/app/data/css/styles.css';
 import '@/app/data/css/marketDepth.css';
 
 const inter = Inter({ subsets: ['latin'] });
-const Loading = lazy(() => import('@/components/tempMarketData/Loading'));
+const Loading = lazy(() => import('@/components/Shared/Loading'));
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://arcana.markets'),

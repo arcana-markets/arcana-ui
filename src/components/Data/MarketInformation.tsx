@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import * as Icons from "@/app/data/svg/Icons";
+import * as Icons from "@/components/common/svg/Icons";
 import Link from "next/link";
 import { FullMarketData } from "@/utils/types";
 import arcanaStore from "@/stores/arcanaStore";
@@ -49,7 +49,7 @@ const MarketInformation = () => {
 
   const getPriceChangeClassName = () =>
     priceChange === null || priceChange === 0
-      ? "text-white"
+      ? "text-foreground-400"
       : priceChange > 0
       ? "text-success-100"
       : "text-danger-100";

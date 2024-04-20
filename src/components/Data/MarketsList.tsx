@@ -97,7 +97,7 @@ const MarketList = () => {
         } else if (performance < 0) {
           return 'text-danger-100 font-bold'; 
         } else {
-          return 'text-white font-bold'; 
+          return 'text-foreground-400 font-bold'; 
         }
       };
 
@@ -154,9 +154,7 @@ const MarketList = () => {
             {marketData ? (
               <>
                 <div className="flex justify-start items-center gap-1">
-                {baseTokenData.logo && (
-                <Image src={baseTokenData.logo} alt={baseTokenData.name} width={20} height={20} className="object-fill z-0" />
-                )}
+                <Image src={baseTokenData.logo!} alt={baseTokenData.name} width={20} height={20} className='object-fill z-0' />
                 <span className='text-[13px]'>{baseTokenData.ticker}</span>
                 </div>
                 <div className="flex justify-start items-center ml-5 dark:opacity-80 opacity-80">
@@ -236,7 +234,7 @@ const MarketList = () => {
     </div>
       <div className='w-full flex justify-between items-center border-b-[1px] borderColor py-3 sm:py-5 px-3 sm:px-3'>
             {/* Rows */}
-            <div className='w-full overflow-auto text-white hideScrollBar h-[300px] md:h-[300px] rounded-[4px]'>
+            <div className='w-full overflow-auto hideScrollBar h-[300px] md:h-[300px] rounded-[4px]'>
             {markets.map((market, index) => (
           <Fragment key={index}>
             {renderMarketOption(market)}

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { LuClipboardCopy } from 'react-icons/lu';
-import Tooltip from '@/components/Shared/Tooltip';
+import Tooltip from "@/components/Shared/Tooltip";
 import { copyToClipboard } from '../../utils';
 import { CarouselCardProps } from '@/utils/types';
-import tokenMintsData from '@/config/token-mints.json';
+import tokenMintsData from '@/config/token-mints.json'; 
 
 interface TokenData {
   address: string;

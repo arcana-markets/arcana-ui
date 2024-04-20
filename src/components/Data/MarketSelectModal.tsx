@@ -9,8 +9,8 @@ import { useRouter } from 'next/navigation';
 import Modal from '@/components/Shared/Modal';
 import Link from 'next/link';
 import { abbreviateAddressSmaller } from '@/utils/formatting';
-import * as Icons from '@/app/data/svg/Icons';
-import Tooltip from '@/components/Shared/Tooltip';
+import * as Icons from "@/components/common/svg/Icons";
+import Tooltip from "@/components/Shared/Tooltip";
 import { FullMarketData } from "@/utils/types";
 
 interface TokenData {
@@ -44,8 +44,6 @@ const MarketSelectModal = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [markets, setMarkets] = useState<TokenData[]>([]);
   const [filteredMarkets, setFilteredMarkets] = useState<TokenData[]>([]);
-  const [selected, setSelected] = useState(null);
-
   const {
     updateMarketId,
     initializeMarketIdFromURL,
@@ -54,13 +52,7 @@ const MarketSelectModal = () => {
     setTradeHistory,
     setOrderBook,
   } = arcanaStore((state) => state);
-
-  useEffect(() => {
-    // Attempt to initialize marketId from URL immediately after component mounts
-    initializeMarketIdFromURL();
-    // This effect should ideally run once unless the specific method it depends on changes.
-    // This ensures that the marketId is read from the URL as early as possible.
-  }, [initializeMarketIdFromURL]);
+  const [selected, setSelected] = useState(null);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -156,25 +148,19 @@ const MarketSelectModal = () => {
 
   useEffect(() => {
     const populateMarketDetails = async () => {
-      if (!marketId) return; // Ensure marketId is available
-      try {
-        const result = await fetchMarketData(marketId);
-        const tradeHistory = await fetchTradeHistory(marketId);
-        let orderBook = await fetchOrderBook(marketId);
-  
-        orderBook?.market?.bidOrders.sort((a: { price: number; }, b: { price: number; }) => b.price - a.price);
-        orderBook?.market?.askOrders.sort((a: { price: number; }, b: { price: number; }) => a.price - b.price);
-  
-        setOrderBook(orderBook);
-        setTradeHistory(tradeHistory?.trades || []);
-        setMarketData(result);
-      } catch (error) {
-        console.error('Error fetching market details:', error);
-        // Consider setting an error state here to inform the user
-      }
+      const result = await fetchMarketData(marketId);
+      const tradeHistory = await fetchTradeHistory(marketId);
+      let orderBook = await fetchOrderBook(marketId);
+
+      orderBook?.market?.bidOrders.sort((a: any, b: any) => b.price - a.price);
+      orderBook?.market?.askOrders.sort((a: any, b: any) => a.price - b.price);
+
+      setOrderBook(orderBook);
+      setTradeHistory(tradeHistory?.trades || []);
+      setMarketData(result);
     };
     populateMarketDetails();
-  }, [marketId, setMarketData, setOrderBook, setTradeHistory]);  
+  }, [marketId, setMarketData, setOrderBook, setTradeHistory]);
 
     const renderMarketOption = (marketData: any, context: 'button' | 'modal') => {
       const baseTokenData = findTokenDataByAddress(marketData?.market.baseMint, tokenMintsData);
@@ -190,7 +176,7 @@ const MarketSelectModal = () => {
 
       const tooltipContent = (
         <Tooltip placement={'bottom'} content={marketData?.market.marketId}>
-          <div className="flex gap-1 text-xs text-foreground-100 text-center cardShadowBor bg-[#09303c] z-10 opacity-70 rounded-[4px] px-2">
+          <div className="flex gap-1 text-xs text-foreground-100 text-center cardShadowBor bg-[#09303c] dark:bg-[#09303c] z-50 opacity-70 rounded-[4px] px-2">
             {abbreviateAddressSmaller(marketData?.market.marketId)}
             <Link href={`https://solscan.io/account/${marketData?.market.marketId}`} target="_blank" rel="noopener noreferrer">
               <Icons.shareSmall/>
@@ -203,8 +189,8 @@ const MarketSelectModal = () => {
         <div className={`flex ${context === 'button' ? 'button-container' : 'flex-row'} items-center justify-between p-1 w-full`}>
         {/* Market logos */}
         <div className='flex items-center'>
-          <Image src={baseTokenLogo} alt={baseTokenName} width={24} height={24} className='object-fill z-1' />
-          <Image src={quoteTokenLogo} alt={quoteTokenName} width={24} height={24} className='object-fill -ml-2 z-1' />
+          <Image src={baseTokenLogo} alt={baseTokenName} width={24} height={24} className='object-fill z-0' />
+          <Image src={quoteTokenLogo} alt={quoteTokenName} width={24} height={24} className='object-fill -ml-2 z-0' />
         </div>
           {/* Market name and Tooltip */}
           <div className={context === 'button' ? 'button-market-info' : ''}>
@@ -222,14 +208,15 @@ const MarketSelectModal = () => {
     <div className="relative cursor-pointer rounded-lg bg-background-100">
       <div 
         onClick={handleOpenModal} 
-        className="hover:bg-[#09303c] rounded-lg px-1 flex justify-between items-center cursor-pointer text-white" 
+        className="hover:bg-[#09303c] rounded-lg px-1 flex justify-between items-center cursor-pointer" 
         style={{ width: '230px' }}
       >
         {selected && renderMarketOption(selected, 'button')}
-        {!selected && <span>Select a Market</span>}
+        {!selected && <span>Select a Market</span>} {/* Fallback content */}
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
           <div className='rounded-md bg-background-100 focus:outline-none sm:text-sm'>
+          {/* Search bar */}
             <div className='text-xl text-center py-4 border-b-[1px] borderColor'>
             <input
               placeholder='Search by market name...'

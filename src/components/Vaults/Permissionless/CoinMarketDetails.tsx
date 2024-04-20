@@ -1,4 +1,4 @@
-import { CoinFire, EyeIcon, OpenBook, RedirectIcon, WhaleIcon } from "@/common/Icons";
+import { CoinFire, EyeIcon, OpenBook, RedirectIcon, WhaleIcon } from "@/components/common/Icons";
 import Image from "next/image";
 import React from "react";
 

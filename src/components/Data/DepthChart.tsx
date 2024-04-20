@@ -10,7 +10,7 @@ import '@/app/data/css/marketDepth.css';
   }
 
   interface AxisLabelsFormatterContext {
-    value: number; // Assuming 'value' is a number
+    value: number;
   }
 
   interface Order {

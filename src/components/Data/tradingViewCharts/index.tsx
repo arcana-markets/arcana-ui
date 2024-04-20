@@ -1,6 +1,7 @@
-import styles from "./index.module.css";
+import styles from '@/components/Data/tradingViewCharts/index.module.css';
+
 import { useEffect, useRef } from "react";
-import { ChartingLibraryWidgetOptions, LanguageCode, ResolutionString, widget } from "../../../public/charting_library/charting_library";
+import { ChartingLibraryWidgetOptions, LanguageCode, ResolutionString, widget } from "../../../../public/charting_library";
 import arcanaStore from "@/stores/arcanaStore";
 import { FullMarketData } from "@/utils/types";
 
@@ -25,7 +26,8 @@ export const TVChartContainer = (props: Partial<ChartingLibraryWidgetOptions>) =
 					expectedOrder: "latestFirst",
 				}
 			),
-			interval: '15' as ResolutionString,         
+			interval: '15' as ResolutionString,
+			theme: 'light',          
 			container: chartContainerRef.current,
 			library_path: '/charting_library/',
 			locale: props.locale as LanguageCode,
@@ -47,7 +49,7 @@ export const TVChartContainer = (props: Partial<ChartingLibraryWidgetOptions>) =
 				"study_templates",
 
 			],
-			charts_storage_url: "https://saveload.tradingview.com",
+			charts_storage_url: props.charts_storage_url,
 			charts_storage_api_version: props.charts_storage_api_version,
 			client_id: props.client_id,
 			user_id: props.user_id,

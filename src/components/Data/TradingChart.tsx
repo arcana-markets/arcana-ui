@@ -22,7 +22,7 @@ const defaultWidgetProps: Partial<ChartingLibraryWidgetOptions> = {
 
 const TVChartContainer = dynamic(
   () =>
-    import("../tradingViewChart").then((mod) => mod.TVChartContainer),
+    import("../Data/tradingViewCharts").then((mod) => mod.TVChartContainer),
   { ssr: false }
 );
 
@@ -38,7 +38,7 @@ const TVChartContainer = dynamic(
         }}
       />
       {isScriptReady && (
-        <div className="h-full flex flex-col p-1 sm:p-2 cardShadowBor rounded-b-[16px] border-l border-r border-b bg-[#012732] dark:bg-[#012732]">
+        <div className="h-full flex flex-col p-1 sm:p-2 cardShadowBor rounded-b-[16px] border-l border-r border-b dark:bg-[#012732]">
         <TVChartContainer {...defaultWidgetProps} />
         </div>
       )}

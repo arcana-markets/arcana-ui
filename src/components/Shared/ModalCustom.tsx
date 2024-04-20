@@ -1,4 +1,4 @@
-import { ModalIcon1, ModalIcon2, TickIcon } from "@/common/Icons";
+import { ModalIcon1, ModalIcon2, TickIcon } from "@/components/common/Icons";
 import React, { useState } from "react";
 import { DownArrow } from "./Icons"; 
 

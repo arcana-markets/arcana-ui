@@ -5,9 +5,9 @@ import { FullMarketData } from '@/utils/types';
 import tokenMintsData from '@/config/token-mints.json';
 import { abbreviateAddressSmaller } from '@/utils/formatting';
 import arcanaStore from '@/stores/arcanaStore';
-import * as Icons from '@/app/data/svg/Icons';
+import * as Icons from "@/components/common/svg/Icons";
 import Link from 'next/link';
-import Tooltip from '@/components/Shared/Tooltip';
+import Tooltip from "@/components/Shared/Tooltip";
 
 interface TokenData {
     address: string;
@@ -40,11 +40,12 @@ const MarketsBar = () => {
           const baseTokenData = findTokenDataByAddress(marketData?.market.baseMint, tokenMintsData);
           const baseMint = marketData?.market.baseMint || '';
           const baseTokenName = baseTokenData.name;
+      
           // Directly use the logo from the data returned by your function
           const baseTokenLogo = baseTokenData.logo;
 
     return (
-    <div className="border-t border-l border-r p-2 mb-1 flex flex-col md:flex-row items-center cardShadowBor rounded-t-[16px] bg-[#012732]">
+    <div className="border-t border-l border-r p-2 mb-1 flex flex-col md:flex-row items-center cardShadowBor rounded-t-[16px] bg-[#012732] dark:bg-[#012732]">
         <div className="flex flex-col justify-start items-start border-b md:border-b-0 md:border-r pr-1 borderColor w-full md:w-auto md:flex-basis[30%]">
         <div className="w-full">
             <div className="w-full">
@@ -60,12 +61,12 @@ const MarketsBar = () => {
                         <div className="text-sm font-bold text-foreground-100 cursor-default">{baseTokenName}</div>
                         <div className="flex cursor-help items-center">
                             <Tooltip placement={'bottom'} content={baseMint}>
-                                <div className="flex text-xs mt-1 text-foreground-100 text-center cardShadowBor bg-[#09303c] z-10 opacity-70 rounded-[4px] px-2">
+                                <div className="flex text-xs mt-1 text-foreground-100 text-center cardShadowBor bg-[#09303c] dark:bg-[#09303c] z-50 opacity-70 rounded-[4px] px-2">
                                     {abbreviateAddressSmaller(baseMint || 'Base Mint')}
                                     <div className="ml-1">
-                                        <a href={`https://solscan.io/token/${baseMint}`} target="_blank" rel="noopener noreferrer">
+                                        <Link href={`https://solscan.io/token/${baseMint}`} target="_blank" rel="noopener noreferrer">
                                             <Icons.shareSmall/>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </Tooltip>

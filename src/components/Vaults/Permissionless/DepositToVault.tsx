@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import DepositForm from "./DepositForm";
 import WithdrawalForm from "./WithdrawalForm";
-import { DepositeIcon, WithdrawIcon } from "@/common/Icons";
+import { DepositeIcon, WithdrawIcon } from "@/components/common/Icons";
 
 const DepositToVault = ({ params }: {
   params: { arcVault: string }
