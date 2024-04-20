@@ -10,7 +10,7 @@ const Data = () => {
 
   useEffect(() => {
     const pathSegments = pathname.split('/');
-    const marketId = pathSegments[2];
+    const marketId = pathSegments.length > 2 ? pathSegments[2] : null;
 
     if (!marketId) {
       router.push('/data/BU3EaRVo9WN44muCBy3mwkCQ4uYQWiuqay1whEmeSXK3');

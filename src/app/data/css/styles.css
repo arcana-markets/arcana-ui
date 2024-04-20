@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,6 +12,28 @@
   --up: 96, 191, 79;
   --up-dark: 82, 180, 65;
   --up-muted: 116, 131, 114;
+}
+
+@layer base {
+  .footer-header-title {
+    @apply font-medium text-xl sm:text-base leading-7 text-missioncontrol mb-1 sm:mb-2;
+  }
+
+  .footer-link {
+    @apply font-medium text-xl sm:text-base leading-7 text-white cursor-pointer transition-all duration-200 ease-in-out hover:opacity-60;
+  }
+  .nav-link {
+    @apply text-base max-sm:text-2xl max-[1024px]:text-3xl font-normal max-lg:text-white text-foxflowerviola hover:text-white duration-200 after:absolute relative after:w-0 after:duration-300 cursor-pointer after:bg-white after:-bottom-[2px] after:left-0 after:h-px after:hover:w-full;
+  }
+  .card-btn {
+    @apply bg-daintree mt-2 leading-6 duration-500 w-full rounded-lg py-2 px-3 text-white text-sm font-medium group-hover:!text-daintree group-hover:!bg-white;
+  }
+  .vault-headings {
+    @apply text-base whitespace-nowrap justify-end flex items-center gap-[2px] font-normal text-foxflowerviola;
+  }
+  .deposit-btn {
+    @apply text-sm mr-4 my-2 group-hover:!text-daintree group-hover:!bg-white duration-500 leading-6 text-white font-medium py-2 px-3 rounded-xl bg-[#1b1f2b];
+  }
 }
 
 @layer utilities {
@@ -43,41 +63,12 @@
   background-color: black;
 }
 
-@media (min-width: 640px) {
-  .loading_header {
-    position: relative;
-    transition: all 0.3s linear;
-  }
-
-  .loading_header::after {
-    --rotation: 0deg;
-    content: "";
-    border-radius: 12px !important;
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(var(--rotation), #5099cc 1.99%, #252b32 23.97%);
-    animation: rotate-border 4s linear infinite;
-    z-index: -1;
-  }
-
-  @keyframes rotate-border {
-    0%,
-    100% {
-      --rotation: 0deg;
-    }
-
-    50% {
-      --rotation: 360deg;
-    }
-  }
-
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
- }
 }
 
 body {
@@ -95,10 +86,6 @@ body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-}
-
-.backgroundCustom {
-  background: linear-gradient(180deg, #012A36 0%, #013746 100%);
 }
 
 /* slider card css ============>  */
@@ -223,274 +210,16 @@ tspan {
   animation: copiedAnimation 0.5s ease;
 }
 
-.Connect_btn {
-  padding: 10px 16px;
-  border-radius: 12px;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 28px;
-  color: white;
-  background: #252b32;
-  position: relative;
-  z-index: 2;
-  transition: all linear 300ms;
-  border: 0;
-}
-
-.Connect_btn:hover::after {
-  opacity: 1;
-}
-
-.Connect_btn:hover {
-  background-color: #2a4e65;
-}
-
-.Connect_btn::after {
-  position: absolute;
-  content: "";
-  width: 100%;
-  opacity: 0;
-  border-radius: 12px;
-  padding: 0.1px 0.1px;
-  inset: 0;
-  border: 2px solid transparent;
-  background: linear-gradient(137deg, #5099cc 1.99%, #252b3200 23.97%)
-    border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: -1;
-}
-
-.Connect_btn:hover:after {
-  animation: rotate 3000ms infinite;
-  transition: all linear 0.3s;
-}
-
-@keyframes rotate {
-  0% {
-    background: linear-gradient(135deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  3% {
-    background: linear-gradient(145deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  6% {
-    background: linear-gradient(155deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  9% {
-    background: linear-gradient(165deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  12% {
-    background: linear-gradient(175deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  15% {
-    background: linear-gradient(185deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  18% {
-    background: linear-gradient(195deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  21% {
-    background: linear-gradient(205deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  24% {
-    background: linear-gradient(215deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  27% {
-    background: linear-gradient(225deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  30% {
-    background: linear-gradient(235deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  33% {
-    background: linear-gradient(245deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  36% {
-    background: linear-gradient(255deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  39% {
-    background: linear-gradient(265deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  42% {
-    background: linear-gradient(275deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  45% {
-    background: linear-gradient(285deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  48% {
-    background: linear-gradient(295deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  52% {
-    background: linear-gradient(305deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  54% {
-    background: linear-gradient(315deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  56% {
-    background: linear-gradient(325deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  58% {
-    background: linear-gradient(335deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  61% {
-    background: linear-gradient(345deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  64% {
-    background: linear-gradient(355deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  66% {
-    background: linear-gradient(360deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  68% {
-    background: linear-gradient(10deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  70% {
-    background: linear-gradient(20deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  72% {
-    background: linear-gradient(30deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  75% {
-    background: linear-gradient(40deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  78% {
-    background: linear-gradient(50deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  81% {
-    background: linear-gradient(60deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  84% {
-    background: linear-gradient(70deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  85% {
-    background: linear-gradient(80deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  88% {
-    background: linear-gradient(90deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  91% {
-    background: linear-gradient(100deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  94% {
-    background: linear-gradient(110deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  98% {
-    background: linear-gradient(120deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-
-  100% {
-    background: linear-gradient(130deg, #5099cc 1.99%, #252b3200 23.97%)
-      border-box;
-  }
-}
-
 /* TRADING VIEW STYLES ===========>  */
 
 .tradingview-widget-container iframe {
   border: none !important;
 }
 
-.toggle {
-  width: 36px;
-  height: 18px;
-  padding: 1.5px;
-}
-
-.toggle-inner {
-  width: 16px;
-  height: 16px;
-
-  background: #fff;
-}
-
-.-translate-x-4 {
-  transform: translateX(-16px) !important;
-}
-
-.bg-blue {
-  background-color: #5099cc;
-}
-
-.bg-dark {
-  background-color: #272a32;
-}
-
 /* JUPITER STYLES ===========>  */
 
 #integrated-terminal {
-  background-color: #161b24;
+  background-color: #012630;
   border: none; /* Removes the border */
   min-height: 419px; /* Example minimum height */
   max-height: 819px; /* Example maximum height */
@@ -506,7 +235,7 @@ tspan {
   font-weight: 500; /* font-medium */
   letter-spacing: normal; /* tracking-wide */
   border-radius: 12px; /* rounded-[12px] */
-  background-color: #161b24; /* bg-[#012630] */
+  background-color: #012630; /* bg-[#012630] */
   transition: opacity 0.3s, transform 0.3s; /* For hover and active states */
 }
 
@@ -523,11 +252,11 @@ tspan {
 }
 
 #jupiter-terminal .bg-\[\#212128\], #jupiter-terminal .bg-\[\#36373E\] {
-  background-color: rgba(59, 71, 94, 1) !important; /* Replace #043341 with RGBA, 70% opacity */
+  background-color: rgba(4, 51, 65, 0.7) !important; /* Replace #043341 with RGBA, 70% opacity */
 }
 
 #jupiter-terminal .bg-\[\#212128\]:hover, #jupiter-terminal .bg-\[\#36373E\]:hover {
-  background-color: rgb(59, 71, 94) !important; /* Full opacity on hover */
+  background-color: rgba(4, 51, 65, 1) !important; /* Full opacity on hover */
 }
 
 #jupiter-terminal .bg-\[\#191B1F\]:hover {
@@ -545,16 +274,12 @@ tspan {
 }
 
 #jupiter-terminal > div > div > div > div > div > div > div > ul {
-  background-color: rgb(59, 71, 94) !important; /* Full opacity on hover */
+  background-color: rgba(4, 51, 65, 1) !important; /* Full opacity on hover */
   color: #d1d5db !important; /* General text color */
 }
 
 #jupiter-terminal > div > div > div > div > div.flex.flex-col.w-full.justify-center.items-center.px-5.mt-7 > div {
-  background-color: #161b24; /* Change the background to green */
-}
-
-#jupiter-terminal > div > div > div > div.absolute.bottom-1.px-3.py-2.w-full > div {
-background-color: #AB9FF2; /* Change the background to green */
+  background-color: #043341; /* Change the background to green */
 }
 
 #jupiter-terminal > div > div > div > div > div > a > span {
@@ -586,7 +311,7 @@ background-color: #AB9FF2; /* Change the background to green */
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/img/png/arcana-icon.png');
+  background-image: url('../../../../public/assets/arcanaswap.svg'); /* Update with the correct path */
   background-size: cover; /* Or 'contain' based on your need */
   background-position: center;
 }
@@ -607,29 +332,29 @@ background-color: #AB9FF2; /* Change the background to green */
   right: 52px;
   width: 38px;  /* Set the width of the pseudo-element */
   height: 38px; /* Set the height of the pseudo-element */
-  background-image: url('/img/png/arcana-icon.png'); /* Update with the correct path */
+  background-image: url('../../../../public/assets/arcanaswap.svg'); /* Update with the correct path */
   background-size: contain; /* Use 'contain' to ensure the entire image fits within the dimensions */
   background-position: center;
 }
 
 #jupiter-terminal {
   /* General styles for the terminal */
-  background-color: #161b24 !important; /* Overall background */
+  background-color: #012630 !important; /* Overall background */
   color: white !important; /* General text color */
 }
 
 #jupiter-terminal > div > div > div > form > div > div.w-full.mt-2.rounded-xl.flex.flex-col.px-2 > div > div.border-b.border-transparent.bg-\[\#212128\].rounded-xl.transition-all {
-  background-color: #161b24 !important; /* Replace with the color you want */
+  background-color: #012630 !important; /* Replace with the color you want */
   /* You can add more styling properties here as needed */
 }
 
 #jupiter-terminal > div > div > div > form > div > div.w-full.mt-2.rounded-xl.flex.flex-col.px-2 > div > div:nth-child(3) {
-  background-color: #161b24 !important; /* Replace with the color you want */
+  background-color: #012630 !important; /* Replace with the color you want */
   /* Additional styling properties can be added here as needed */
 }
 
 #jupiter-terminal > div > div > div > div > div > div > div > button {
-  background-color: #161b24 !important; /* Main button background color */
+  background-color: #043341 !important; /* Main button background color */
 }
 
 #jupiter-terminal > div > div > div > div > div > div > div > button:hover {
@@ -638,25 +363,25 @@ background-color: #AB9FF2; /* Change the background to green */
 
 #jupiter-terminal > div > div > div > div.absolute.top-0.left-0.h-full.w-full.bg-jupiter-bg.rounded-lg.overflow-hidden:hover {
   /* Your styles here */
-  background-color: #161b24 !important; /* Replace with the color you want */
+  background-color: #012630 !important; /* Replace with the color you want */
 
 }
 
 #jupiter-terminal > div > div > div > div.absolute.top-0.left-0.h-full.w-full.bg-jupiter-bg.rounded-lg.overflow-hidden {
-  background-color: #161b24 !important; /* Ensures the background is always green */
+  background-color: #012630 !important; /* Ensures the background is always green */
 }
 
 
 #jupiter-terminal > div > div > div > div > div:nth-child(2) > div {
-  background-color: #161b24; /* Sets the background color to #043341 */
+  background-color: #043341; /* Sets the background color to #043341 */
 }
 
 #jupiter-terminal > div > div > div > div > div.flex.flex-col.justify-center.items-center > div > div.mt-4.space-y-4.border.border-white\/5.rounded-xl.p-3.bg-\[\#25252D\].border-none.mt-0 {
-  background-color: #161b24; /* Sets the background color to #043341 */
+  background-color: #043341; /* Sets the background color to #043341 */
 }
 
 #jupiter-terminal > div > div > div > form > div > div.w-full.mt-2.rounded-xl.flex.flex-col.px-2 > div > div.my-2 > div > div {
-  background-color: #3B475E !important; /* Existing style */
+  background-color: #043341 !important; /* Existing style */
   margin-bottom: -1rem; /* Adds a bottom margin of 1rem (16 pixels) */
   transform: translateY(-10px); /* Moves the element up by 10 pixels */
   /* Include other existing styles here */
@@ -673,7 +398,7 @@ background-color: #AB9FF2; /* Change the background to green */
 }
 
 #jupiter-terminal > div > div > div > div.absolute.top-0.left-0.h-full.w-full.bg-jupiter-bg.rounded-lg.overflow-hidden > div > div.mt-2 > div > div > div > li > div {
-  background-color: #161b24; /* Applies the background color to all rows */
+  background-color: #043341; /* Applies the background color to all rows */
 }
 
 #integrated-terminal, #jupiter-terminal {
@@ -683,7 +408,7 @@ background-color: #AB9FF2; /* Change the background to green */
 
 #jupiter-terminal > div > div > div > form > div > div:nth-child(2) > div.mt-4.space-y-4.border.border-white\/5.rounded-xl.p-3 {
   position: relative; /* If it's not already positioned */
-  background-color: #161b24; /* Replace with your desired color */
+  background-color: #043341; /* Replace with your desired color */
 
   /* Other existing styles */
 }
@@ -693,7 +418,7 @@ background-color: #AB9FF2; /* Change the background to green */
 }
 
 #jupiter-terminal > div > div::-webkit-scrollbar-track {
-  background-color: #161b24; /* Background color same as the page */
+  background-color: #012A36; /* Background color same as the page */
 }
 
 #jupiter-terminal > div > div::-webkit-scrollbar-thumb {
@@ -708,7 +433,7 @@ background-color: #AB9FF2; /* Change the background to green */
 /* Ensuring scrollbar blends well in dark mode too for #jupiter-terminal */
 @media (prefers-color-scheme: dark) {
   #jupiter-terminal > div > div::-webkit-scrollbar-track {
-    background-color: #161b24;
+    background-color: #012732;
   }
 
   #jupiter-terminal > div > div::-webkit-scrollbar-thumb {
@@ -718,24 +443,9 @@ background-color: #AB9FF2; /* Change the background to green */
   #jupiter-terminal > div > div::-webkit-scrollbar-thumb:hover {
     background-color: rgba(1, 39, 50, 0.8);
   }
-};
+}
 
 /* JUPITER STYLES END ===========>  */
-
-.chart-container {
-  display: flex;
-  justify-content: flex-end;
-};
-
-.legend {
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  z-index: 1;
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 300;
-};
 
 .shiny-gradient-text {
   font-weight: bold; /* Makes the text bold */
