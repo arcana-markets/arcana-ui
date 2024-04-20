@@ -1,5 +1,6 @@
 import SwapWidget from "@/components/Swap/SwapWidget";
 import Image from "next/image";
+import '@/app/globals.css';
 
 const SwapCard = () => {
   return (
