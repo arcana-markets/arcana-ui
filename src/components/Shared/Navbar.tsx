@@ -162,9 +162,9 @@ const Navbar = () => {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <div className={`${active ? 'bg-[#252B32]' : ''} rounded-md p-2 flex`}>
+                          <div className={`${active ? 'bg-[#252B32]' : ''} rounded-md p-2`}>
                             <Image src="/tokens/SOL.png" alt="Solana Logo" width={24} height={24} />
-                            <span className="text-white pl-2">{(balance || 0).toLocaleString()} SOL (Devnet)</span>
+                            <span className="text-white">{(balance || 0).toLocaleString()} SOL (Devnet)</span>
                           </div>
                         )}
                       </Menu.Item>

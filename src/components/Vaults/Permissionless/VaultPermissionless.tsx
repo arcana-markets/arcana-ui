@@ -1,6 +1,7 @@
 import React from "react";
 import DepositToVault from "./DepositToVault";
 import CoinMarketDetails from "./CoinMarketDetails";
+import { useWallet } from '@solana/wallet-adapter-react';
 
 // Define the type for arcVault params to ensure type safety
 type VaultKey = "arcanum" | "augury" | "aether" | "permissionless";
@@ -10,7 +11,7 @@ const VaultPermissionless = ({
 }: {
   params: { arcVault: VaultKey }; // Use the defined type instead of string
 }) => {
-  // Function to determine the background color based on the arcVault value
+  const { publicKey } = useWallet();
   const getBarColor = (arcVault: VaultKey) => { // Use VaultKey type here as well
     switch (arcVault) {
       case "arcanum":
@@ -32,7 +33,7 @@ const VaultPermissionless = ({
       <div className="bg-[#11171D] relative z-10 ">
         <section className="container xl:max-w-[1140px] px-4 mx-auto sm:pt-9 z-[1] text-white">
           <div className="flex flex-row max-lg:flex-col justify-between my-[-12px] max-sm:gap-4 gap-6 sm:-mt-32">
-            <DepositToVault params={params} />
+            <DepositToVault params={params} publicKey={publicKey}/>
             <CoinMarketDetails params={params} />
           </div>
         </section>

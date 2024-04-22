@@ -152,6 +152,8 @@ export const CoinLogosTyped: CoinLogosType = CoinLogos as CoinLogosType;
 
 //* ARCANA_VAULT TYPES *//
 
+export type VaultKey = "arcanum" | "augury" | "aether" | "permissionless";
+
 export enum SelfTradeBehavior {
   DecrementTake,
   CancelProvide,
