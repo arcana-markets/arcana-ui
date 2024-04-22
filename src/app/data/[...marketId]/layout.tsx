@@ -1,10 +1,12 @@
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { Suspense, lazy } from 'react';
 import '@/app/data/css/styles.css';
 import '@/app/data/css/marketDepth.css';
 
 const inter = Inter({ subsets: ['latin'] });
+const Loading = lazy(() => import('@/components/Shared/Loading'));
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://arcana.markets'),
@@ -31,8 +33,10 @@ export const metadata: Metadata = {
     // usePageMetadata(metadata);    
     return (
       <div className={`dark:bg-black-gradient bg-[#012A36] ${inter.className}`}>
+      <Suspense fallback={<Loading/>}>
         <GoogleAnalytics gaId="G-9PEVYHKFL5" />
           {children}
+      </Suspense>
       </div>
     );
   };
