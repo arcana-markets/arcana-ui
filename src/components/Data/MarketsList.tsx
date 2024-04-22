@@ -1,16 +1,21 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import arcanaStore from '@/stores/arcanaStore';
-import Image from 'next/image';
 import { convertMakerVolumeToDecimal, formatCurrencyValue, formatNumericValue } from '@/utils/numbers';
-import tokenMintsData from '@/config/token-mints.json';
 import { useRouter } from 'next/navigation';
+import { FullMarketData, TokenData } from '@/utils/types';
+import CoinLogos from '../../config/logos.json';
+import tokenMintsRawData from '@/config/token-mints.json';
 
-interface TokenData {
-  address: string;
-  name: string;
-  logo?: string;
-  ticker?: string;
-}
+type CoinLogosType = { [key: string]: string };
+const CoinLogosTyped: CoinLogosType = CoinLogos as CoinLogosType;
+let tokenMintsData: TokenData[] = tokenMintsRawData as TokenData[];
+  try {
+    tokenMintsData = require('@/config/token-mints.json');
+  } catch (error) {
+    tokenMintsData = [];
+  }
+const tokenMintsData2: TokenData[] = require('@/config/token-mints2.json');
+const mergedTokenMintsData = [...tokenMintsData, ...tokenMintsData2];
 
 export interface MarketData {
   marketPerformance: {
@@ -40,6 +45,7 @@ const MarketList = () => {
     const {
         updateMarketId,
       } = arcanaStore((state) => state);
+      const { marketData }: FullMarketData | any = arcanaStore();
       const [markets, setMarkets] = useState<MarketData[]>([]);
       const [activeOption, setActiveOption] = useState('Volume');
       const [timeLine, setTimeLine] = useState('24h'); // Default to 24h
@@ -52,98 +58,122 @@ const MarketList = () => {
           : [...marketsData].sort((a, b) => b.marketPerformance.hour24 - a.marketPerformance.hour24);
       };
 
-      const findTokenDataByAddress = (address: string): TokenData => {
-        const defaultTokenData: TokenData = {
-          address: '', // You can keep this empty or use a placeholder
-          name: 'Unknown Token',
-          logo: '/icons/question-circle.svg', // Default logo for unknown tokens
-          // If you decide to make 'ticker' non-optional in the future, provide a default value here
-          ticker: undefined,
-        };
-        const token = tokenMintsData.find(token => token.address === address);
-        return token || defaultTokenData;
-      };
-
-      
-      const getPerformanceDataAsNumber = (marketData: MarketData, timeLine: string): number => {
-        switch (timeLine) {
-          case '1h':
-            return marketData.marketPerformance.hour1;
-          case '4h':
-            return marketData.marketPerformance.hour4;
-          case '24h':
-            return marketData.marketPerformance.hour24;
-          default:
-            return 0; // or return a suitable default value
+  // Function to get base token logo URI
+  const baseTokenLogoURI = (address: string) => {
+    if (tokenMintsData) {
+      const baseTokenData = findTokenDataByAddress(address);
+      return baseTokenData.logoURI || "/tokens/SOL.png";
+    } else {
+      const [baseToken, _] = marketData?.name ? marketData.name.split(/[-\/]/) : ["", ""];
+      return CoinLogosTyped[baseToken] || "/tokens/SOL.png";
+    }
+  };
+  
+    // Function to find token data by address
+    const findTokenDataByAddress = (address: string): TokenData => {
+      const defaultTokenData: TokenData = {
+        address: '',
+        name: 'Unknown Token',
+        logoURI: '/icons/question-circle.svg',
+        symbol: '',
+        chainId: 0,
+        decimals: 0,
+        tags: [],
+        extensions: {
+          coingeckoId: undefined
         }
       };
 
-      const getPerformanceData = (marketData: MarketData, timeLine: string) => {
-        const performanceValue = getPerformanceDataAsNumber(marketData, timeLine);
-        const formattedPerformance = formatNumericValue(performanceValue, 2, true);
-        if (isNaN(parseFloat(formattedPerformance))) {
-          return 'N/A';
-        }
-        let symbol = '';
-        if (performanceValue > 0) {
-          symbol = '+'; 
-        }    
-        return `${symbol}${formattedPerformance}%`;
+      const token = mergedTokenMintsData.find((token: { address: string; }) => token.address === address);
+      return token || defaultTokenData;
     };
 
-      const getPerformanceColor = (performance: number) => {
-        if (performance > 0) {
-          return 'text-success-100 font-bold'; 
-        } else if (performance < 0) {
-          return 'text-danger-100 font-bold'; 
-        } else {
-          return 'text-foreground-400 font-bold'; 
-        }
-      };
+  // Function to get performance data as number
+  const getPerformanceDataAsNumber = (marketData: MarketData, timeLine: string): number => {
+    switch (timeLine) {
+      case '1h':
+        return marketData.marketPerformance.hour1;
+      case '4h':
+        return marketData.marketPerformance.hour4;
+      case '24h':
+        return marketData.marketPerformance.hour24;
+      default:
+        return 0; // or return a suitable default value
+    }
+  };
 
-      const getPriceChangeClassName = () => {
-        if (priceChange === null || priceChange === 0) {
-          return 'text-foreground-100';
-        } else if (priceChange > 0) {
-          return 'text-success-100'; 
-        } else {
-          return 'text-danger-100'; 
-        }
-      };
+  // Function to get performance data
+  const getPerformanceData = (marketData: MarketData, timeLine: string) => {
+    const performanceValue = getPerformanceDataAsNumber(marketData, timeLine);
+    const formattedPerformance = formatNumericValue(performanceValue, 2, true);
+    if (isNaN(parseFloat(formattedPerformance))) {
+      return 'N/A';
+    }
+    let symbol = '';
+    if (performanceValue > 0) {
+      symbol = '+'; 
+    }    
+    return `${symbol}${formattedPerformance}%`;
+  };
 
-      useEffect(() => {
-        fetch('https://prod.arcana.markets/api/openbookv2/markets')
-          .then((response) => response.json())
-          .then((data) => {
-            setOriginalMarkets(data);
-            const sortedData = sortMarkets(activeOption, data);
-            setMarkets(sortedData);
-          })
-          .catch((error) => console.error('Error fetching markets:', error));
-      }, [activeOption]);
+  // Function to get performance color
+  const getPerformanceColor = (performance: number) => {
+    if (performance > 0) {
+      return 'text-success-100 font-bold'; 
+    } else if (performance < 0) {
+      return 'text-danger-100 font-bold'; 
+    } else {
+      return 'text-foreground-400 font-bold'; 
+    }
+  };
 
-      const handleMarketSelect = (market: MarketData) => {
-        updateMarketId(market.market.marketId);
-      router.push(`/data/${market.market.marketId}`);
-      };
+  // Function to get price change class name
+  const getPriceChangeClassName = () => {
+    if (priceChange === null || priceChange === 0) {
+      return 'text-foreground-100';
+    } else if (priceChange > 0) {
+      return 'text-success-100'; 
+    } else {
+      return 'text-danger-100'; 
+    }
+  };
 
-      useEffect(() => {
-        console.log('Active Option Changed to:', activeOption);
-      
-        if (originalMarkets.length > 0) {
-          const sortedMarkets = sortMarkets(activeOption, originalMarkets);
-          setMarkets(sortedMarkets);
-        }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [activeOption]);
-      
-      const renderMarketOption = (marketData: MarketData) => {
+  // Fetch markets data on component mount
+  useEffect(() => {
+    fetch('https://prod.arcana.markets/api/openbookv2/markets')
+      .then((response) => response.json())
+      .then((data) => {
+        setOriginalMarkets(data);
+        const sortedData = sortMarkets(activeOption, data);
+        setMarkets(sortedData);
+      })
+      .catch((error) => console.error('Error fetching markets:', error));
+  }, [activeOption]);
 
-        const baseTokenData = findTokenDataByAddress(marketData.market.baseMint);
-        const performance = timeLine === '1h' ? marketData.marketPerformance.hour1
-        : timeLine === '4h' ? marketData.marketPerformance.hour4
-        : marketData.marketPerformance.hour24;
-        const performanceColorClass = getPerformanceColor(performance); 
+  // Handle market selection
+  const handleMarketSelect = (market: MarketData) => {
+    updateMarketId(market.market.marketId);
+    router.push(`/data/${market.market.marketId}`);
+  };
+
+  // Update markets when active option changes
+  useEffect(() => {
+    console.log('Active Option Changed to:', activeOption);
+  
+    if (originalMarkets.length > 0) {
+      const sortedMarkets = sortMarkets(activeOption, originalMarkets);
+      setMarkets(sortedMarkets);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeOption]);
+
+  // Render market option
+  const renderMarketOption = (marketData: MarketData) => {
+    const baseTokenData = findTokenDataByAddress(marketData.market.baseMint);
+    const performance = timeLine === '1h' ? marketData.marketPerformance.hour1
+      : timeLine === '4h' ? marketData.marketPerformance.hour4
+      : marketData.marketPerformance.hour24;
+    const performanceColorClass = getPerformanceColor(performance); 
       
         return (
             <div
@@ -154,8 +184,15 @@ const MarketList = () => {
             {marketData ? (
               <>
                 <div className="flex justify-start items-center gap-1">
-                <Image src={baseTokenData.logo!} alt={baseTokenData.name} width={20} height={20} className='object-fill z-0' />
-                <span className='text-[13px]'>{baseTokenData.ticker}</span>
+                <img
+                    src={baseTokenData.logoURI}
+                    alt={baseTokenData.name}
+                    width={28}
+                    height={28}
+                    loading="lazy"
+                    style={{ borderRadius: '50%', objectFit: 'cover', width: '28px', height: '28px' }}
+                  />                
+                <span className='text-[13px]'>{baseTokenData.symbol}</span>
                 </div>
                 <div className="flex justify-start items-center ml-5 dark:opacity-80 opacity-80">
                 <p className={`text-[12px] sm:text-[13px] font-medium ${getPriceChangeClassName()}`}>

@@ -1,5 +1,29 @@
 import Decimal from 'decimal.js'
 
+// Example function that formats a Decimal or number to scientific notation if needed
+export const formatToScientificNotation = (value: Decimal.Value, fractionDigits: number = 2): string => {
+  const decimalValue = new Decimal(value);
+  // Determine if the number is too large or too small and should be formatted in scientific notation
+  const absValue = decimalValue.abs();
+  if (absValue.gte(1e+6) || (absValue.lt(1e-3) && !absValue.isZero())) {
+    return decimalValue.toExponential(fractionDigits);
+  } else {
+    // For numbers within a "normal" range, just format them with fixed decimal places
+    return decimalValue.toFixed(fractionDigits);
+  }
+};
+
+export const formatLargeSize = (value: number | string): string => {
+  const number = Number(value);
+  if (isNaN(number)) return value.toString(); // return original value as string if it's not a number
+
+  if (number < 1000) return number.toFixed(2); // Return the number with 2 decimal places if it's smaller than 1000
+
+  const suffixes = ["", "K", "M", "B", "T"];
+  const i = Math.floor(Math.log(number) / Math.log(1000));
+  return parseFloat((number / Math.pow(1000, i)).toFixed(2)) + suffixes[i];
+};
+
 export const convertMakerVolumeToDecimal = (makerVolume: string | number): Decimal => {
   const decimalValue = new Decimal(makerVolume);
   return decimalValue;

@@ -26,7 +26,7 @@ const MarketDepth = () => {
 
 return (
   <div className='w-full flex justify-center items-center'>
-    <div className='h-[300px] sm:h-[340px] w-full marketDepthCon pt-4 flex flex-col justify-between items-center bg-background-900 dark:bg-background-100 cardShadowBor rounded-[16px]'>
+    <div className='h-[300px] sm:h-[340px] w-full marketDepthCon pt-4 flex flex-col justify-between items-center bg-background-300 dark:bg-background-100 cardShadowBor rounded-[16px]'>
       {/* coins -----> */}
       <div className='flex flex-col gap-4 w-full px-5 items-center'>
         <p className='text-[20px] text-white dark:opacity-100 opacity-80'>

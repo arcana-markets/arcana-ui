@@ -1,5 +1,4 @@
-import styles from '@/components/Data/tradingViewCharts/index.module.css';
-
+import styles from './index.module.css';
 import { useEffect, useRef } from "react";
 import { ChartingLibraryWidgetOptions, LanguageCode, ResolutionString, widget } from "../../../../public/charting_library";
 import arcanaStore from "@/stores/arcanaStore";
@@ -100,41 +99,12 @@ export const TVChartContainer = (props: Partial<ChartingLibraryWidgetOptions>) =
 				const button = tvWidget.createButton();
 				button.classList.add("apply-common-tooltip");
 				button.innerHTML = "Data by TradingView";
-			
 				// Add a click event listener to the button
 				button.addEventListener('click', () => {
 					// Open TradingView website in a new tab
 					window.open('https://www.tradingview.com', '_blank');
 				});
 			});
-			
-			tvWidget.activeChart().createStudy(
-				'Moving Average Exponential',
-				true,
-				false,
-				{
-					length: 7
-				},
-				{'Plot.color': '#ff9900'}
-			);
-			tvWidget.activeChart().createStudy(
-				'Moving Average Exponential',
-				true,
-				false,
-				{
-					length: 25
-				},
-				{'Plot.color': '#cc0099'}
-			);
-			tvWidget.activeChart().createStudy(
-				'Moving Average Exponential',
-				true,
-				false,
-				{
-					length: 99
-				},
-				{'Plot.color': '#3399ff'}
-			);
 		});
         // Cleanup function
         return () => {

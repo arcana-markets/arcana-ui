@@ -5,6 +5,7 @@ import { Order } from '@/utils/types';
 import arcanaStore from '@/stores/arcanaStore';
 import { useInterval } from '@/hooks/useInterval';
 import usePrevious from '@/hooks/usePrevious';
+import { formatNumericValue } from '@/utils/numbers';
 
 const MIN_PERCENT_THRESHOLD = 1; // Minimum threshold for visual representation
 const LOG_BASE = 1.5; // Logarithmic base for scaling sizes
@@ -147,7 +148,7 @@ const OrderBook = () => {
           <div className='flex justify-center bg-foreground-800 dark:bg-[#012A36] rounded-[12px] py-[6px] px-[12px] items-center gap-1'>
             <Icons.arrowUp />
             <p className='text-[14px] text-green font-medium'>
-            {midpoint?.toFixed(4)}
+            {midpoint?.toFixed(6)}
            </p>
           </div>
         </div>
@@ -229,22 +230,22 @@ const OrderBook = () => {
                 <div className='w-full h-full relative grid grid-cols-[1fr,3.5fr,1fr] sm:grid-cols-[1fr,2fr,1fr] z-20'>
                   {/* bid size */}
                   <p className='text-[14px] w-full items-center flex justify-end text-foreground-100 opacity-80 font-medium'>
-                    {item.bid.size > 0 ? item.bid.size : ''}
+                {formatNumericValue(item.bid.size)}
                   </p>
                   <div className='w-full grid grid-cols-2'>
                     {/* bid price */}
                     <p className='text-[14px] w-full flex justify-end items-center pr-1 text-foreground-100 font-medium' >
-                      {item.bid.price > 0 ? item.bid.price : ''}
+                  {formatNumericValue(item.bid.price)}
                     </p>
                     {/* ask price */}
                     <p className='text-[14px] w-full flex items-center justify-start pl-1 text-foreground-100 font-medium'>
-                      {item.ask.price > 0 ? item.ask.price : ''}
-                    </p>
+                  {formatNumericValue(item.ask.price)}
+                   </p>
                   </div>
                   {/* ask size */}
                   <p className='text-[14px] w-full flex justify-start items-center pl-1 text-foreground-100 opacity-80 font-medium'>
-                    {item.ask.size > 0 ? item.ask.size : ''}
-                  </p>
+                {formatNumericValue(item.ask.size)}
+                </p>
                 </div>
               {/* Similar logic for Ask Order Display */}
               <p className='text-[14px] w-full flex justify-end items-center text-foreground-100 opacity-80 font-medium underline'>

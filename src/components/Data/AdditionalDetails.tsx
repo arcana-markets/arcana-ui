@@ -3,20 +3,25 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import * as Icons from "@/components/common/svg/Icons";
-import { FullMarketData } from "@/utils/types";
+import { FullMarketData, TokenData } from "@/utils/types";
 import arcanaStore from "@/stores/arcanaStore";
 import { abbreviateAddressLonger } from "@/utils/formatting";
 import { copyToClipboard } from "@/utils";
 import Tooltip from "@/components/Shared/Tooltip";
 import dayjs from 'dayjs';
-import tokenMintsData from '@/config/token-mints.json';
+import tokenMintsRawData from '@/config/token-mints.json'; 
+import CoinLogos from '../../config/logos.json';
 
-interface TokenData {
-  address: string;
-  name: string;
-  logo?: string;
-  ticker?: string;
-}
+type CoinLogosType = { [key: string]: string };
+const CoinLogosTyped: CoinLogosType = CoinLogos as CoinLogosType;
+let tokenMintsData: TokenData[] = tokenMintsRawData as TokenData[];
+  try {
+    tokenMintsData = require('@/config/token-mints.json');
+  } catch (error) {
+    tokenMintsData = [];
+  }
+const tokenMintsData2: TokenData[] = require('@/config/token-mints2.json');
+const mergedTokenMintsData = [...tokenMintsData, ...tokenMintsData2];
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -66,15 +71,23 @@ const AdditionalDetails = () => {
   const [width] = useWindowSize();
   const { marketData }: FullMarketData | any = arcanaStore();
   const [tooltipVisibility, setTooltipVisibility] = useState<{ [key: string]: boolean }>({});
+  const tokenMintsData: TokenData[] = tokenMintsRawData as TokenData[];
 
-  const findTokenDataByAddress = (address: string, tokenMints: TokenData[]): { name: string, logo: string } => {
-    const token = tokenMints.find(token => token.address === address);
+  
+  // Split the market name to get base and quote tokens
+  // This regex will split the string on either a slash or a hyphen
+  const [baseToken, quoteToken] = marketData?.market?.name
+    ? marketData.market.name.split(/[-\/]/)
+    : ["", ""];
+
+  const findTokenDataByAddress = (address: string, mergedTokenMintsData: TokenData[]): { name: string, logo: string } => {
+    const token = mergedTokenMintsData.find(token => token.address === address);
     // Ensure a default logo is used if the found token does not have a logo or if no token is found
     const defaultLogo = '/icons/question-circle.svg'; // Adjust path as needed
     if (token) {
       return { 
         name: token.name, 
-        logo: token.logo || defaultLogo, // Use the token logo if available, otherwise use the default logo
+        logo: token.logoURI || defaultLogo, // Use the token logo if available, otherwise use the default logo
       };
     } else {
       return { 
@@ -84,15 +97,23 @@ const AdditionalDetails = () => {
     }
   };
   
-      
-    const baseTokenData = findTokenDataByAddress(marketData?.market.baseMint, tokenMintsData);
-    const quoteTokenData = findTokenDataByAddress(marketData?.market.quoteMint, tokenMintsData);
+    const baseTokenData = findTokenDataByAddress(marketData?.market.baseMint, mergedTokenMintsData);
+    const quoteTokenData = findTokenDataByAddress(marketData?.market.quoteMint, mergedTokenMintsData);
 
     const baseTokenName = baseTokenData.name;
     const quoteTokenName = quoteTokenData.name;
 
-    const baseTokenLogo = baseTokenData.logo;
-    const quoteTokenLogo = quoteTokenData.logo;
+    let baseTokenLogo = baseTokenData.logo;
+    // If baseTokenData.logo is not available, fetch from CoinLogosTyped
+    if (!baseTokenLogo) {
+        baseTokenLogo = CoinLogosTyped[baseToken] || "/tokens/SOL.png";
+    }
+    
+    let quoteTokenLogo = quoteTokenData.logo;
+    // If quoteTokenData.logo is not available, fetch from CoinLogosTyped
+    if (!quoteTokenLogo) {
+        quoteTokenLogo = CoinLogosTyped[quoteToken] || "/tokens/WUSDC.png";
+    }
 
   const handleCopyClick = (marketId: string) => {
     const fullUrl = `https://app.arcana.markets/data/${marketId}`;
@@ -183,12 +204,14 @@ const AdditionalDetails = () => {
               Base deposits
             </p>
             <div className='flex gap-2 items-center'>
-              <Image
+              <img
                 src={baseTokenLogo}
                 alt={baseTokenName}
                 width={32}
                 height={32}
+                loading="lazy"
                 className='object-fill'
+                style={{ borderRadius: '50%', objectFit: 'cover', width: '32px', height: '32px' }}
               />
               <p className='text-foreground-100 dark:opacity-100 opacity-80 dark:text-white text-[18px] sm:text-[24px] font-semibold'>
                 {/* Dynamic value from API */}

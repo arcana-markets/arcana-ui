@@ -5,6 +5,7 @@ import { OpenBookTradeEvent } from "@/utils/types";
 import arcanaStore from "@/stores/arcanaStore";
 import Tooltip from "@/components/Shared/Tooltip";
 import { useInterval } from "@/hooks/useInterval";
+import { formatLargeSize, formatNumericValue } from "@/utils/numbers";
 
 const formatDateFull = (timestamp: number): string => {
   return dayjs.unix(timestamp / 1000).format("YYYY-MM-DD dddd");
@@ -80,12 +81,12 @@ const fetchTradeHistory = async () => {
           <>
             <div className="flex justify-center items-center">
               <p style={priceColorStyle} className="cursor-default text-[13px] text-foreground-100 dark:opacity-100 opacity-80 font-bold">
-                {item.priceDouble.toFixed(3)}
+                {formatNumericValue(item.priceDouble)}
               </p>
             </div>
             <div className="flex justify-center items-center">
               <p style={sizeColorStyle} className='mr-2 cursor-default text-[13px] dark:opacity-100 opacity-80'>
-                {item.quantityDouble.toFixed(3)}
+              {formatLargeSize(item.quantityDouble)}
               </p>
             </div>
             <div className="flex justify-center items-center gap-1">

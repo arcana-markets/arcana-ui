@@ -1,8 +1,156 @@
 import { BN, Idl, IdlAccounts, IdlTypes } from '@coral-xyz/anchor';
-import { Connection, PublicKey, Signer, Transaction } from '@solana/web3.js';
+import { AccountInfo, Connection, PublicKey, Signer, Transaction } from '@solana/web3.js';
 import { OpenbookV2 } from './idl/openbook_v2';
 import CoinLogos from '../config/logos.json';
 import { ArcanaVaults } from './idl/arcana_vaults';
+
+export declare type AccountInfoMap = Map<string, AccountInfo<Buffer> | null>
+
+// NEW GLOBALS
+
+export type TokenData = {
+  address: string;
+  chainId: number;
+  decimals: number;
+  name: string;
+  symbol: string;
+  logoURI: string;
+  tags: string[];
+  extensions: {
+    coingeckoId?: string;
+  };
+};
+
+
+//* ARCANA_DATA_API TYPES *//
+
+export interface MarketData {
+  marketId: string;
+  baseMint: string;
+  quoteMint: string;
+  name: string;
+  midpoint: number;
+};
+
+export interface FullMarketData {
+  marketId: string;
+  bump: number;
+  baseDecimals: number;
+  quoteDecimals: number;
+  marketAuthority: string;
+  timeExpiry: number;
+  collectFeeAdmin: string;
+  openOrdersAdmin: string;
+  consumeEventsAdmin: string;
+  closeMarketAdmin: string;
+  name: string;
+  bids: string;
+  asks: string;
+  eventHeap: string;
+  oracleA: string;
+  oracleB: string;
+  confFilter: number;
+  maxStalenessSlots: number;
+  quoteLotSize: number;
+  baseLotSize: number;
+  seqNum: number;
+  registrationTime: number;
+  makerFee: number;
+  takerFee: number;
+  feesAccrued: number;
+  feesToReferrers: number;
+  referrerRebatesAccrued: number;
+  feesAvailable: number;
+  makerVolume: number;
+  takerVolume: number;
+  makerVolumeNormalized: number;
+  takerVolumeNormalized: number;
+  notionalVolume: number;
+  notionalVolume24hour: number;
+  baseMint: string;
+  quoteMint: string;
+  marketBaseVault: string;
+  baseDepositTotal: number;
+  marketQuoteVault: string;
+  quoteDepositTotal: number;
+  bidOrders: Order[];
+  askOrders: Order[];
+  marketPerformance: MarketPerformance;
+  midpoint: number;
+};
+
+interface MarketPerformance {
+  marketId: string;
+  current: number;
+  minute30: number;
+  hour1: number;
+  hour4: number;
+  hour24: number;
+};
+
+export interface OrderBookData {
+  midpoint: number;
+  market: {
+    bidOrders: Order[];
+    askOrders: Order[];
+  };
+  identities: { [traderPublicKey: string]: string };
+};
+
+export interface Order {
+  trader: string;
+  identity?: string;
+  price: number;
+  size: number;
+  sizePercent?: number;
+};
+
+export interface TradeData {
+  market: string;
+  notionalVolume: number;
+  marketName: string;
+  identities: { [publicKey: string]: string };
+  notionalVolume24Hour: number;
+  trades: OpenBookTradeEvent[];
+};
+
+export interface OpenBookTradeEvent {
+  timeStamp: number;
+  makerOwner: string;
+  takerOwner: string;
+  priceDouble: number;
+  quantityDouble: number;
+  marketId: string;
+  takerSide: number;
+  marketName: string;
+};
+
+export interface CarouselCardProps {
+      onCardClick: (marketId: string) => void;
+      item: {
+        market: {
+          marketId: string;
+          name: string;
+          takerVolume: number;
+          makerVolume: number;
+          quoteDecimals: number;
+          baseMint: string;
+          quoteMint: string;
+        },
+        midpoint: number;
+        marketPerformance: MarketPerformance;
+      };
+};
+
+export type CoinLogosType = {
+    [key: string]: string;
+};
+
+export const CoinLogosTyped: CoinLogosType = CoinLogos as CoinLogosType;
+
+// END ARCANA_DATA_API TYPES //
+
+//* ARCANA_VAULT TYPES *//
 
 export enum SelfTradeBehavior {
   DecrementTake,
@@ -112,129 +260,9 @@ export interface RefreshQuotesOnOpenbookV2Accounts {
   systemProgram: PublicKey
 }
 
-export interface MarketData {
-  marketId: string;
-  baseMint: string;
-  quoteMint: string;
-  name: string;
-  midpoint: number;
-};
+// END ARCANA_VAULT TYPES //
 
-export interface FullMarketData {
-  marketId: string;
-  bump: number;
-  baseDecimals: number;
-  quoteDecimals: number;
-  marketAuthority: string;
-  timeExpiry: number;
-  collectFeeAdmin: string;
-  openOrdersAdmin: string;
-  consumeEventsAdmin: string;
-  closeMarketAdmin: string;
-  name: string;
-  bids: string;
-  asks: string;
-  eventHeap: string;
-  oracleA: string;
-  oracleB: string;
-  confFilter: number;
-  maxStalenessSlots: number;
-  quoteLotSize: number;
-  baseLotSize: number;
-  seqNum: number;
-  registrationTime: number;
-  makerFee: number;
-  takerFee: number;
-  feesAccrued: number;
-  feesToReferrers: number;
-  referrerRebatesAccrued: number;
-  feesAvailable: number;
-  makerVolume: number;
-  takerVolume: number;
-  makerVolumeNormalized: number;
-  takerVolumeNormalized: number;
-  notionalVolume: number;
-  notionalVolume24hour: number;
-  baseMint: string;
-  quoteMint: string;
-  marketBaseVault: string;
-  baseDepositTotal: number;
-  marketQuoteVault: string;
-  quoteDepositTotal: number;
-  bidOrders: Order[];
-  askOrders: Order[];
-  marketPerformance: MarketPerformance;
-  midpoint: number;
-};
-
-export interface OrderBookData {
-  midpoint: number;
-  market: {
-    bidOrders: Order[];
-    askOrders: Order[];
-  };
-  identities: { [traderPublicKey: string]: string };
-};
-
-export interface Order {
-  trader: string;
-  identity?: string;
-  price: number;
-  size: number;
-  sizePercent?: number;
-};
-
-interface MarketPerformance {
-  marketId: string;
-  current: number;
-  minute30: number;
-  hour1: number;
-  hour4: number;
-  hour24: number;
-};
-
-export interface TradeData {
-  market: string;
-  notionalVolume: number;
-  marketName: string;
-  identities: { [publicKey: string]: string };
-  notionalVolume24Hour: number;
-  trades: OpenBookTradeEvent[];
-};
-
-export interface OpenBookTradeEvent {
-  timeStamp: number;
-  makerOwner: string;
-  takerOwner: string;
-  priceDouble: number;
-  quantityDouble: number;
-  marketId: string;
-  takerSide: number;
-  marketName: string;
-};
-
-export interface CarouselCardProps {
-      onCardClick: (marketId: string) => void;
-      item: {
-        market: {
-          marketId: string;
-          name: string;
-          takerVolume: number;
-          makerVolume: number;
-          quoteDecimals: number;
-          baseMint: string;
-          quoteMint: string;
-        },
-        midpoint: number;
-        marketPerformance: MarketPerformance;
-      };
-};
-
-export type CoinLogosType = {
-    [key: string]: string;
-};
-
-export const CoinLogosTyped: CoinLogosType = CoinLogos as CoinLogosType;
+//* OPENBOOK_V2 TYPES *//
 
 export type AccountWithKey<T> = { publicKey: PublicKey; account: T };
 export type ProgramVersion = { label: string; programId: PublicKey; idl: Idl };
@@ -335,4 +363,5 @@ export type InstructionSet = {
     name: string;
     actions: InstructionAction[];
   };
-  
+
+// END OPENBOOK_V2 TYPES

@@ -10,6 +10,8 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 's2.coinmarketcap.com' },
       { protocol: 'https', hostname: 'raw.githubusercontent.com' },
+      { protocol: 'https', hostname: 'arweave.net' },
+      { protocol: 'https', hostname: 'shdw-drive.genesysgo.net' },
     ],
   },
   async redirects() {
