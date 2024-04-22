@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import Script from "next/script";
-
 import {
   ChartingLibraryWidgetOptions,
   ResolutionString,

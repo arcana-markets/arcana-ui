@@ -2,7 +2,6 @@
 
 import React from "react";
 import SwapCard from "@/components/Vaults/HeroCards/SwapCard";
-import '@/app/globals.css';
 
 const HeroSwap = () => {
 

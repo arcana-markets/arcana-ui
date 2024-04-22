@@ -16,7 +16,6 @@ export const TVChartContainer = (props: Partial<ChartingLibraryWidgetOptions>) =
 
 		const widgetOptions: ChartingLibraryWidgetOptions = {
             symbol: marketData.market.marketId, // The widget uses ID
-			// BEWARE: no trailing slash is expected in feed URL
 			datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(
 				"https://prod.arcana.markets/api/openbookv2/tv",
 				undefined,
@@ -26,7 +25,6 @@ export const TVChartContainer = (props: Partial<ChartingLibraryWidgetOptions>) =
 				}
 			),
 			interval: '15' as ResolutionString,
-			theme: 'light',          
 			container: chartContainerRef.current,
 			library_path: '/charting_library/',
 			locale: props.locale as LanguageCode,
@@ -38,9 +36,9 @@ export const TVChartContainer = (props: Partial<ChartingLibraryWidgetOptions>) =
 				// 'header_settings',
 				'header_chart_type',
 				'header_compare',
-				'header_screenshot',
+				// 'header_screenshot',
 				'header_saveload',
-				'header_undo_redo',
+				// 'header_undo_redo',
 				// 'show_interval_dialog_on_key_press',
 				'header_symbol_search',
 			  ],

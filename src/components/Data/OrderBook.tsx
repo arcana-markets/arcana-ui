@@ -39,6 +39,7 @@ const OrderBook = () => {
   const [error] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const prevOrderBookData = usePrevious(orderBookData);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     fetchOrderBook();
@@ -46,27 +47,27 @@ const OrderBook = () => {
   }, [marketId]); // Dependency on marketId
 
   const fetchOrderBook = async () => {
+    setLoading(true); // Set loading state to true before fetching data
     try {
-        const response = await fetch(`https://prod.arcana.markets/api/openbookv2/markets/${marketId}/orders`);
-        if (!response.ok) throw new Error("Network response was not ok");
-        const data = await response.json();
-        
-        // Process identities and merge them into bidOrders and askOrders
-        const identities = data.identities || {};
-        const processOrdersWithIdentities = (orders: any[]) => orders.map(order => ({
-            ...order,
-            // Replace trader with identity if available, otherwise use the trader's public key
-            identity: identities[order.trader]
-          }));
-        
-        data.market.bidOrders = processOrdersWithIdentities(data.market.bidOrders);
-        data.market.askOrders = processOrdersWithIdentities(data.market.askOrders);
-        
-        setOrderBook(data); // Update the order book with new data
+      const response = await fetch(`https://prod.arcana.markets/api/openbookv2/markets/${marketId}/orders`);
+      if (!response.ok) throw new Error("Network response was not ok");
+      const data = await response.json();
+      
+      const identities = data.identities || {};
+      const processOrdersWithIdentities = (orders: any[]) => orders.map(order => ({
+        ...order,
+        identity: identities[order.trader]
+      }));
+      
+      data.market.bidOrders = processOrdersWithIdentities(data.market.bidOrders);
+      data.market.askOrders = processOrdersWithIdentities(data.market.askOrders);
+      
+      setOrderBook(data);
+      setLoading(false); // Set loading state to false after data is fetched successfully
     } catch (error) {
-        console.error("Error fetching order book:", error);
+      setLoading(false); // Set loading state to false after encountering an error
     }
-};
+  };
 
   useInterval(() => {
     fetchOrderBook();
@@ -78,21 +79,21 @@ const OrderBook = () => {
 
   // Function to determine if a flash should be applied to Buy orders based on size change
   const shouldFlashBuy = (currentOrder: Order, index: number) => {
-    const previousOrders = prevOrderBookData?.market.bidOrders;
+    const previousOrders = prevOrderBookData?.market?.bidOrders;
     const previousOrder = previousOrders?.[index];
     return !previousOrder || currentOrder.size !== previousOrder.size ? 'green-flash' : '';
   };
 
   // Function to determine if a flash should be applied to Sell orders based on size change
   const shouldFlashSell = (currentOrder: Order, index: number) => {
-    const previousOrders = prevOrderBookData?.market.askOrders;
+    const previousOrders = prevOrderBookData?.market?.askOrders;
     const previousOrder = previousOrders?.[index];
     return !previousOrder || currentOrder.size !== previousOrder.size ? 'red-flash' : '';
   };
 
     // Assuming bidOrders and askOrders are sorted with highest bid and lowest ask at index 0
-    const bidPrice = orderBookData?.market.bidOrders[0]?.price;
-    const askPrice = orderBookData?.market.askOrders[0]?.price;
+    const bidPrice = orderBookData?.market?.bidOrders[0]?.price;
+    const askPrice = orderBookData?.market?.askOrders[0]?.price;
   
     // Calculate the spread
     const spread = bidPrice && askPrice ? askPrice - bidPrice : null;
@@ -137,6 +138,7 @@ const OrderBook = () => {
           {error}
         </div>
       )}
+      {loading}
         <div className='w-full grid grid-cols-2 md:grid-cols-[2fr,1fr,1.5fr] gap-y-4'>
         <div className='flex justify-start items-center gap-1 order-1'>
           <p className='text-[20px] text-foreground-100 opacity-80'>

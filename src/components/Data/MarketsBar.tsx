@@ -24,6 +24,7 @@ type CoinLogosType = { [key: string]: string };
 
     const MarketsBar = () => {
         const { marketData }: FullMarketData | any = arcanaStore();
+        
         const baseTokenLogoURI = (address: string) => {
             if (tokenMintsData) {
             const baseTokenData = findTokenDataByAddress(address);
@@ -50,11 +51,9 @@ type CoinLogosType = { [key: string]: string };
         const token = mergedTokenMintsData.find((token: { address: string; }) => token.address === address);
         return token || defaultTokenData;
       };
-  
-        const baseTokenData = findTokenDataByAddress(marketData?.market.baseMint);
-        const baseMint = marketData?.market.baseMint || '';
-        const baseTokenName = baseTokenData.name;
-        const baseTokenLogo = baseTokenData.logoURI;
+      const baseTokenData = findTokenDataByAddress(marketData?.market.baseMint);
+    const baseTokenName = baseTokenData.name;
+    const baseTokenLogo = baseTokenData.logoURI;
 
     return (
     <div className="border-t border-l border-r p-2 mb-1 flex flex-col md:flex-row items-center cardShadowBor rounded-t-[16px] bg-[#012732] dark:bg-[#012732]">
@@ -70,7 +69,7 @@ type CoinLogosType = { [key: string]: string };
                 <div className="flex items-center">
                     <img
                     src={baseTokenLogo}
-                    alt={`${baseMint} logoURI`}
+                    alt={`${baseTokenData.logoURI} logoURI`}
                     width={22}
                     height={22}
                     loading="lazy"
@@ -79,11 +78,11 @@ type CoinLogosType = { [key: string]: string };
                     <div className="ml-2">
                         <div className="text-sm font-bold text-foreground-100 cursor-default">{baseTokenName}</div>
                         <div className="flex cursor-help items-center">
-                            <Tooltip placement={'bottom'} content={baseMint}>
+                            <Tooltip placement={'bottom'} content={marketData?.market.baseMint}>
                                 <div className="flex text-xs mt-1 text-foreground-100 text-center cardShadowBor bg-[#09303c] dark:bg-[#09303c] z-50 opacity-70 rounded-[4px] px-2">
-                                    {abbreviateAddressSmaller(baseMint || 'Base Mint')}
+                                    {abbreviateAddressSmaller(marketData?.market.baseMint || 'Base Mint')}
                                     <div className="ml-1">
-                                        <Link href={`https://solscan.io/token/${baseMint}`} target="_blank" rel="noopener noreferrer">
+                                        <Link href={`https://solscan.io/token/${marketData?.market.baseMint}`} target="_blank" rel="noopener noreferrer">
                                             <Icons.shareSmall/>
                                         </Link>
                                     </div>

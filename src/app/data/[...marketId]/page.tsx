@@ -14,7 +14,6 @@ import AdditionalDetails from '@/components/Data/AdditionalDetails';
 import MarketsBar from '@/components/Data/MarketsBar';
 import DataFooter from '@/components/Shared/DataFooter';
 import Navbar from '@/components/Shared/Navbar';
-import '@/app/data/css/styles.css';
 
 const Page = () => {
   const [refreshKey, setRefreshKey] = useState(0);
