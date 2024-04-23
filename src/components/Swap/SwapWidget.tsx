@@ -5,7 +5,7 @@ import { PublicKey } from '@solana/web3.js';
 
 const PLATFORM_FEE_AND_ACCOUNTS = {
   referralAccount: new PublicKey('6jE5KKjene8TGZPF2ZAujYkxqSNZWPZzDwNdd2f8s3dr'),
-  feeBps: 200,
+  feeBps: 100,
   feeAccounts: new Map(),
 };
 
