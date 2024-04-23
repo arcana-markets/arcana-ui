@@ -7,26 +7,23 @@ import { useInterval } from '@/hooks/useInterval';
 import usePrevious from '@/hooks/usePrevious';
 import { formatNumericValue } from '@/utils/numbers';
 
-const MIN_PERCENT_THRESHOLD = 1; // Minimum threshold for visual representation
-const LOG_BASE = 1.5; // Logarithmic base for scaling sizes
-const SCALE_FACTOR = 2; // Additional scaling factor to increase differentiation
+const MIN_PERCENT_THRESHOLD = 1;
+const LOG_BASE = 1.5;
+const SCALE_FACTOR = 2; 
 
 const getCumulativeOrders = (orders: Order[], _totalSize: number, orderType: 'bid' | 'ask'): Order[] => {
   const sortedOrders = orderType === 'bid' 
     ? [...orders].sort((a, b) => b.price - a.price)
     : [...orders].sort((a, b) => a.price - b.price);
 
-  // Apply logarithmic transformation with an additional scaling factor
   const logScaledOrders = sortedOrders.map(order => ({
     ...order,
     logSize: (Math.log(order.size * SCALE_FACTOR + 1) / Math.log(LOG_BASE)) * SCALE_FACTOR
   }));
-  // Calculate the total of the logarithmically scaled sizes
   const totalLogSize = logScaledOrders.reduce((acc, order) => acc + order.logSize, 0);
-  // Adjust and normalize each order size based on the logarithmic scale
   return logScaledOrders.map(order => {
     let logSizePercent = (order.logSize / totalLogSize) * 200;
-    logSizePercent = Math.max(logSizePercent, MIN_PERCENT_THRESHOLD); // Ensure minimum threshold
+    logSizePercent = Math.max(logSizePercent, MIN_PERCENT_THRESHOLD);
     return {
       ...order,
       sizePercent: logSizePercent,
@@ -35,7 +32,7 @@ const getCumulativeOrders = (orders: Order[], _totalSize: number, orderType: 'bi
 };
 
 const OrderBook = () => {
-  const { orderBookData, setOrderBook, marketId } = arcanaStore(state => state); // Use marketId from arcanaStore
+  const { orderBookData, setOrderBook, marketId } = arcanaStore(state => state);
   const [error] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const prevOrderBookData = usePrevious(orderBookData);
@@ -44,10 +41,10 @@ const OrderBook = () => {
   useEffect(() => {
     fetchOrderBook();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [marketId]); // Dependency on marketId
+  }, [marketId]);
 
   const fetchOrderBook = async () => {
-    setLoading(true); // Set loading state to true before fetching data
+    setLoading(true);
     try {
       const response = await fetch(`https://prod.arcana.markets/api/openbookv2/markets/${marketId}/orders`);
       if (!response.ok) throw new Error("Network response was not ok");
@@ -63,9 +60,9 @@ const OrderBook = () => {
       data.market.askOrders = processOrdersWithIdentities(data.market.askOrders);
       
       setOrderBook(data);
-      setLoading(false); // Set loading state to false after data is fetched successfully
+      setLoading(false);
     } catch (error) {
-      setLoading(false); // Set loading state to false after encountering an error
+      setLoading(false);
     }
   };
 
@@ -73,33 +70,50 @@ const OrderBook = () => {
     fetchOrderBook();
   }, 3000);
 
+  function formatPriceWithSupSub(price: string) {
+    const [integerPart, decimalPart] = price.split(".");
+    if (!decimalPart) {
+      return <>{integerPart}</>;
+    }
+  
+    const firstNonZeroIndex = decimalPart.search(/[^0]/);
+    if (firstNonZeroIndex === -1) {
+      return <>{integerPart}.0<sup>{decimalPart.length}</sup></>;
+    }
+  
+    const leadingZerosCount = firstNonZeroIndex;
+    const significantDigits = decimalPart.substring(firstNonZeroIndex);
+  
+    return (
+      <>
+        {integerPart}.
+        {leadingZerosCount > 0 ? <>0<sup>{leadingZerosCount}</sup></> : '0'}
+        {significantDigits}
+      </>
+    );
+  }
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  // Function to determine if a flash should be applied to Buy orders based on size change
   const shouldFlashBuy = (currentOrder: Order, index: number) => {
     const previousOrders = prevOrderBookData?.market?.bidOrders;
     const previousOrder = previousOrders?.[index];
     return !previousOrder || currentOrder.size !== previousOrder.size ? 'green-flash' : '';
   };
 
-  // Function to determine if a flash should be applied to Sell orders based on size change
   const shouldFlashSell = (currentOrder: Order, index: number) => {
     const previousOrders = prevOrderBookData?.market?.askOrders;
     const previousOrder = previousOrders?.[index];
     return !previousOrder || currentOrder.size !== previousOrder.size ? 'red-flash' : '';
   };
 
-    // Assuming bidOrders and askOrders are sorted with highest bid and lowest ask at index 0
     const bidPrice = orderBookData?.market?.bidOrders[0]?.price;
     const askPrice = orderBookData?.market?.askOrders[0]?.price;
   
-    // Calculate the spread
     const spread = bidPrice && askPrice ? askPrice - bidPrice : null;
-  
-    // Calculate the percent spread
-    const percentSpread = spread && askPrice ? (spread / askPrice) * 100 : null;
+      const percentSpread = spread && askPrice ? (spread / askPrice) * 100 : null;
 
       if (error) return <div>Error: {error}</div>;
 
@@ -150,8 +164,8 @@ const OrderBook = () => {
           <div className='flex justify-center bg-foreground-800 dark:bg-[#012A36] rounded-[12px] py-[6px] px-[12px] items-center gap-1'>
             <Icons.arrowUp />
             <p className='text-[14px] text-green font-medium'>
-            {midpoint?.toFixed(6)}
-           </p>
+              {midpoint ? formatPriceWithSupSub(formatNumericValue(midpoint)) : ''}
+            </p>
           </div>
         </div>
         <div className='w-full flex justify-end order-3 col-span-2 md:col-span-1'>
@@ -237,11 +251,11 @@ const OrderBook = () => {
                   <div className='w-full grid grid-cols-2'>
                     {/* bid price */}
                     <p className='text-[14px] w-full flex justify-end items-center pr-1 text-foreground-100 font-medium' >
-                  {formatNumericValue(item.bid.price)}
-                    </p>
+                    {formatPriceWithSupSub(formatNumericValue(item.bid.price))}
+                  </p>
                     {/* ask price */}
                     <p className='text-[14px] w-full flex items-center justify-start pl-1 text-foreground-100 font-medium'>
-                  {formatNumericValue(item.ask.price)}
+                    {formatPriceWithSupSub(formatNumericValue(item.ask.price))}
                    </p>
                   </div>
                   {/* ask size */}

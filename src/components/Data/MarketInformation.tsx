@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import * as Icons from "@/components/common/svg/Icons";
 import Link from "next/link";
-import { FullMarketData, TokenData } from "@/utils/types";
+import { FullMarketData, OrderBookData, TokenData } from "@/utils/types";
 import arcanaStore from "@/stores/arcanaStore";
 import { copyToClipboard } from "@/utils";
 import Tooltip from "@/components/Shared/Tooltip";
 import { abbreviateAddressLonger } from "@/utils/formatting";
 import tokenMintsRawData from '@/config/token-mints.json';
 import CoinLogos from '../../config/logos.json';
+import { formatNumericValue } from "@/utils/numbers";
 
 type CoinLogosType = { [key: string]: string };
     const CoinLogosTyped: CoinLogosType = CoinLogos as CoinLogosType;
@@ -41,13 +42,33 @@ const MarketInformation = () => {
   const { marketData }: FullMarketData | any = arcanaStore();
   const [tooltipVisibility, setTooltipVisibility] = useState<{[key: string]: boolean}>({});
   const tokenMintsData: TokenData[] = tokenMintsRawData as TokenData[];
+  
+  function formatPriceWithSupSub(price: string) {
+    const [integerPart, decimalPart] = price.split(".");
+    if (!decimalPart) {
+      return <>{integerPart}</>;
+    }
+  
+    const firstNonZeroIndex = decimalPart.search(/[^0]/);
+    if (firstNonZeroIndex === -1) {
+      return <>{integerPart}.0<sup>{decimalPart.length}</sup></>;
+    }
+  
+    const leadingZerosCount = firstNonZeroIndex;
+    const significantDigits = decimalPart.substring(firstNonZeroIndex);
+  
+    return (
+      <>
+        {integerPart}.
+        {leadingZerosCount > 0 ? <>0<sup>{leadingZerosCount}</sup></> : '0'}
+        {significantDigits}
+      </>
+    );
+  }
 
   const handleCopyClick = (value: string) => {
-    // Copy the value to clipboard
     copyToClipboard(value);
-    // Update tooltip visibility using the value as a unique identifier
     setTooltipVisibility(prevState => ({ ...prevState, [value]: true }));
-    // Hide tooltip after a delay
     setTimeout(() => {
       setTooltipVisibility(prevState => ({ ...prevState, [value]: false }));
     }, 2000);
@@ -91,7 +112,6 @@ const MarketInformation = () => {
     const baseTokenData = findTokenDataByAddress(marketData?.market.baseMint);
     const quoteTokenData = findTokenDataByAddress(marketData?.market.quoteMint);
 
-    // Extracted names, logos, and tickers
     const baseTokenName = baseTokenData.name;
     const quoteTokenName = quoteTokenData.name;
     const baseTokenLogo = baseTokenData.logoURI;
@@ -99,6 +119,9 @@ const MarketInformation = () => {
 
     const baseTokenLink = marketData?.market?.baseMint ?? "defaultBaseMint";
     const quoteTokenLink = marketData?.market?.quoteMint ?? "defaultQuoteMint";
+
+    const orderBookData: OrderBookData | any = marketData;
+    const { midpoint } = orderBookData || { midpoint: null };
 
   const renderDetails = () => {
     if (!marketData) return null;
@@ -222,8 +245,8 @@ const MarketInformation = () => {
               <p
                 className={`text-[18px] sm:text-[24px] font-medium ${getPriceChangeClassName()}`}
               >
-                $ {marketData?.midpoint.toFixed(4)}
-              </p>
+              {midpoint ? formatPriceWithSupSub(formatNumericValue(midpoint)) : '0'}
+            </p>
             </div>
             {/* 24h Low */}
             <div className="flex flex-col gap-2 sm:gap-3 items-start">

@@ -21,8 +21,7 @@ const date = dayjs.unix(timestamp).format("YYYY-MM-DD HH:mm:ss");
 console.log(date);
 
 const TradeHistory = () => {
-  const { tradeHistory, setTradeHistory, marketId } = arcanaStore((state) => state);
-
+  const { tradeHistory, setTradeHistory, marketId } = arcanaStore((state) => state);  
   const getHeaderStyle = (headerName: string) => {
     switch(headerName) {
       case `Price`:
@@ -52,6 +51,31 @@ const fetchTradeHistory = async () => {
   }
 };
 
+function formatPriceWithSupSub(price: string) {
+  const [integerPart, decimalPart] = price.split(".");
+  if (!decimalPart) {
+    return <>{integerPart}</>;  // No decimal part, return integer part only
+  }
+
+  const firstNonZeroIndex = decimalPart.search(/[^0]/);
+  if (firstNonZeroIndex === -1) {
+    // All digits after the decimal are zeros
+    return <>{integerPart}.0<sup>{decimalPart.length}</sup></>;
+  }
+
+  // Separate the leading zeros from the significant digits
+  const leadingZerosCount = firstNonZeroIndex;
+  const significantDigits = decimalPart.substring(firstNonZeroIndex);
+
+  return (
+    <>
+      {integerPart}.
+      {leadingZerosCount > 0 ? <>0<sup>{leadingZerosCount}</sup></> : '0'}
+      {significantDigits}
+    </>
+  );
+}
+
   useInterval(() => {
     fetchTradeHistory();
     console.log("Fetched new trade history data:");
@@ -79,9 +103,11 @@ const fetchTradeHistory = async () => {
       >
         {item ? (
           <>
-            <div className="flex justify-center items-center">
-              <p style={priceColorStyle} className="cursor-default text-[13px] text-foreground-100 dark:opacity-100 opacity-80 font-bold">
-                {formatNumericValue(item.priceDouble)}
+            <div className="flex justify-center items-center -mt-4">
+              <p style={priceColorStyle} className="cursor-default text-[18px] text-foreground-100 dark:opacity-100 opacity-80 font-bold">
+                <sub>
+                {formatPriceWithSupSub(formatNumericValue(item.priceDouble))}
+                </sub>
               </p>
             </div>
             <div className="flex justify-center items-center">

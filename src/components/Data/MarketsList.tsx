@@ -58,6 +58,40 @@ const MarketList = () => {
           : [...marketsData].sort((a, b) => b.marketPerformance.hour24 - a.marketPerformance.hour24);
       };
 
+      function formatPriceWithSupSub(price: number): JSX.Element {
+        if (price == null) return <></>; // Handle null or undefined input gracefully
+      
+        // Determine the formatting precision based on the presence of leading zeros in small numbers
+        const priceString = price.toString();
+        const [integerPart, rawDecimalPart] = priceString.split(".");
+        const hasLeadingZeros = rawDecimalPart && /^0+[1-9]/.test(rawDecimalPart);
+        const decimalPlaces = hasLeadingZeros ? 6 : 2;
+      
+        const formattedPrice = price.toFixed(decimalPlaces);
+        const [_, decimalPart] = formattedPrice.split(".");
+      
+        if (!decimalPart) {
+          return <>{integerPart}</>; // No decimal part, return integer part only
+        }
+      
+        const firstNonZeroIndex = decimalPart.search(/[^0]/);
+        if (firstNonZeroIndex === -1) {
+          // Only trailing zeros or no zeros at all
+          return <>{integerPart}</>; // Display integer part only if all are zeros
+        }
+      
+        // Handle leading zeros by counting them
+        const leadingZerosCount = firstNonZeroIndex;
+        const significantDigits = decimalPart.substring(firstNonZeroIndex);
+      
+        return (
+          <>
+            {integerPart}.
+            {leadingZerosCount > 0 ? <>0<sup>{leadingZerosCount}</sup></> : '0'}
+            {significantDigits}
+          </>
+        );
+      }
   // Function to get base token logo URI
   const baseTokenLogoURI = (address: string) => {
     if (tokenMintsData) {
@@ -196,7 +230,7 @@ const MarketList = () => {
                 </div>
                 <div className="flex justify-start items-center ml-5 dark:opacity-80 opacity-80">
                 <p className={`text-[12px] sm:text-[13px] font-medium ${getPriceChangeClassName()}`}>
-                ${marketData?.midpoint.toFixed(3)}
+                  ${formatPriceWithSupSub(marketData?.midpoint)}
                 </p>
                 </div>
                 <div className={`flex justify-end items-center mr-3`}>

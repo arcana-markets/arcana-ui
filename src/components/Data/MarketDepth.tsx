@@ -4,6 +4,7 @@ import CoinLogos from '../../config/logos.json';
 import { FullMarketData, OrderBookData } from '@/utils/types';
 import dynamic from 'next/dynamic';
 import arcanaStore from '@/stores/arcanaStore';
+import { formatCurrencyValue, formatLargeSize, formatNumericValue } from '@/utils/numbers';
 
 type CoinLogosType = { [key: string]: string };
 const CoinLogosTyped: CoinLogosType = CoinLogos as CoinLogosType;
@@ -42,13 +43,14 @@ return (
               width={16}
               height={16}
             />
-              <p className='text-foreground-100 dark:opacity-100 opacity-80 dark:text-white text-[18px] sm:text-[12px] font-semibold'>
-                {/* Dynamic value from API */}
-                {(
+            <p className='text-foreground-100 dark:opacity-100 opacity-80 dark:text-white text-[18px] sm:text-[12px] font-semibold'>
+              {formatNumericValue(
+                (
                   (marketData?.market?.quoteDepositTotal ?? 0) /
                   Math.pow(10, marketData?.market?.quoteDecimals ?? 0)
-                ).toFixed(2)}
-              </p>
+                ).toFixed(2)
+              )}
+            </p>
           </div>
           {/* coin 2 -->  */}
           <div className='flex justify-center bg-foreground-900 dark:bg-[#09303c] py-[3px] px-[10px] rounded-[16px] items-center gap-1 cardShadowBor'>
@@ -59,13 +61,14 @@ return (
               width={16}
               height={16}
             />
-              <p className='text-foreground-100 dark:opacity-100 opacity-80 dark:text-white text-[18px] sm:text-[12px] font-semibold'>
-                {/* Dynamic value from API */}
-                {(
+            <p className='text-foreground-100 dark:opacity-100 opacity-80 dark:text-white text-[18px] sm:text-[12px] font-semibold'>
+              {formatNumericValue(
+                (
                   (marketData?.market?.baseDepositTotal ?? 0) /
                   Math.pow(10, marketData?.market?.baseDecimals ?? 0)
-                ).toFixed(2)}
-              </p>
+                ).toFixed(2)
+              )}
+            </p>
           </div>
          </div>
         </div>
