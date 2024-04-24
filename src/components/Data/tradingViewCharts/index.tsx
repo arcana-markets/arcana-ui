@@ -1,13 +1,122 @@
+import React from 'react';
 import styles from './index.module.css';
 import { useEffect, useRef } from "react";
-import { ChartingLibraryWidgetOptions, LanguageCode, ResolutionString, widget } from "../../../../public/charting_library";
+import { ChartingLibraryWidgetOptions, LanguageCode, ResolutionString, widget, LibrarySymbolInfo, ISymbolValueFormatter, SeriesFormatterFactory } from "../../../../public/charting_library";
 import arcanaStore from "@/stores/arcanaStore";
 import { FullMarketData } from "@/utils/types";
 
 export const TVChartContainer = (props: Partial<ChartingLibraryWidgetOptions>) => {
 	const chartContainerRef = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
 	const { marketData }: FullMarketData | any = arcanaStore();
-	
+
+	function createPriceFormatter(): SeriesFormatterFactory {
+		return (symbolInfo: LibrarySymbolInfo | null, minTick: string): ISymbolValueFormatter | null => {
+		  if (!symbolInfo) return null;
+		  return {
+			format: (price: number): string => {
+			  let suffix = '';
+			  let dividedPrice = price;
+	  
+			  if (price >= 1000000000) {
+				suffix = 'B';
+				dividedPrice = price / 1000000000;
+			  } else if (price >= 1000000) {
+				suffix = 'M';
+				dividedPrice = price / 1000000;
+			  } else if (price >= 1000) {
+				suffix = 'K';
+				dividedPrice = price / 1000;
+			  }
+	  
+			  const priceString = dividedPrice.toString();
+			  const [integerPart, rawDecimalPart] = priceString.split(".");
+			  const decimalPlaces = rawDecimalPart && /^0+[1-9]/.test(rawDecimalPart) ? 6 : 4;
+			  const formattedPrice = dividedPrice.toFixed(decimalPlaces);
+			  const [_, decimalPart] = formattedPrice.split(".");
+			  
+			  if (!decimalPart) {
+				return `${integerPart}${suffix}`;
+			  }
+			  
+			  const firstNonZeroIndex = decimalPart.search(/[^0]/);
+			  if (firstNonZeroIndex === -1) {
+				return `${integerPart}${suffix}`;
+			  }
+			  
+			  const leadingZerosCount = firstNonZeroIndex;
+			  const significantDigits = decimalPart.substring(firstNonZeroIndex);
+	  
+			  return `${integerPart}.` +
+					 `${'0'.repeat(leadingZerosCount)}` +
+					 `${significantDigits}${suffix}`;
+			}
+		  };
+		};
+	  };
+
+	  function createTimeFormatter() {
+		return {
+		  format: (date: Date): string => {
+			let hours = date.getUTCHours().toString().padStart(2, '0');
+			let minutes = date.getUTCMinutes().toString().padStart(2, '0');
+			let seconds = date.getUTCSeconds().toString().padStart(2, '0');
+			return `${hours}:${minutes}:${seconds}`;
+		  },
+		  formatLocal: (date: Date): string => {
+			let hours = date.getHours().toString().padStart(2, '0');
+			let minutes = date.getMinutes().toString().padStart(2, '0');
+			let seconds = date.getSeconds().toString().padStart(2, '0');
+			return `${hours}:${minutes}:${seconds}`;
+		  }
+		};
+	  };
+
+	function createDateFormatter() {
+		return {
+			format: (date: Date): string => {
+				let year = date.getUTCFullYear();
+				let month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+				let day = date.getUTCDate().toString().padStart(2, '0');
+				return `${year}/${month}/${day}`;
+			},
+			formatLocal: (date: Date): string => {
+				let year = date.getFullYear();
+				let month = (date.getMonth() + 1).toString().padStart(2, '0');
+				let day = date.getDate().toString().padStart(2, '0');
+				return `${year}/${month}/${day}`;
+			}
+		};
+	};
+
+	function formatPriceWithSupSub(price: number | null) {
+		if (price == null) return '';
+	  
+		const priceString = price.toString();
+		const [integerPart, rawDecimalPart] = priceString.split(".");
+		const hasLeadingZeros = rawDecimalPart && /^0+[1-9]/.test(rawDecimalPart);
+		const decimalPlaces = hasLeadingZeros ? 6 : 2;
+		const formattedPrice = price.toFixed(decimalPlaces);
+		const [_, decimalPart] = formattedPrice.split(".");
+	  
+		if (!decimalPart) {
+		  return integerPart;
+		}
+	  
+		const firstNonZeroIndex = decimalPart.search(/[^0]/);
+		if (firstNonZeroIndex === -1) {
+		  return integerPart;
+		}
+	  
+		const leadingZerosCount = firstNonZeroIndex;
+		const significantDigits = decimalPart.substring(firstNonZeroIndex);
+	  
+		return (
+		  `${integerPart}.` +
+		  (leadingZerosCount > 0 ? `<sub>${'0'.repeat(leadingZerosCount)}</sub>` : '') +
+		  `${significantDigits}`
+		);
+	  }
+
     useEffect(() => {
         if (!marketData?.market?.marketId) {
             console.log("Market ID is not available");
@@ -88,9 +197,37 @@ export const TVChartContainer = (props: Partial<ChartingLibraryWidgetOptions>) =
 				'volume.precision': 6,
 			  },
 			  custom_css_url: '/styles/tradingview.css',
+			  custom_formatters: {
+				priceFormatterFactory: createPriceFormatter(),
+				timeFormatter: createTimeFormatter(),
+				dateFormatter: createDateFormatter()
+			},	
 		};
 
 		const tvWidget = new widget(widgetOptions);
+
+		tvWidget.onChartReady(() => {
+			const yAxisLabelInterval = setInterval(() => {
+			  const yAxisLabels = document.querySelectorAll('.tv-yaxis-labels .tv-yaxis-label__text');
+			  yAxisLabels.forEach(label => {
+				// Check if the textContent is not null before replacing commas and parsing
+				if (label.textContent) {
+				  const originalValue = parseFloat(label.textContent.replace(/,/g, ''));
+				  const formatted = formatPriceWithSupSub(originalValue);
+				  const tempDiv = document.createElement('div');
+				  tempDiv.innerHTML = formatted;
+				  label.innerHTML = '';
+				  // Check if the first child of tempDiv is not null before appending
+				  if (tempDiv.firstChild) {
+					label.appendChild(tempDiv.firstChild);
+				  }
+				}
+			  });
+			}, 1000);
+			return () => {
+			  clearInterval(yAxisLabelInterval);
+			};
+		  });
 
 		tvWidget.onChartReady(() => {
 			tvWidget.headerReady().then(() => {
@@ -104,11 +241,10 @@ export const TVChartContainer = (props: Partial<ChartingLibraryWidgetOptions>) =
 				});
 			});
 		});
-        // Cleanup function
         return () => {
             tvWidget.remove();
         };
-    }, [marketData, props]); // Dependencies
+    }, [marketData, props]);
     return (
         <div ref={chartContainerRef} className={styles.TVChartContainer} />
     );

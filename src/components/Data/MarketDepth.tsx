@@ -4,7 +4,7 @@ import CoinLogos from '../../config/logos.json';
 import { FullMarketData, OrderBookData } from '@/utils/types';
 import dynamic from 'next/dynamic';
 import arcanaStore from '@/stores/arcanaStore';
-import { formatCurrencyValue, formatLargeSize, formatNumericValue } from '@/utils/numbers';
+import { formatNumericValue } from '@/utils/numbers';
 
 type CoinLogosType = { [key: string]: string };
 const CoinLogosTyped: CoinLogosType = CoinLogos as CoinLogosType;
