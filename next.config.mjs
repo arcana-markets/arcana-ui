@@ -12,6 +12,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'raw.githubusercontent.com' },
       { protocol: 'https', hostname: 'arweave.net' },
       { protocol: 'https', hostname: 'shdw-drive.genesysgo.net' },
+      { protocol: 'https', hostname: 'cdn.kamino.finance' },
     ],
   },
   async redirects() {
