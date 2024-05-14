@@ -67,26 +67,34 @@ export const TVChartContainer = (props: Partial<ChartingLibraryWidgetOptions>) =
 			let minutes = date.getMinutes().toString().padStart(2, '0');
 			let seconds = date.getSeconds().toString().padStart(2, '0');
 			return `${hours}:${minutes}:${seconds}`;
+		  },
+		  parse: (dateString: string) => {
+			// Assume dateString is in UTC time format "HH:MM:SS"
+			return dateString;  // Directly return the string assuming it's properly formatted
 		  }
 		};
-	  };
+	  }
 
-	function createDateFormatter() {
+	  function createDateFormatter() {
 		return {
-			format: (date: Date): string => {
-				let year = date.getUTCFullYear();
-				let month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-				let day = date.getUTCDate().toString().padStart(2, '0');
-				return `${year}/${month}/${day}`;
-			},
-			formatLocal: (date: Date): string => {
-				let year = date.getFullYear();
-				let month = (date.getMonth() + 1).toString().padStart(2, '0');
-				let day = date.getDate().toString().padStart(2, '0');
-				return `${year}/${month}/${day}`;
-			}
+		  format: (date: Date): string => {
+			let year = date.getUTCFullYear();
+			let month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+			let day = date.getUTCDate().toString().padStart(2, '0');
+			return `${year}/${month}/${day}`;
+		  },
+		  formatLocal: (date: Date): string => {
+			let year = date.getFullYear();
+			let month = (date.getMonth() + 1).toString().padStart(2, '0');
+			let day = date.getDate().toString().padStart(2, '0');
+			return `${year}/${month}/${day}`;
+		  },
+		  parse: (dateString: string) => {
+			// Assume dateString is in local date format "YYYY/MM/DD"
+			return dateString;  // Directly return the string assuming it's properly formatted
+		  }
 		};
-	};
+	  }
 
 	function formatPriceWithSupSub(price: number | null) {
 		if (price == null) return '';
