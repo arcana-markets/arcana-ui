@@ -68,7 +68,7 @@ export class SymbolsStorage {
                 const symbolInfo = item.symbolInfo;
                 return {
                     symbol: symbolInfo.name,
-                    full_name: symbolInfo.full_name,
+                    full_name: `${symbolInfo.exchange}:${symbolInfo.name}`,
                     description: symbolInfo.description,
                     exchange: symbolInfo.exchange,
                     params: [],
@@ -131,7 +131,6 @@ export class SymbolsStorage {
                     ticker: ticker,
                     name: symbolName,
                     base_name: [listedExchange + ':' + symbolName],
-                    full_name: fullName,
                     listed_exchange: listedExchange,
                     exchange: tradedExchange,
                     currency_code: currencyCode,

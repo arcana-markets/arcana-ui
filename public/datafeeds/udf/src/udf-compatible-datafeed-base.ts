@@ -331,15 +331,14 @@ export class UDFCompatibleDatafeedBase implements IExternalDatafeed, IDatafeedQu
 						const symbol = response.name;
 						const listedExchange = response.listed_exchange ?? response['exchange-listed'];
 						const tradedExchange = response.exchange ?? response['exchange-traded'];
-						const fullName = response.full_name ?? `${tradedExchange}:${symbol}`;
 
 						const result: LibrarySymbolInfo = {
 							...response,
 							name: symbol,
 							base_name: [listedExchange + ':' + symbol],
-							full_name: fullName,
 							listed_exchange: listedExchange,
 							exchange: tradedExchange,
+							ticker: response.ticker,
 							currency_code: response.currency_code ?? response['currency-code'],
 							original_currency_code: response.original_currency_code ?? response['original-currency-code'],
 							unit_id: response.unit_id ?? response['unit-id'],
