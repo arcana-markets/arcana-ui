@@ -1021,5 +1021,11 @@
         "name": "MPLEX",
         "logoURI": "/icons/MPLEX.png",
         "symbol": "MPLEX"
+    },
+    {
+        "address": "DriFtupJYLTosbwoN8koMbEYSx54aFAVLddWsbksjwg7",
+        "name": "DRIFT Protocol",
+        "logoURI": "/icons/drift.png",
+        "symbol": "DRIFT"
     }
 ]
