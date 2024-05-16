@@ -1,13 +1,22 @@
 import React from 'react';
 import Image from 'next/image';
 import CoinLogos from '../../config/logos.json';
-import { FullMarketData, OrderBookData } from '@/utils/types';
+import { FullMarketData, OrderBookData, TokenData } from '@/utils/types';
 import dynamic from 'next/dynamic';
 import arcanaStore from '@/stores/arcanaStore';
 import { formatNumericValue } from '@/utils/numbers';
+import tokenMintsRawData from '@/config/token-mints.json';
 
 type CoinLogosType = { [key: string]: string };
-const CoinLogosTyped: CoinLogosType = CoinLogos as CoinLogosType;
+    const CoinLogosTyped: CoinLogosType = CoinLogos as CoinLogosType;
+    let tokenMintsData: TokenData[] = tokenMintsRawData as TokenData[];
+    try {
+        tokenMintsData = require('@/config/token-mints.json');
+    } catch (error) {
+        tokenMintsData = [];
+    }
+    const tokenMintsData2: TokenData[] = require('@/config/token-mints2.json');
+    const mergedTokenMintsData = [...tokenMintsData, ...tokenMintsData2];
 
 const DepthChart = dynamic(() => import('./DepthChart'), { ssr: false });
 
@@ -15,15 +24,38 @@ const MarketDepth = () => {
   const { marketData }: FullMarketData | any = arcanaStore();
   const orderBookData: OrderBookData | any = marketData; // Adjust this line based on your actual data structure
 
-  // Split the market name to get base and quote tokens
-  // This regex will split the string on either a slash or a hyphen
-  const [baseToken, quoteToken] = marketData?.market?.name
-    ? marketData.market.name.split(/[-\/]/)
-    : ["", ""];
+  const baseTokenLogoURI = (address: string) => {
+    if (tokenMintsData) {
+        const baseTokenData = findTokenDataByAddress(address);
+        return baseTokenData.logoURI || "/tokens/SOL.png";
+    } else {
+        const [baseToken, _] = marketData?.name ? marketData.name.split(/[-\/]/) : ["", ""];
+        return CoinLogosTyped[baseToken] || "/tokens/SOL.png";
+    }
+};
 
-  // Get the logos for base and quote tokens
-  const baseTokenLogo = CoinLogosTyped[baseToken] || "/tokens/SOL.png";
-  const quoteTokenLogo = CoinLogosTyped[quoteToken] || "/tokens/WUSDC.png";
+const findTokenDataByAddress = (address: string): TokenData => {
+    const defaultTokenData: TokenData = {
+        address: '',
+        name: 'Unknown Token',
+        logoURI: '/icons/question-circle.svg',
+        symbol: '',
+        chainId: 0,
+        decimals: 0,
+        tags: [],
+        extensions: {
+            coingeckoId: undefined
+        }
+    };
+    const token = mergedTokenMintsData.find((token: { address: string; }) => token.address === address);
+    return token || defaultTokenData;
+};
+
+const baseTokenData = findTokenDataByAddress(marketData?.market.baseMint);
+const quoteTokenData = findTokenDataByAddress(marketData?.market.quoteMint);
+
+const baseTokenLogo = baseTokenData.logoURI;
+const quoteTokenLogo = quoteTokenData.logoURI;
 
 return (
   <div className='w-full flex justify-center items-center'>

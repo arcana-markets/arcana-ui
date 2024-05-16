@@ -13,13 +13,14 @@ const nextConfig = {
       { protocol: 'https', hostname: 'arweave.net' },
       { protocol: 'https', hostname: 'shdw-drive.genesysgo.net' },
       { protocol: 'https', hostname: 'cdn.kamino.finance' },
+      { protocol: 'https', hostname: 'metadata.drift.foundation' },
     ],
   },
   async redirects() {
     return [
       {
         source: '/data',
-        destination: '/data/Gio5iGZF9YVvhX6vwW3fZEfnPhtafseapaseGbAoiH9D',
+        destination: '/data/CFSMrBssNG8Ud1edW59jNLnq2cwrQ9uY5cM3wXmqRJj3',
         permanent: true,
       },
     ];

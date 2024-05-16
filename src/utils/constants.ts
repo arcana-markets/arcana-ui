@@ -21,7 +21,7 @@ export const OPENBOOK_PROGRAM_ID = new PublicKey('opnb2LAfJYbRMAHHvqjCwQxanZn7Re
 export const ARCANA_VAULTS_PROGRAM_ID = new PublicKey('FVbmcn58GVgYAGYqtQwVWwWrTDbSFqwXfCrErGEGo1mx');
 
 export const BASE_OPENBOOK_URL = 'https://prod.arcana.markets/api/openbookv2/markets';
-export const DEFAULT_MARKET_ID = 'BU3EaRVo9WN44muCBy3mwkCQ4uYQWiuqay1whEmeSXK3';
+export const DEFAULT_MARKET_ID = 'CFSMrBssNG8Ud1edW59jNLnq2cwrQ9uY5cM3wXmqRJj3';
 
 // export const BASE_PHOENIX_URL = 'https://prod.arcana.markets/api/phoenix/markets';
 

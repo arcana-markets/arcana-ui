@@ -13,7 +13,7 @@ const Data = () => {
     const marketId = pathSegments.length > 2 ? pathSegments[2] : null;
 
     if (!marketId) {
-      router.push('/data/Gio5iGZF9YVvhX6vwW3fZEfnPhtafseapaseGbAoiH9D');
+      router.push('/data/CFSMrBssNG8Ud1edW59jNLnq2cwrQ9uY5cM3wXmqRJj3');
     }
   }, [pathname, router]);
 

@@ -103,5 +103,6 @@
     "ALL": "/icons/fmeta.svg",
     "$WIF": "/icons/$wif.svg",
     "GECKO": "/icons/gecko.svg",
-    "DUAL": "/icons/dual.svg"
+    "DUAL": "/icons/dual.svg",
+    "DRIFT": "/icons/drift.svg"
 }
