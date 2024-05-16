@@ -11,7 +11,7 @@ Responsive                     |  Desktop
 
 To get started, follow these steps:
 
-#### **Hackathon Judges:** Download the repo and run a local project:
+#### **Testers:** Download or Fork the repo and run a local project:
 1. **Clone the repo:** Begin by cloning the repository using the command:
 
 ```bash
@@ -22,13 +22,19 @@ git clone git@github.com:arcana-markets/arcana-ui.git
 
 ```bash
 cd arcana-ui
-npm install
+
+npm install 
+# or
+bun install
 ```
 
 3. **Run the app:**
 
 ```bash
+
 npm run dev
+# or
+bun dev
 ```
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
