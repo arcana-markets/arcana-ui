@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 import { useConnection, useWallet, useAnchorWallet } from '@solana/wallet-adapter-react';
 import { PublicKey, sendAndConfirmTransaction, Transaction, type Message, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { Program, AnchorProvider } from '@coral-xyz/anchor';
-import { ARCANA_PROGRAM_ID } from '@/utils/constants';
+import { ARCANA_VAULTS_PROGRAM_ID } from '@/utils/constants';
 import { IDL as ArcanaVaultsIDL } from '@/utils/idl/arcana_vaults';
 import { useProvider } from '@/hooks/useProvider';
 import { BN } from "bn.js";
@@ -39,7 +39,7 @@ export const ArcanaVaultsProvider = ({ children }: { children: React.ReactNode }
   const walletPublickey = publicKey;
 
   const provider = useProvider();
-  const program = new Program(ArcanaVaultsIDL, ARCANA_PROGRAM_ID, provider);
+  const program = new Program(ArcanaVaultsIDL, ARCANA_VAULTS_PROGRAM_ID, provider);
 
   const [vaults, setVaults] = useState<Vault[]>([]);
 
