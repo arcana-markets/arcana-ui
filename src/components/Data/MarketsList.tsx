@@ -230,7 +230,7 @@ const MarketList = () => {
                 </div>
                 <div className="flex justify-start items-center ml-5 dark:opacity-80 opacity-80">
                 <p className={`text-[12px] sm:text-[13px] font-medium ${getPriceChangeClassName()}`}>
-                  ${formatPriceWithSupSub(marketData?.midpoint)}
+                  ${formatNumericValue(marketData?.midpoint)}
                 </p>
                 </div>
                 <div className={`flex justify-end items-center mr-3`}>

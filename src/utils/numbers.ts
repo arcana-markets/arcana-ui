@@ -34,31 +34,37 @@ export const formatNumericValue = (
   decimals?: number,
   roundUp?: boolean,
 ): string => {
-  const numberValue = Number(value)
-  let formattedValue
-  if (decimals !== undefined) {
-    formattedValue = roundUp
-      ? roundValue(numberValue, decimals, true)
-      : roundValue(numberValue, decimals)
-  } else if (numberValue === 0) {
-    formattedValue = numberValue.toFixed(decimals || 0)
+  const numberValue = Number(value);
+  let formattedValue;
+
+  if (numberValue === 0) {
+    formattedValue = numberValue.toFixed(decimals || 0);
   } else if (numberValue > -0.0000000001 && numberValue < 0.000000001) {
-    formattedValue = numberValue.toExponential(3)
+    formattedValue = numberValue.toExponential(4);
   } else if (Math.abs(numberValue) >= 1000) {
     formattedValue = roundUp
       ? roundValue(numberValue, 0, true)
-      : roundValue(numberValue, 0)
+      : roundValue(numberValue, 0);
   } else if (Math.abs(numberValue) >= 0.1) {
+    const effectiveDecimals = numberValue < 0.99 ? 4 : 3;
     formattedValue = roundUp
-      ? roundValue(numberValue, 3, true)
-      : roundValue(numberValue, 3)
+      ? roundValue(numberValue, effectiveDecimals, true)
+      : roundValue(numberValue, effectiveDecimals);
   } else {
     formattedValue = roundUp
-      ? roundValue(numberValue, countLeadingZeros(numberValue) + 3, true)
-      : roundValue(numberValue, countLeadingZeros(numberValue) + 3)
+      ? roundValue(numberValue, countLeadingZeros(numberValue) + 4, true)
+      : roundValue(numberValue, countLeadingZeros(numberValue) + 4);
   }
-  return formattedValue
-}
+
+  return formattedValue;
+};
+
+const countLeadingZeros = (value: number): number => {
+  const [_, decimalPart] = value.toString().split(".");
+  if (!decimalPart) return 0;
+  const match = decimalPart.match(/^0*/);
+  return match ? match[0].length : 0;
+};
 
 export const formatCurrencyValue = (
   value: number | string | Decimal,
@@ -181,15 +187,6 @@ const usdFormatter3Sig = Intl.NumberFormat('en', {
   style: 'currency',
   currency: 'USD',
 })
-
-export const countLeadingZeros = (x: number) => {
-  const absoluteX = Math.abs(x)
-  if (absoluteX % 1 == 0) {
-    return 0
-  } else {
-    return -1 - Math.floor(Math.log10(absoluteX % 1))
-  }
-}
 
 export const getDecimalCount = (value: number): number => {
   if (
