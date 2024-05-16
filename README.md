@@ -1,7 +1,6 @@
 # 🧙‍♂️ Arcana Markets Web App
 
-The arcana web app elevates the DeFi experience on Solana by offering a comprehensive suite including token vaults, data analytics, interactive charts, a swap application, customized tools and bots. 
-Streamline the decentralized financial ecosystem, moving beyond just liquidity provision to empowering users with a full array of advanced functionalities and insights.
+The arcana web app is a Next.js / Typescript project that elevates the DeFi experience on Solana by offering a comprehensive suite including token vaults, data analytics, interactive charts, a swap application, customized tools and access to bots.
 
 Responsive                     |  Desktop
 :-------------------------:|:-------------------------:
@@ -57,8 +56,42 @@ The below is an example structure for the project
 │   ├── types` 
 │   ├── utils` 
 tailwind, package, configuration, and other project files
-
 ```
+
+# 🤝 Contributing
+
+We welcome contributions from the community to help improve the Arcana Markets Web App. To contribute, please follow these steps:
+
+## Submitting PRs
+
+1. **Fork, Clone, and Branch:**
+   - Fork the repository by clicking the "Fork" button at the top right of the repository page on GitHub.
+   - Create a new branch for your feature or bug fix:
+     ```bash
+     git checkout -b feature/your-feature-name
+     ```
+
+2. **Make and Commit Changes:**
+   - Make your changes to the codebase, ensuring your code follows the project's coding standards and conventions. Add or update tests as needed.
+   - Commit your changes with a descriptive commit message:
+     ```bash
+     git commit -m "Add feature: description of your feature"
+     ```
+
+3. **Push and Create a Pull Request:**
+   - Push your changes to your forked repository:
+     ```bash
+     git push origin feature/your-feature-name
+     ```
+   - Go to the original repository on GitHub, click the "Pull Request" button, and select your branch. Provide a clear and descriptive title and description for your pull request, link any relevant issues, and click "Create Pull Request".
+
+## Guidelines
+
+- Ensure your code is well-documented and follows the project's style guide.
+- Write clear, concise commit messages.
+- Test your changes thoroughly before submitting a pull request.
+- Be responsive to feedback and willing to make necessary changes.
+     
 ## Key Features
 
 - **Token Vaults UI:** Yield-generating DeFi protocol.
@@ -101,9 +134,8 @@ The **Arcana Data APIs** act as a gateway to the Arcana ecosystem, enabling seam
 
 To complement our data repository, the **Arcana Data Indexer** plays a pivotal role in indexing on-chain DEX data. This ensures quick and reliable access to transaction data, enhancing our market-making strategies and operational efficiency.
 
-<a href="https://github.com/arcana-markets/arcana-indexer">
-  <img src="https://img.shields.io/badge/Arcana-Indexer-blue" alt="Arcana Indexer" style="height: 30px;"/>
-</a>
+  - `/trades`
+  - `/orders`
 
 # License
 
