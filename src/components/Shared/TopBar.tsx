@@ -1,88 +1,118 @@
-'use client'
+'use client';
 
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { useWalletModal, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-// import { Menu } from '@headlessui/react';
-// import { shortKey } from '@/utils/utils';
-import ComponentWrapper from '@/components/Shared/ComponentWrapper';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { useWalletModal } from '@solana/wallet-adapter-react-ui';
+import { Networks, useNetworkConfiguration } from '@/hooks/useNetworkConfiguration';
+import { Explorers, useExplorerConfiguration } from '@/hooks/useExplorerConfiguration';
+import { usePriorityFee } from '@/hooks/usePriorityFee';
+import { Menu } from '@headlessui/react';
+import { shortKey } from '@/utils/utils';
+import { DownIcon, NavIcon, NavMenu } from '@/components/Shared/Icons';
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
+import Image from 'next/image';
 import * as Icons from '@/app/data/svg/Icons';
-import Tooltip from './Tooltip';
+import { MdClose } from "react-icons/md";
+import { NUMERAL_FORMAT } from '@/utils/constants';
+import Link from 'next/link';
+import Dropdown from './DropDown';
+import useUserSOLBalanceStore from '@/stores/useUserSOLBalanceStore';
+import { RequestAirdrop } from './RequestAirdrop';
 
-function useWindowSize() {
-  const [size, setSize] = useState([0, 0]);
-  useEffect(() => {
-    function updateSize() {
-      setSize([window.innerWidth, window.innerHeight]);
-    }
-    window.addEventListener('resize', updateSize);
-    updateSize();
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-  return size;
-}
+const networks = [
+  { label: 'Mainnet', value: Networks.Mainnet.toString() },
+  { label: 'Devnet', value: Networks.Devnet.toString() },
+  { label: 'Localnet', value: Networks.Localnet.toString() },
+];
 
-const TopBar = () => {
-  const [modal, setModal] = useState(false);
-  const [show, setShow] = useState(false);
-  const [width] = useWindowSize();
-  const isMobile = width <= 768;
+const explorers = [
+  { label: 'Solscan', value: Explorers.Solscan.toString() },
+  { label: 'Solana Explorer', value: Explorers.Solana.toString() },
+];
+
+const Navbar = () => {
   const wallet = useWallet();
-  const { setVisible } = useWalletModal();
+  const modal = useWalletModal();
+  const { connection } = useConnection();
+  const [modal2, setmodal] = useState(false)
+  const { network, endpoint, setNetwork, setCustomEndpoint } = useNetworkConfiguration();
+  // const { explorer, setExplorer } = useExplorerConfiguration();
+  // const { priorityFee, setPriorityFee } = usePriorityFee();
+  const [solPrice, setSolPrice] = useState<number>();
+    const balance = useUserSOLBalanceStore((s) => s.balance)
+    const { getUserSOLBalance } = useUserSOLBalanceStore()
+    const [show, setShow] = useState(false);
 
-  const handleWalletButtonClick = () => {
-    if (wallet?.publicKey) {
-      wallet.disconnect();
-    } else {
-      setVisible(true);
-    }
-  };
+    useEffect(() => {
+      if (show) {
+        document.body.classList.add("overflow-hidden");
+      } else {
+        document.body.classList.remove("overflow-hidden");
+      }
+    }, [show]);
+    useEffect(() => {
+      if (modal2) {
+        document.body.classList.add("overflow-hidden");
+      } else {
+        document.body.classList.remove("overflow-hidden");
+      }
+    }, [modal2]);
+  
+    const toggleMenu = () => {
+      setShow(!show);
+    };
 
+    useEffect(() => {
+      if (wallet.publicKey && wallet.connected) {
+        console.log(wallet.publicKey.toBase58());
+        getUserSOLBalance(wallet.publicKey, connection);
+      } else if (!wallet.connected) {
+        // Resetting the balance when the wallet disconnects
+        useUserSOLBalanceStore.getState().resetBalance();
+      }
+    }, [wallet.publicKey, wallet.connected, connection, getUserSOLBalance]);
+    
   useEffect(() => {
-    if (show) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-  }, [show]);
-  useEffect(() => {
-    if (modal) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-  }, [modal]);
+    if (!wallet.connected && wallet.wallet) wallet.connect();
+  }, [wallet]);
+
+  // const feesCost = (((priorityFee / 100000) * 200000) / LAMPORTS_PER_SOL) * (solPrice || 0);
 
   return (
     <nav className={`w-full py-6 sm:py-10 z-[11] relative`}>
-      <ComponentWrapper>
-        <div className="flex container px-4 mx-auto justify-between items-center">
-          <div className="flex gap-12">
-            <a href="/" className="mr-4">
-              <Icons.logo ClassName='w-[120px] sm:w-[140px] h-[100px] sm:h-[140px]' />
-            </a>
-            <div
-              className={`transition-all duration-300 ${show ? "!left-0" : ""
-                } max-[1024px]:flex-col justify-center items-center gap-5 max-[1024px]:fixed max-[1024px]:w-full max-[1024px]:h-screen h-screen min-[1024px]:h-auto top-0 left-[-100%] max-[1024px]:bg-primary backdrop-blur-3xl max-lg:z-50 flex min-[1024px]:flex min-[1024px]:static`}
-            >
+      <div className="flex container px-4 mx-auto justify-between items-center">
+        <div className=" flex gap-12">
+          <Link href='/' className='mr-4'>
+            <NavIcon />
+          </Link>
+          <div
+            className={`transition-all duration-300 ${show ? "!left-0" : ""
+              } max-[1024px]:flex-col justify-center items-center gap-5 max-[1024px]:fixed max-[1024px]:w-full max-[1024px]:h-screen h-screen min-[1024px]:h-auto top-0 left-[-100%] max-[1024px]:bg-primary backdrop-blur-3xl max-lg:z-50 flex min-[1024px]:flex min-[1024px]:static`}
+          >
             <ul className="flex items-center gap-6 sm:gap-10 min-[1024px]:flex-row flex-col">
-                <Link href="/">
-                  <li className="nav-link">
-                    Vaults
-                  </li>
-                </Link>
-                <Link href="/swap">
-                  <li className="nav-link">
-                    Swap
-                  </li>
-                </Link>
-                <Link href="/data">
-                  <li className="nav-link ">
-                    Markets
-                  </li>
-                </Link>
-                <a href="https://github.com/arcana-markets/arcana-trading-bot" target="_blank" rel="noopener noreferrer" className="nav-link flex items-center gap-2">
+            <Link href='/'>
+              <div className="nav-link flex items-center relative">
+                Vaults
+              </div>
+            </Link>
+              <Link href='/swap'>
+              <div className="nav-link flex items-center relative">
+              Swap
+              </div>
+              </Link>
+              <Link href='/data'>
+                <div className='nav-link '>
+                  Markets
+                  <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-markergreen text-white opacity-70 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                Live
+              </span>
+              </div>
+              </Link>
+              <a href="https://faucet.arcana.markets" target="_blank" rel="noopener noreferrer" className="nav-link flex items-center gap-2">
+                  <span>SPL Faucet</span>
+                  <Icons.RedirectIcon />
+                </a>
+              <a href="https://github.com/arcana-markets/arcana-trading-bot" target="_blank" rel="noopener noreferrer" className="nav-link flex items-center gap-2">
                   <span>Tools</span>
                   <Icons.RedirectIcon />
                 </a>
@@ -90,96 +120,76 @@ const TopBar = () => {
                   <span>Docs</span>
                   <Icons.RedirectIcon />
                 </a>
-              </ul>
-            </div>
-          </div>
-          <div className="flex gap-5">
-            {/* Additional content here */}
+            </ul>
           </div>
         </div>
-        <div className={` ${modal === true ? "block" : "hidden"} fixed w-full left-0 top-0`}>
-          {/* Modal content here */}
-        </div>
-      </ComponentWrapper>
-    </nav>
-  );
-};
-        {/* Your navigation links here */}
-        {/*
-        <div className='flex gap-10 justify-center items-center'>
-          {wallet?.publicKey ? (
-            <Menu as="div" className="relative">
-              <Menu.Button 
-                className="inline-flex justify-center w-full h-[44px] rounded-md border border-transparent shadow-sm px-4 py-2 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#5099CC] focus:border-[#5099CC]"
-                style={{ 
-                  padding: '10px',
-                  paddingLeft: '16px',
-                  paddingRight: '16px',
-                  marginRight: '20px',
-                  alignItems: 'center',
-                  fontSize: '16px',
-                  borderRadius: '12px',
-                  backgroundColor: '#5099CC',
-                  color: '#FFFFFF',
-                  fontFamily: 'Inter',
-                  height: '44px',
-                  width: 'auto',
-                }}
-              >
-                {shortKey(wallet.publicKey)}
-              </Menu.Button>
-              <Menu.Items className="z-10 absolute right-0 mt-2 w-56 origin-top-right border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className='flex items-center'>
+        <div className="flex gap-5">
+        {wallet?.publicKey ? (
+            <Menu as="div" className="relative inline-block text-left text-foxflowerviola z-30 cursor-pointer p-3">
+              <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right bg-[#013746] hover:bg-[#252B32] rounded-xl p-1">
                 <div className="py-1">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Button
-                        onClick={handleWalletButtonClick}
-                        className={`${active ? 'bg-[#5099CC] text-white' : 'text-white'} block px-4 py-2 text-sm`}
-                      >
-                        Disconnect
-                      </Button>
-                    )}
-                  </Menu.Item>
+                  {wallet && (
+                    <div className="flex flex-col p-2">
+                      <Menu.Item>
+                          <RequestAirdrop />
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <div className={`${active ? 'bg-[#252B32]' : ''} rounded-md p-2`}>
+                            <Image src="/tokens/SOL.png" alt="Solana Logo" width={24} height={24} />
+                            <span className="text-white">{(balance || 0).toLocaleString()} SOL (Devnet)</span>
+                          </div>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          className={`${
+                            active ? "bg-[#252B32]" : "text-white"
+                          } rounded-md p-2 flex items-center justify-between w-full text-sm`}
+                          onClick={() => wallet.disconnect()}
+                        >
+                          Disconnect
+                        </button>
+                      )}
+                    </Menu.Item>
+                    </div>
+                  )}
                 </div>
               </Menu.Items>
             </Menu>
           ) : (
-            !isMobile && (
-              <WalletMultiButton 
-                onClick={() => setVisible(true)} 
-                style={{ 
-                  padding: '10px',
-                  paddingLeft: '16px',
-                  paddingRight: '16px',
-                  marginRight: '20px',
-                  alignItems: 'center',
-                  fontSize: '16px',
-                  color: '#FFFFFF',
-                  backgroundColor: '#5099CC',
-                  borderRadius: '12px',
-                  fontFamily: 'Inter',
-                  height: '44px',
-                  width: 'auto',
-                }} 
-              />           
-            )
-          )}
-          {isMobile && (
-            <div className='w-full md:hidden flex justify-center items-center'>
-              <WalletMultiButton
-                onClick={() => setVisible(true)}
-                style={{
-                  marginTop: '8px',
-                  padding: '10px 20px',
-                  fontSize: '14px', 
-                  color: '#FFFFFF', 
-                  backgroundColor: '#5099CC', 
-                  borderRadius: '12px', 
-                }}
-              />
+            <div className="flex gap-5">
+            <div className="text-white z-30 cursor-pointer p-3">
+            <button
+                onClick={() => modal.setVisible(true)}
+                disabled={modal.visible || wallet.connecting}
+                className={`text-foxflowerviola sm:text-white text-sm sm:text-base font-medium sm:py-[10px] p-3 sm:px-4 rounded-xl bg-[#013746] sm:bg-[#252B32] Connect_btn transition-all duration-300 ease-linear ${
+                  (modal.visible || wallet.connecting) ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+              {modal.visible || wallet.connecting ? (
+                'Loading...'
+              ) : (
+                <>
+                  Connect <span className="sm:inline hidden">Wallet</span>
+                </>
+              )}
+            </button>
+            </div>
+            <button
+            className={`${modal.visible === true ? "hidden" : "block"} z-50 mt-2.5 -ml-4 relative min-[1024px]:hidden bg-[#013746] rounded-lg text-white h-12 w-12 flex items-center justify-center`}
+            onClick={toggleMenu}
+          >
+            {show ? <MdClose size={24} /> : <NavMenu />}
+          </button>
             </div>
           )}
         </div>
-        */}
-
-export default TopBar;
+        </div>
+      </div>
+    </nav>
+  );
+};
+export default Navbar;

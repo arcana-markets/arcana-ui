@@ -37,7 +37,7 @@ export const SignMessage: FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
                 onClick={onClick}
                 disabled={!publicKey}
             >
-                {publicKey ? "Sign In" : "Wallet not connected"}
+                {publicKey ? "Sign Message" : "Wallet not connected"}
             </button>
         </div>
     );

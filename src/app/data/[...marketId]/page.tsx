@@ -13,7 +13,7 @@ import MarketInformation from '@/components/Data/MarketInformation';
 import AdditionalDetails from '@/components/Data/AdditionalDetails';
 import MarketsBar from '@/components/Data/MarketsBar';
 import DataFooter from '@/components/Shared/DataFooter';
-import Navbar from '@/components/Shared/Navbar';
+import TopBar from '@/components/Shared/TopBar';
 
 const Page = () => {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -21,7 +21,7 @@ const Page = () => {
 
   return (
     <main className='w-full'>
-      <Navbar />
+      <TopBar />
       <GoogleAnalytics gaId="G-9PEVYHKFL5" />
       <CarouselSlider />
       <button

@@ -20,6 +20,7 @@ import useUserSOLBalanceStore from '@/stores/useUserSOLBalanceStore';
 import { RequestAirdrop } from './RequestAirdrop';
 
 const networks = [
+  { label: 'Mainnet', value: Networks.Mainnet.toString() },
   { label: 'Devnet', value: Networks.Devnet.toString() },
   { label: 'Localnet', value: Networks.Localnet.toString() },
 ];
