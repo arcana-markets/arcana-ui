@@ -70,7 +70,7 @@ function formatPriceWithSupSub(price: string) {
   return (
     <>
       {integerPart}.
-      {leadingZerosCount > 0 ? <>0<sup>{leadingZerosCount}</sup></> : '0'}
+      {leadingZerosCount > 0 ? <>0<sup>{leadingZerosCount}</sup></> : ''}
       {significantDigits}
     </>
   );
